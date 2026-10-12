@@ -1,0 +1,247 @@
+/* ============================================================
+   WASTE2WORTH - CSS HALAMAN RIWAYAT (riwayat.html)
+   Hanya style yang dipakai di riwayat.html.
+   ============================================================ */
+
+/* ============================================================
+   STATISTIK LAYANAN
+   ============================================================ */
+
+.stats-services-grid-riwayat {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+/* ============================================================
+   RIWAYAT PAGE
+   ============================================================ */
+
+.riwayat-section {
+  padding: 80px 0 60px;
+  background: var(--bg-light);
+  min-height: 100vh;
+}
+
+.table-container {
+  background: var(--white);
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: var(--shadow-md);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.data-table {
+  width: 100%;
+  min-width: 800px;
+  border-collapse: collapse;
+}
+
+.data-table th,
+.data-table td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.data-table th {
+  background: var(--primary-green);
+  color: white;
+  font-weight: 600;
+}
+
+.data-table tr:hover {
+  background: var(--bg-light);
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 5px 12px;
+  border-radius: 50px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.status-pending {
+  background: #fff3e0;
+  color: var(--primary-orange);
+}
+
+.status-proses {
+  background: #e3f2fd;
+  color: #1976d2;
+}
+
+.status-selesai {
+  background: #e8f5e9;
+  color: var(--primary-green);
+}
+
+.action-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px 8px;
+  border-radius: 8px;
+  transition: all 0.3s;
+}
+
+.action-btn.edit {
+  color: var(--primary-green);
+}
+
+.action-btn.edit:hover {
+  background: rgba(46, 125, 50, 0.1);
+}
+
+.action-btn.delete {
+  color: #f44336;
+}
+
+.action-btn.delete:hover {
+  background: rgba(244, 67, 54, 0.1);
+}
+
+.filter-section {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.filter-search {
+  flex: 1;
+  position: relative;
+  min-width: 200px;
+}
+
+.filter-search input {
+  width: 100%;
+  padding: 12px 20px;
+  padding-left: 45px;
+  border: 2px solid var(--gray-200);
+  border-radius: 50px;
+  font-family: "Poppins", sans-serif;
+  font-size: 0.9rem;
+  transition: border-color 0.3s;
+}
+
+.filter-search input:focus {
+  outline: none;
+  border-color: var(--primary-orange);
+}
+
+.filter-search i {
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-light);
+}
+
+.filter-select {
+  padding: 12px 20px;
+  border: 2px solid var(--gray-200);
+  border-radius: 50px;
+  font-family: "Poppins", sans-serif;
+  background: var(--white);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: border-color 0.3s;
+  min-width: 140px;
+}
+
+.filter-select:focus {
+  outline: none;
+  border-color: var(--primary-orange);
+}
+
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.empty-state i {
+  font-size: 4rem;
+  color: var(--gray-200);
+  margin-bottom: 20px;
+}
+
+.empty-state h3 {
+  font-size: 1.2rem;
+  color: var(--text-dark);
+  margin-bottom: 10px;
+}
+
+.empty-state p {
+  color: var(--text-light);
+  font-size: 0.9rem;
+}
+
+/* ============================================================
+   RESPONSIVE GLOBAL
+   ============================================================ */
+
+/* Tablet */
+@media (max-width: 1024px) {
+    .stats-services-grid-riwayat {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile Large */
+@media (max-width: 768px) {
+    .stats-services-grid-riwayat {
+    grid-template-columns: 1fr;
+  }
+
+    .filter-section {
+    flex-direction: column;
+  }
+
+    .filter-search {
+    min-width: auto;
+  }
+
+    .filter-select {
+    width: 100%;
+  }
+
+    .data-table {
+    min-width: 700px;
+  }
+
+    .data-table th,
+  .data-table td {
+    padding: 10px 8px;
+    font-size: 0.8rem;
+  }
+}
+
+/* Mobile Small */
+@media (max-width: 480px) {
+    .data-table {
+    min-width: 600px;
+  }
+
+    .data-table th,
+  .data-table td {
+    padding: 8px 6px;
+    font-size: 0.7rem;
+  }
+
+    .table-container {
+    padding: 10px;
+  }
+
+    #editModal .modal-content {
+    padding: 25px 15px;
+    max-width: 95%;
+  }
+
+    #editModal .form-row {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+}

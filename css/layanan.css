@@ -1,0 +1,482 @@
+/* ============================================================
+   WASTE2WORTH - CSS HALAMAN LAYANAN (layanan.html)
+   Hanya style yang dipakai di layanan.html.
+   ============================================================ */
+
+/* ============================================================
+   TOMBOL UTAMA
+   ============================================================ */
+
+.btn-block {
+  width: 100%;
+  justify-content: center;
+}
+
+/* ============================================================
+   STATISTIK LAYANAN
+   ============================================================ */
+
+.stats-services-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+}
+
+/* ============================================================
+   KALKULATOR
+   ============================================================ */
+
+.calculator-section {
+  padding: 60px 0;
+  background: var(--bg-light);
+}
+
+.calculator-grid {
+  display: grid;
+  grid-template-columns: 1fr;   /* satu kolom: form di atas, hasil di bawah */
+  gap: 30px;
+  align-items: start;
+  width: 100%;
+}
+
+.calculator-form {
+  width: 100%;
+}
+
+.calculator-result {
+  width: 100%;
+}
+
+.calculator-form {
+  background: var(--white);
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: var(--shadow-sm);
+}
+
+.calculator-result {
+  background: linear-gradient(
+    135deg,
+    var(--primary-green),
+    var(--primary-green-dark)
+  );
+  padding: 35px;
+  border-radius: 25px;
+  text-align: center;
+  color: white;
+  animation: fadeInUp 0.5s ease;
+}
+
+.result-icon i {
+  font-size: 3rem;
+  margin-bottom: 15px;
+  color: var(--primary-orange);
+}
+
+.result-label {
+  font-size: 0.9rem;
+  opacity: 0.9;
+  margin-bottom: 5px;
+}
+
+.result-value {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin: 10px 0;
+}
+
+.price-breakdown {
+  background: rgba(255, 255, 255, 0.15);
+  padding: 10px 15px;
+  border-radius: 50px;
+  display: inline-block;
+  margin: 15px 0;
+  font-size: 0.85rem;
+}
+
+.bank-recommendation {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 15px;
+  border-radius: 15px;
+  margin: 15px 0;
+  font-size: 0.9rem;
+  text-align: left;
+}
+
+.result-note {
+  font-size: 0.7rem;
+  opacity: 0.7;
+  margin-top: 15px;
+}
+
+/* ============================================================
+   DAFTAR HARGA
+   ============================================================ */
+
+.price-table-section {
+  padding: 60px 0;
+  background: var(--white);
+}
+
+.price-table-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.price-table {
+  width: 100%;
+  min-width: 700px;
+  border-collapse: collapse;
+  background: var(--white);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.price-table th,
+.price-table td {
+  padding: 15px;
+  text-align: center;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.price-table th {
+  background: var(--primary-green);
+  color: white;
+  font-weight: 600;
+}
+
+.price-table tr:hover {
+  background: var(--bg-light);
+}
+
+/* ============================================================
+   PETA BANK SAMPAH
+   ============================================================ */
+
+.maps-section {
+  padding: 60px 0;
+  background: var(--bg-light);
+}
+
+.maps-wrapper {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 30px;
+}
+
+.maps-container {
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+
+.maps-container iframe {
+  width: 100%;
+  height: 450px;
+  border-radius: 20px;
+}
+
+.maps-list {
+  background: var(--white);
+  padding: 25px;
+  border-radius: 20px;
+  box-shadow: var(--shadow-sm);
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.maps-list h3 {
+  margin-bottom: 20px;
+  color: var(--primary-green);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.maps-list ul {
+  list-style: none;
+  margin-bottom: 20px;
+}
+
+.location-link {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 15px;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s;
+  border-radius: 12px;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.location-link:hover {
+  background: rgba(255, 152, 0, 0.1);
+  transform: translateX(5px);
+}
+
+.location-link i:first-child {
+  color: var(--primary-orange);
+  font-size: 1.2rem;
+  margin-top: 3px;
+}
+
+.location-link strong {
+  display: block;
+  color: var(--text-dark);
+  margin-bottom: 5px;
+}
+
+.location-link .distance {
+  font-size: 0.7rem;
+  color: var(--primary-green);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.link-icon {
+  margin-left: auto;
+  color: var(--primary-orange);
+  font-size: 0.8rem;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.location-link:hover .link-icon {
+  opacity: 1;
+}
+
+.maps-buttons {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.btn-map,
+.btn-map-waze {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 20px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s;
+  min-width: 140px;
+}
+
+.btn-map {
+  background: var(--primary-green);
+  color: white;
+}
+
+.btn-map:hover {
+  background: var(--primary-green-dark);
+  transform: translateY(-2px);
+}
+
+.btn-map-waze {
+  background: #1b3b5c;
+  color: white;
+}
+
+.btn-map-waze:hover {
+  background: #0e2a44;
+  transform: translateY(-2px);
+}
+
+.maps-note {
+  margin-top: 15px;
+  padding: 10px;
+  background: rgba(255, 152, 0, 0.1);
+  border-radius: 10px;
+  font-size: 0.75rem;
+  text-align: center;
+}
+
+/* ============================================================
+   FORM PENJEMPUTAN
+   ============================================================ */
+
+.pickup-section {
+  padding: 60px 0;
+  background: var(--bg-light);
+}
+
+.pickup-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.pickup-form {
+  background: var(--white);
+  padding: 40px;
+  border-radius: 30px;
+  box-shadow: var(--shadow-lg);
+}
+
+.form-hint {
+  display: block;
+  font-size: 0.7rem;
+  color: var(--text-light);
+  margin-top: 5px;
+}
+
+.btn-submit {
+  background: linear-gradient(
+    135deg,
+    var(--primary-green),
+    var(--primary-green-dark)
+  );
+  padding: 14px 28px;
+  font-size: 1rem;
+  font-weight: 700;
+  margin-top: 20px;
+}
+
+.btn-submit:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(46, 125, 50, 0.4);
+}
+
+/* ============================================================
+   FAQ
+   ============================================================ */
+
+.faq-section {
+  padding: 60px 0;
+  background: var(--white);
+}
+
+.faq-grid {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.faq-item {
+  background: var(--bg-light);
+  border-radius: 15px;
+  margin-bottom: 15px;
+  overflow: hidden;
+}
+
+.faq-question {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.faq-question:hover {
+  background: rgba(255, 152, 0, 0.1);
+}
+
+.faq-question h3 {
+  font-size: 1rem;
+  margin: 0;
+}
+
+.faq-question i {
+  transition: transform 0.3s;
+}
+
+.faq-item.active .faq-question i {
+  transform: rotate(180deg);
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  padding: 0 20px;
+}
+
+.faq-item.active .faq-answer {
+  max-height: 200px;
+  padding: 0 20px 20px;
+}
+
+/* ============================================================
+   RESPONSIVE GLOBAL
+   ============================================================ */
+
+/* Tablet */
+@media (max-width: 1024px) {
+    .stats-services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+    .calculator-grid {
+    grid-template-columns: 1fr;
+  }
+
+    .maps-wrapper {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Mobile Large */
+@media (max-width: 768px) {
+    .stats-services-grid {
+    grid-template-columns: 1fr;
+  }
+
+    .maps-container iframe {
+    height: 350px;
+  }
+
+    .maps-buttons {
+    flex-direction: column;
+  }
+
+    .btn-map,
+  .btn-map-waze {
+    width: 100%;
+    min-width: auto;
+  }
+
+    .pickup-form {
+    padding: 25px 20px;
+  }
+
+    .faq-question h3 {
+    font-size: 0.9rem;
+  }
+}
+
+/* Mobile Small */
+@media (max-width: 480px) {
+    .result-value {
+    font-size: 2rem;
+  }
+
+    .maps-container iframe {
+    height: 250px;
+  }
+
+    .btn-map,
+  .btn-map-waze {
+    font-size: 0.7rem;
+    padding: 10px 12px;
+  }
+
+    .pickup-form {
+    padding: 20px 15px;
+    border-radius: 20px;
+  }
+
+    .faq-question {
+    padding: 15px;
+  }
+
+    .faq-question h3 {
+    font-size: 0.85rem;
+  }
+}

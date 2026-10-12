@@ -1,0 +1,339 @@
+/* ============================================================
+   WASTE2WORTH - CSS HALAMAN EDUKASI (edukasi.html)
+   Hanya style yang dipakai di edukasi.html.
+   ============================================================ */
+
+/* ============================================================
+   EDUKASI PAGE
+   ============================================================ */
+
+.edukasi-section {
+  padding: 120px 0 60px;
+  background: var(--bg-light);
+}
+
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 30px;
+  margin-bottom: 60px;
+}
+
+.video-card {
+  background: var(--white);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.video-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+}
+
+.video-thumbnail {
+  position: relative;
+  background: #000;
+  overflow: hidden;
+}
+
+.video-thumbnail video {
+  width: 100%;
+  height: 220px;
+  display: block;
+  background: #000;
+  object-fit: cover;
+}
+
+.btn-pip {
+  position: absolute;
+  bottom: 15px;
+  right: 65px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 12px;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.3s ease;
+  font-size: 16px;
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.btn-pip:hover {
+  background: var(--primary-orange);
+  transform: scale(1.1);
+}
+
+.btn-fs {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 12px;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.3s ease;
+  font-size: 16px;
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.btn-fs:hover {
+  background: var(--primary-orange);
+  transform: scale(1.1);
+}
+
+.video-info {
+  padding: 18px 22px 22px;
+}
+
+.video-info h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: var(--text-dark);
+}
+
+.video-info p {
+  font-size: 0.85rem;
+  color: var(--text-light);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.articles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 30px;
+  margin-top: 10px;
+}
+
+.article-card {
+  background: var(--white);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s ease;
+}
+
+.article-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+}
+
+.article-content {
+  padding: 25px 28px;
+}
+
+.article-category {
+  display: inline-block;
+  background: rgba(255, 152, 0, 0.1);
+  color: var(--primary-orange);
+  padding: 5px 14px;
+  border-radius: 50px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.article-category i {
+  margin-right: 6px;
+}
+
+.article-content h3 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+  line-height: 1.4;
+  color: var(--text-dark);
+}
+
+.article-content p {
+  color: var(--text-light);
+  font-size: 0.9rem;
+  margin-bottom: 18px;
+  line-height: 1.6;
+}
+
+.article-read-more {
+  color: var(--primary-orange);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.85rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+}
+
+.article-read-more:hover {
+  color: var(--primary-green);
+  gap: 14px;
+}
+
+.article-read-more i {
+  font-size: 0.8rem;
+  transition: transform 0.3s ease;
+}
+
+.article-read-more:hover i {
+  transform: translateX(4px);
+}
+
+.tips-section {
+  padding: 60px 0;
+  background: linear-gradient(
+    135deg,
+    var(--primary-green),
+    var(--primary-green-dark)
+  );
+  color: white;
+}
+
+.tips-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.tip-card {
+  text-align: center;
+  padding: 30px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+}
+
+.tip-card i {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+}
+
+.tip-card h4 {
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+.tip-card p {
+  font-size: 0.8rem;
+  opacity: 0.9;
+}
+
+/* ============================================================
+   VIDEO MODAL
+   ============================================================ */
+
+.video-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 3000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.video-modal.active {
+  display: flex;
+}
+
+.video-modal-content {
+  position: relative;
+  width: 90%;
+  max-width: 800px;
+}
+
+.video-modal-content video {
+  width: 100%;
+  border-radius: 20px;
+}
+
+.close-video-modal {
+  position: absolute;
+  top: -40px;
+  right: 0;
+  color: white;
+  font-size: 2rem;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.close-video-modal:hover {
+  color: var(--primary-orange);
+}
+
+/* ============================================================
+   RESPONSIVE GLOBAL
+   ============================================================ */
+
+/* Tablet */
+@media (max-width: 1024px) {
+    .tips-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile Large */
+@media (max-width: 768px) {
+    .video-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+    .articles-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+    .video-thumbnail video {
+    height: 200px;
+  }
+
+    .video-info {
+    padding: 15px 18px 18px;
+  }
+
+    .video-info h3 {
+    font-size: 0.95rem;
+  }
+
+    .tips-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile Small */
+@media (max-width: 480px) {
+    .video-thumbnail video {
+    height: 180px;
+  }
+
+    .tips-grid {
+    grid-template-columns: 1fr;
+  }
+
+    .article-content {
+    padding: 20px;
+  }
+
+    .article-content h3 {
+    font-size: 1rem;
+  }
+
+    .close-video-modal {
+    top: -30px;
+    font-size: 1.5rem;
+  }
+}
