@@ -1,6 +1,5 @@
 /* ============================================
    AUTH CSS - Register & Login
-   FIX: Navbar overlap
    ============================================ */
 
 /* ========== BODY AUTH ========== */
@@ -385,6 +384,33 @@
 
 .btn-social.google:hover { color: #db4437; border-color: #db4437; }
 .btn-social.facebook:hover { color: #4267b2; border-color: #4267b2; }
+
+/* ========== DEMO AKUN ========== */
+.demo-akun {
+  margin-top: 24px;
+  padding: 16px;
+  background: #f5f5f5;
+  border-radius: 12px;
+  font-size: 12px;
+  color: #616161;
+  border-left: 4px solid var(--primary);
+}
+
+.demo-akun strong {
+  color: var(--primary);
+  display: block;
+  margin-bottom: 8px;
+  font-size: 13px;
+}
+
+.demo-list {
+  line-height: 1.8;
+}
+
+.demo-list span {
+  font-weight: 600;
+  color: var(--dark);
+}
 
 /* ========== RESPONSIVE ========== */
 @media (max-width: 900px) {
