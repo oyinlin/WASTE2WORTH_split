@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Admin - Waste2Worth</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/common.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+<body class="dashboard-body">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <a href="../index.html" class="sidebar-logo">
+        <div class="nav-logo-icon">
+          <i class="fas fa-recycle"></i>
+        </div>
+        <div class="nav-logo-text">Waste<strong>2</strong>Worth</div>
+      </a>
+      <button class="sidebar-close" id="sidebarClose">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a href="dashboard-admin.html" class="sidebar-link active">
+        <i class="fas fa-home"></i>
+        <span>Dashboard</span>
+      </a>
+      <a href="admin-verifikasi.html" class="sidebar-link">
+        <i class="fas fa-clipboard-check"></i>
+        <span>Verifikasi Transaksi</span>
+      </a>
+      <a href="admin-pembayaran.html" class="sidebar-link">
+        <i class="fas fa-money-bill-wave"></i>
+        <span>Konfirmasi Pembayaran</span>
+      </a>
+      <a href="admin-harga.html" class="sidebar-link">
+        <i class="fas fa-tags"></i>
+        <span>Kelola Harga Sampah</span>
+      </a>
+      <a href="admin-mitra.html" class="sidebar-link">
+        <i class="fas fa-handshake"></i>
+        <span>Kelola Mitra</span>
+      </a>
+      <a href="admin-konten.html" class="sidebar-link">
+        <i class="fas fa-file-alt"></i>
+        <span>Kelola Konten</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button class="sidebar-link logout-btn" onclick="logoutUser()">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Keluar</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- OVERLAY -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-content">
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <button class="topbar-toggle" id="topbarToggle">
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="topbar-title">
+        <h1>Dashboard Admin</h1>
+        <p id="tanggalHariIni"></p>
+      </div>
+      <div class="topbar-user">
+        <div class="user-info">
+          <span class="user-name" id="userName">Admin</span>
+          <span class="user-role">Admin</span>
+        </div>
+        <div class="user-avatar" id="userAvatar">A</div>
+      </div>
+    </header>
+
+    <!-- WELCOME BANNER -->
+    <section class="welcome-banner">
+      <div class="welcome-content">
+        <h2>Halo, <span id="welcomeName">Admin</span>! 👋</h2>
+        <p>Kelola transaksi, harga, dan mitra bank sampah di sini.</p>
+        <div class="welcome-actions">
+          <a href="admin-verifikasi.html" class="btn btn-white">
+            <i class="fas fa-clipboard-check"></i> Verifikasi Transaksi
+          </a>
+          <a href="admin-harga.html" class="btn btn-outline-white">
+            <i class="fas fa-tags"></i> Kelola Harga
+          </a>
+        </div>
+      </div>
+      <div class="welcome-illustration">
+        <i class="fas fa-user-shield"></i>
+      </div>
+    </section>
+
+    <!-- STAT CARDS -->
+    <section class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon icon-orange">
+          <i class="fas fa-hourglass-half"></i>
+        </div>
+        <div class="stat-info">
+          <span class="stat-label">Menunggu Verifikasi</span>
+          <h3 class="stat-value" id="statPending">0</h3>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon icon-blue">
+          <i class="fas fa-truck"></i>
+        </div>
+        <div class="stat-info">
+          <span class="stat-label">Sedang Diproses</span>
+          <h3 class="stat-value" id="statProses">0</h3>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon icon-green">
+          <i class="fas fa-check-circle"></i>
+        </div>
+        <div class="stat-info">
+          <span class="stat-label">Selesai</span>
+          <h3 class="stat-value" id="statSelesai">0</h3>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon icon-purple">
+          <i class="fas fa-users"></i>
+        </div>
+        <div class="stat-info">
+          <span class="stat-label">Total User</span>
+          <h3 class="stat-value" id="statUser">0</h3>
+        </div>
+      </div>
+    </section>
+
+    <!-- STATISTIK TAMBAHAN -->
+    <section class="stats-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+      <div class="stat-card" style="flex-direction: column; align-items: flex-start;">
+        <span class="stat-label">Total Transaksi</span>
+        <h3 class="stat-value" id="statTotalTransaksi">0</h3>
+      </div>
+      <div class="stat-card" style="flex-direction: column; align-items: flex-start;">
+        <span class="stat-label">Total Nilai Transaksi</span>
+        <h3 class="stat-value" id="statTotalNilai">Rp 0</h3>
+      </div>
+      <div class="stat-card" style="flex-direction: column; align-items: flex-start;">
+        <span class="stat-label">Total Berat Sampah</span>
+        <h3 class="stat-value" id="statTotalBerat">0 kg</h3>
+      </div>
+    </section>
+
+    <!-- ANTRIAN VERIFIKASI -->
+    <section class="riwayat-section">
+      <div class="section-header-flex">
+        <h2 class="section-title">Antrian Verifikasi Terbaru</h2>
+        <a href="admin-verifikasi.html" class="lihat-semua">
+          Lihat Semua <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+
+      <div class="riwayat-card">
+        <div id="emptyVerifikasi" class="empty-riwayat">
+          <i class="fas fa-inbox"></i>
+          <p>Tidak ada antrian verifikasi</p>
+          <span>Semua pengajuan sudah diproses</span>
+        </div>
+
+        <div class="table-wrapper" id="tableWrapper" style="display:none;">
+          <table class="table-riwayat">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Pelanggan</th>
+                <th>Kecamatan</th>
+                <th>Total Estimasi</th>
+                <th>Status</th>
+                <th>Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="bodyVerifikasi"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- MENU CEPAT ADMIN -->
+    <section class="quick-actions">
+      <h2 class="section-title">Menu Cepat</h2>
+      <div class="actions-grid">
+        <a href="admin-verifikasi.html" class="action-card">
+          <div class="action-icon icon-orange">
+            <i class="fas fa-clipboard-check"></i>
+          </div>
+          <h3>Verifikasi Transaksi</h3>
+          <p>Konfirmasi pengajuan penjemputan</p>
+        </a>
+
+        <a href="admin-pembayaran.html" class="action-card">
+          <div class="action-icon icon-green">
+            <i class="fas fa-money-bill-wave"></i>
+          </div>
+          <h3>Konfirmasi Pembayaran</h3>
+          <p>Proses pembayaran ke pelanggan</p>
+        </a>
+
+        <a href="admin-harga.html" class="action-card">
+          <div class="action-icon icon-blue">
+            <i class="fas fa-tags"></i>
+          </div>
+          <h3>Kelola Harga Sampah</h3>
+          <p>Update harga per jenis & kecamatan</p>
+        </a>
+
+        <a href="admin-mitra.html" class="action-card">
+          <div class="action-icon icon-purple">
+            <i class="fas fa-handshake"></i>
+          </div>
+          <h3>Kelola Mitra</h3>
+          <p>Data bank sampah mitra</p>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="../js/common.js"></script>
+  <script src="../js/dashboard-admin.js"></script>
+</body>
+</html>
