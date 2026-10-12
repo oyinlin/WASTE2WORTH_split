@@ -1,12 +1,12 @@
 /* ============================================
-   INDEX JS - Khusus Halaman Beranda
+   INDEX JS - Khusus Beranda
    ============================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
-  
-  // ========== ANIMASI COUNTER STATISTIK ==========
+
+  // ========== COUNTER ANIMASI ==========
   const statElements = document.querySelectorAll('.stat-item h3[data-count]');
-  
+
   const observerStats = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -17,27 +17,14 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }, { threshold: 0.5 });
-  
+
   statElements.forEach(el => observerStats.observe(el));
-  
-  // ========== VIDEO PLACEHOLDER ==========
-  const videoPlaceholder = document.getElementById('videoPlaceholder');
-  const videoFrame = document.getElementById('videoFrame');
-  
-  videoPlaceholder?.addEventListener('click', () => {
-    // Ganti dengan URL video YouTube kamu
-    const videoUrl = 'https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1';
-    
-    videoFrame.src = videoUrl;
-    videoFrame.style.display = 'block';
-    videoPlaceholder.style.display = 'none';
-  });
-  
-  // ========== ANIMASI SCROLL (FADE IN UP) ==========
+
+  // ========== FADE IN ANIMASI ==========
   const animatedElements = document.querySelectorAll(
-    '.feature-card, .step-card, .testimonial-card, .news-card, .advantage-card'
+    '.feature-card, .step-card, .testimonial-card, .news-card'
   );
-  
+
   const observerAnim = new IntersectionObserver((entries) => {
     entries.forEach((entry, index) => {
       if (entry.isIntersecting) {
@@ -49,59 +36,51 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }, { threshold: 0.1 });
-  
+
   animatedElements.forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(30px)';
     el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
     observerAnim.observe(el);
   });
-  
+
   // ========== NAVBAR ACTIVE LINK SAAT SCROLL ==========
   const sections = document.querySelectorAll('section[id]');
   const navLinks = document.querySelectorAll('.nav-link');
-  
+
   window.addEventListener('scroll', () => {
     let current = '';
     const scrollPos = window.scrollY + 100;
-    
+
     sections.forEach(section => {
       const sectionTop = section.offsetTop;
       const sectionHeight = section.offsetHeight;
-      
       if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
         current = section.getAttribute('id');
       }
     });
-    
+
     navLinks.forEach(link => {
       link.classList.remove('active');
-      if (link.getAttribute('href') === `#${current}`) {
+      if (link.getAttribute('href') === '#' + current) {
         link.classList.add('active');
       }
     });
   });
-  
-  // ========== CEK JIKA USER SUDAH LOGIN ==========
-  // Jika sudah login, ubah tombol "Masuk/Daftar" menjadi "Dashboard"
+
+  // ========== CEK LOGIN ==========
   const currentUser = Auth.getUser();
-  
   if (currentUser) {
     const navActions = document.querySelector('.nav-actions');
     if (navActions) {
       let dashboardUrl = 'pages/dashboard-pelanggan.html';
       if (currentUser.role === 'supir') dashboardUrl = 'pages/dashboard-supir.html';
       if (currentUser.role === 'admin') dashboardUrl = 'pages/dashboard-admin.html';
-      
-      navActions.innerHTML = `
-        <a href="${dashboardUrl}" class="btn btn-primary">
-          <i class="fas fa-tachometer-alt"></i> Dashboard
-        </a>
-        <button onclick="Auth.logout()" class="btn btn-outline">
-          <i class="fas fa-sign-out-alt"></i> Keluar
-        </button>
-      `;
+
+      navActions.innerHTML = 
+        '<a href="' + dashboardUrl + '" class="btn btn-primary"><i class="fas fa-tachometer-alt"></i> Dashboard</a>' +
+        '<button onclick="Auth.logout()" class="btn btn-outline"><i class="fas fa-sign-out-alt"></i> Keluar</button>';
     }
   }
-  
+
 });

@@ -17,8 +17,12 @@
   <nav class="navbar" id="navbar">
     <div class="nav-container">
       <a href="index.html" class="nav-logo">
-        <img src="../gambar/waste2worth.png" alt="Waste2Worth" style="height:40px;">
-        <span>Waste<strong>2</strong>Worth</span>
+        <div class="nav-logo-icon">
+          <i class="fas fa-recycle"></i>
+        </div>
+        <div class="nav-logo-text">
+          Waste<strong>2</strong>Worth
+        </div>
       </a>
       <ul class="nav-menu" id="navMenu">
         <li><a href="#beranda" class="nav-link active">Beranda</a></li>
@@ -36,7 +40,7 @@
   </nav>
 
   <!-- HERO -->
-  <section class="hero" id="beranda" style="background-image: url('../gambar/bgindex.png'); background-size: cover; background-position: center;">
+  <section class="hero" id="beranda">
     <div class="hero-container">
       <div class="hero-content">
         <span class="hero-badge"><i class="fas fa-leaf"></i> #UbahSampahJadiBerkah</span>
@@ -53,7 +57,25 @@
         </div>
       </div>
       <div class="hero-image">
-        <img src="../gambar/sampah-lingkungan.png" alt="Ilustrasi" style="max-width:100%;border-radius:20px;">
+        <div class="hero-recycle">
+          <div class="hero-recycle-ring-2"></div>
+          <div class="hero-recycle-ring"></div>
+          <div class="hero-recycle-circle"></div>
+          <i class="fas fa-recycle hero-recycle-icon"></i>
+          
+          <div class="recycle-badge recycle-badge-1">
+            <i class="fas fa-money-bill-wave"></i>
+            <span>+Rp 50.000</span>
+          </div>
+          <div class="recycle-badge recycle-badge-2">
+            <i class="fas fa-truck"></i>
+            <span>Penjemputan</span>
+          </div>
+          <div class="recycle-badge recycle-badge-3">
+            <i class="fas fa-check-circle"></i>
+            <span>Selesai</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -66,7 +88,7 @@
         <h2>Lihat Dampak Sampah Terhadap Lingkungan</h2>
       </div>
       <div class="video-wrapper">
-        <video src="../video/sampah-lingkungan.mp4" controls poster="../gambar/sampah-lingkungan.png" style="width:100%;border-radius:20px;">
+        <video src="video/sampah-lingkungan.mp4" controls style="width:100%;border-radius:20px;box-shadow:0 20px 50px rgba(0,0,0,0.15);">
           Browser kamu tidak mendukung video.
         </video>
       </div>
@@ -150,21 +172,21 @@
         <div class="testimonial-card">
           <p class="testimonial-text">"Luar biasa! Prosesnya mudah dan dapat uang tambahan."</p>
           <div class="testimonial-author">
-            <img src="../gambar/olin.png" alt="Caroline" class="author-avatar" style="width:50px;height:50px;border-radius:50%;object-fit:cover;">
+            <img src="gambar/olin.png" alt="Caroline" class="author-avatar" style="width:50px;height:50px;border-radius:50%;object-fit:cover;">
             <div class="author-info"><h4>Caroline Yuliana</h4><span>Mahasiswa, Medan Barat</span></div>
           </div>
         </div>
         <div class="testimonial-card">
           <p class="testimonial-text">"Fitur kalkulator nilainya sangat membantu!"</p>
           <div class="testimonial-author">
-            <img src="../gambar/dita.png" alt="Arina" class="author-avatar" style="width:50px;height:50px;border-radius:50%;object-fit:cover;">
+            <img src="gambar/dita.png" alt="Arina" class="author-avatar" style="width:50px;height:50px;border-radius:50%;object-fit:cover;">
             <div class="author-info"><h4>ArinaDhita Sidabungke</h4><span>Mahasiswa, Medan Sunggal</span></div>
           </div>
         </div>
         <div class="testimonial-card">
           <p class="testimonial-text">"Konsep bank sampah digital ini revolusioner!"</p>
           <div class="testimonial-author">
-            <img src="../gambar/pio.png" alt="Viona" class="author-avatar" style="width:50px;height:50px;border-radius:50%;object-fit:cover;">
+            <img src="gambar/pio.png" alt="Viona" class="author-avatar" style="width:50px;height:50px;border-radius:50%;object-fit:cover;">
             <div class="author-info"><h4>Viona</h4><span>Mahasiswa, Medan Timur</span></div>
           </div>
         </div>
@@ -181,7 +203,7 @@
       </div>
       <div class="news-grid">
         <a href="#" class="news-card">
-          <img src="../gambar/peresmian.png" alt="Berita" style="width:100%;height:180px;object-fit:cover;">
+          <img src="gambar/peresmian.png" alt="Berita" style="width:100%;height:180px;object-fit:cover;">
           <div class="news-content">
             <span class="news-date"><i class="fas fa-calendar"></i> 10 Maret 2026</span>
             <h3>Pemko Medan Resmikan 10 Bank Sampah Baru</h3>
@@ -189,7 +211,7 @@
           </div>
         </a>
         <a href="#" class="news-card">
-          <img src="../gambar/plastiknaik.png" alt="Berita" style="width:100%;height:180px;object-fit:cover;">
+          <img src="gambar/plastiknaik.png" alt="Berita" style="width:100%;height:180px;object-fit:cover;">
           <div class="news-content">
             <span class="news-date"><i class="fas fa-calendar"></i> 5 Maret 2026</span>
             <h3>Harga Sampah Plastik Naik 15%</h3>
@@ -220,7 +242,9 @@
       <div class="footer-grid">
         <div class="footer-col">
           <div class="footer-logo">
-            <img src="../gambar/waste2worth.png" alt="Logo" style="height:40px;">
+            <div class="nav-logo-icon">
+              <i class="fas fa-recycle"></i>
+            </div>
             <span>Waste<strong>2</strong>Worth</span>
           </div>
           <p>Platform bank sampah digital pertama di Medan.</p>
