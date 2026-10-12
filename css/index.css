@@ -2,12 +2,25 @@
    INDEX CSS - Khusus Beranda
    ============================================ */
 
+/* ========== HERO ========== */
 .hero {
   position: relative;
-  padding: 140px 0 80px;
-  background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 50%, #a5d6a7 100%);
+  padding: 140px 0 100px;
+  background-image: url('../gambar/bgindex.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
   overflow: hidden;
-  min-height: auto;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(232, 245, 233, 0.95) 0%, rgba(200, 230, 201, 0.85) 50%, rgba(165, 214, 167, 0.7) 100%);
+  z-index: 0;
 }
 
 .hero::before {
@@ -20,6 +33,7 @@
   background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, transparent 70%);
   border-radius: 50%;
   pointer-events: none;
+  z-index: 1;
 }
 
 .hero-container {
@@ -27,11 +41,12 @@
   margin: 0 auto;
   padding: 0 20px;
   display: grid;
-  grid-template-columns: 1.2fr 1fr;
+  grid-template-columns: 1.1fr 1fr;
   gap: 60px;
   align-items: center;
   position: relative;
-  z-index: 1;
+  z-index: 2;
+  width: 100%;
 }
 
 .hero-content {
@@ -83,6 +98,7 @@
   color: var(--gray-700);
   margin-bottom: 30px;
   max-width: 560px;
+  line-height: 1.7;
 }
 
 .hero-buttons {
@@ -115,10 +131,178 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: fadeIn 1s ease;
+  animation: fadeIn 1s ease 0.3s backwards;
 }
 
-/* VIDEO */
+/* ========== ANIMASI RECYCLE YANG LEBIH BAGUS ========== */
+.hero-recycle {
+  position: relative;
+  width: 100%;
+  max-width: 450px;
+  aspect-ratio: 1;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-recycle-glow {
+  position: absolute;
+  inset: -30px;
+  background: radial-gradient(circle, rgba(76, 175, 80, 0.4) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: pulse 3s ease-in-out infinite;
+  z-index: 0;
+}
+
+.hero-recycle-circle {
+  position: relative;
+  width: 70%;
+  height: 70%;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ffffff, #e8f5e9);
+  box-shadow: 
+    0 30px 80px rgba(46, 125, 50, 0.35),
+    0 10px 30px rgba(46, 125, 50, 0.2),
+    inset 0 -15px 40px rgba(46, 125, 50, 0.15),
+    inset 0 15px 40px rgba(255, 255, 255, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: float 4s ease-in-out infinite;
+  z-index: 2;
+}
+
+.hero-recycle-icon {
+  font-size: 140px;
+  color: var(--primary);
+  animation: spin-slow 12s linear infinite;
+  filter: drop-shadow(0 10px 20px rgba(46, 125, 50, 0.4));
+}
+
+.hero-recycle-ring {
+  position: absolute;
+  inset: 5%;
+  border: 3px dashed var(--primary-light);
+  border-radius: 50%;
+  animation: spin-slow 25s linear infinite reverse;
+  opacity: 0.6;
+  z-index: 1;
+}
+
+.hero-recycle-ring-2 {
+  position: absolute;
+  inset: -5%;
+  border: 2px dotted var(--primary-lighter, #81c784);
+  border-radius: 50%;
+  animation: spin-slow 35s linear infinite;
+  opacity: 0.4;
+  z-index: 1;
+}
+
+/* ========== BADGE ========== */
+.recycle-badge {
+  position: absolute;
+  background: white;
+  padding: 12px 18px;
+  border-radius: 16px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  animation: float 3s ease-in-out infinite;
+  z-index: 3;
+  border: 1px solid rgba(46, 125, 50, 0.1);
+}
+
+.badge-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.icon-money {
+  background: #fff3e0;
+  color: #f57c00;
+}
+
+.icon-truck {
+  background: #e3f2fd;
+  color: #1976d2;
+}
+
+.icon-check {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.badge-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.3;
+}
+
+.badge-text strong {
+  font-size: 14px;
+  color: var(--dark);
+  font-weight: 700;
+}
+
+.badge-text span {
+  font-size: 11px;
+  color: var(--gray-500);
+}
+
+.recycle-badge-1 {
+  top: 5%;
+  left: -8%;
+  animation-delay: 0s;
+}
+
+.recycle-badge-2 {
+  top: 45%;
+  right: -12%;
+  animation-delay: 1s;
+}
+
+.recycle-badge-3 {
+  bottom: 8%;
+  left: -5%;
+  animation-delay: 2s;
+}
+
+/* ========== ANIMASI ========== */
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.1); opacity: 0.8; }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ========== VIDEO ========== */
 .video-section {
   padding: 80px 0;
   background: var(--white);
@@ -138,7 +322,7 @@
   border-radius: var(--radius-lg);
 }
 
-/* FEATURES */
+/* ========== FEATURES ========== */
 .features {
   padding: 80px 0;
   background: var(--gray-100);
@@ -230,7 +414,7 @@
 .feature-link i { transition: var(--transition); }
 .feature-card:hover .feature-link i { transform: translateX(5px); }
 
-/* HOW IT WORKS */
+/* ========== HOW IT WORKS ========== */
 .how-it-works {
   padding: 80px 0;
   background: var(--white);
@@ -309,7 +493,7 @@
   line-height: 1.6;
 }
 
-/* TESTIMONIALS */
+/* ========== TESTIMONIALS ========== */
 .testimonials {
   padding: 80px 0;
   background: var(--white);
@@ -328,12 +512,22 @@
   box-shadow: var(--shadow-sm);
   border: 1px solid var(--gray-300);
   transition: var(--transition);
+  position: relative;
 }
 
 .testimonial-card:hover {
   transform: translateY(-8px);
   box-shadow: var(--shadow-lg);
   border-color: var(--primary-light);
+}
+
+.testimonial-quote {
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  font-size: 40px;
+  color: var(--primary-bg);
+  opacity: 0.6;
 }
 
 .testimonial-text {
@@ -348,6 +542,15 @@
   display: flex;
   align-items: center;
   gap: 14px;
+  margin-bottom: 16px;
+}
+
+.author-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--primary-bg);
 }
 
 .author-info h4 {
@@ -362,7 +565,14 @@
   color: var(--gray-500);
 }
 
-/* NEWS */
+.testimonial-rating {
+  display: flex;
+  gap: 4px;
+  color: var(--accent);
+  font-size: 14px;
+}
+
+/* ========== NEWS ========== */
 .news {
   padding: 80px 0;
   background: var(--gray-100);
@@ -386,6 +596,21 @@
 .news-card:hover {
   transform: translateY(-8px);
   box-shadow: var(--shadow-xl);
+}
+
+.news-image {
+  height: 180px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.news-image::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.2));
 }
 
 .news-content {
@@ -414,6 +639,13 @@
   color: var(--primary);
 }
 
+.news-content p {
+  font-size: 14px;
+  color: var(--gray-700);
+  margin-bottom: 16px;
+  line-height: 1.6;
+}
+
 .news-link {
   display: inline-flex;
   align-items: center;
@@ -423,7 +655,10 @@
   font-size: 14px;
 }
 
-/* CTA */
+.news-link i { transition: var(--transition); }
+.news-card:hover .news-link i { transform: translateX(5px); }
+
+/* ========== CTA ========== */
 .cta {
   padding: 80px 0;
   background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
@@ -431,27 +666,26 @@
   overflow: hidden;
 }
 
-.cta::before,
-.cta::after {
+.cta::before {
   content: '';
   position: absolute;
-  border-radius: 50%;
-}
-
-.cta::before {
   top: -100px;
   right: -100px;
   width: 400px;
   height: 400px;
   background: rgba(255,255,255,0.1);
+  border-radius: 50%;
 }
 
 .cta::after {
+  content: '';
+  position: absolute;
   bottom: -150px;
   left: -100px;
   width: 350px;
   height: 350px;
   background: rgba(255,255,255,0.05);
+  border-radius: 50%;
 }
 
 .cta-wrapper {
@@ -482,22 +716,46 @@
   flex-wrap: wrap;
 }
 
-/* RESPONSIVE */
+/* ========== RESPONSIVE ========== */
 @media (max-width: 992px) {
+  .hero {
+    padding: 120px 0 60px;
+    background-attachment: scroll;
+    min-height: auto;
+  }
+  
   .hero-container {
     grid-template-columns: 1fr;
     text-align: center;
     gap: 40px;
   }
+  
   .hero-desc { margin-left: auto; margin-right: auto; }
   .hero-buttons, .hero-stats { justify-content: center; }
-  .hero-image { order: -1; margin-bottom: 20px; }
+  
+  .hero-image { order: -1; }
+  
+  .hero-recycle { max-width: 300px; }
+  .hero-recycle-icon { font-size: 100px; }
+  
+  .recycle-badge-1 { left: 0; }
+  .recycle-badge-2 { right: 0; }
+  .recycle-badge-3 { left: 5%; }
 }
 
 @media (max-width: 576px) {
-  .hero { padding: 120px 0 60px; }
+  .hero { padding: 110px 0 50px; }
   .hero-stats { gap: 24px; }
   .stat-item h3 { font-size: 24px; }
+  
+  .hero-recycle { max-width: 240px; }
+  .hero-recycle-icon { font-size: 80px; }
+  
+  .recycle-badge { padding: 8px 12px; }
+  .badge-icon { width: 32px; height: 32px; font-size: 14px; }
+  .badge-text strong { font-size: 12px; }
+  .badge-text span { font-size: 10px; }
+  
   .cta-buttons { flex-direction: column; }
   .cta-buttons .btn { width: 100%; }
 }

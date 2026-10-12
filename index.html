@@ -39,41 +39,65 @@
     </div>
   </nav>
 
-  <!-- HERO -->
+  <!-- HERO dengan BG IMAGE -->
   <section class="hero" id="beranda">
+    <div class="hero-overlay"></div>
     <div class="hero-container">
       <div class="hero-content">
         <span class="hero-badge"><i class="fas fa-leaf"></i> #UbahSampahJadiBerkah</span>
         <h1 class="hero-title">Ubah Sampahmu,<br><span class="highlight">Ubah Masa Depan</span></h1>
-        <p class="hero-desc">Platform bank sampah digital pertama di Medan yang menghubungkan masyarakat dengan ekonomi sirkular.</p>
+        <p class="hero-desc">Platform bank sampah digital pertama di Medan yang menghubungkan masyarakat dengan ekonomi sirkular. Dapatkan keuntungan sambil menyelamatkan lingkungan!</p>
         <div class="hero-buttons">
           <a href="pages/register.html" class="btn btn-primary btn-lg"><i class="fas fa-user-plus"></i> Daftar Sekarang</a>
-          <a href="#cara-kerja" class="btn btn-outline btn-lg"><i class="fas fa-play-circle"></i> Pelajari Dulu</a>
+          <a href="#cara-kerja" class="btn btn-white btn-lg"><i class="fas fa-play-circle"></i> Pelajari Dulu</a>
         </div>
         <div class="hero-stats">
-          <div class="stat-item"><h3 data-count="15234">0</h3><p>Pengguna Aktif</p></div>
-          <div class="stat-item"><h3 data-count="8567">0</h3><p>Ton Sampah</p></div>
-          <div class="stat-item"><h3 data-count="48">0</h3><p>Bank Sampah</p></div>
+          <div class="stat-item">
+            <h3 data-count="15234">0</h3>
+            <p>Pengguna Aktif</p>
+          </div>
+          <div class="stat-item">
+            <h3 data-count="8567">0</h3>
+            <p>Ton Sampah</p>
+          </div>
+          <div class="stat-item">
+            <h3 data-count="48">0</h3>
+            <p>Bank Sampah</p>
+          </div>
         </div>
       </div>
+      
       <div class="hero-image">
         <div class="hero-recycle">
+          <div class="hero-recycle-glow"></div>
           <div class="hero-recycle-ring-2"></div>
           <div class="hero-recycle-ring"></div>
-          <div class="hero-recycle-circle"></div>
-          <i class="fas fa-recycle hero-recycle-icon"></i>
+          <div class="hero-recycle-circle">
+            <i class="fas fa-recycle hero-recycle-icon"></i>
+          </div>
           
           <div class="recycle-badge recycle-badge-1">
-            <i class="fas fa-money-bill-wave"></i>
-            <span>+Rp 50.000</span>
+            <div class="badge-icon icon-money"><i class="fas fa-money-bill-wave"></i></div>
+            <div class="badge-text">
+              <strong>+Rp 50.000</strong>
+              <span>Dari sampahmu</span>
+            </div>
           </div>
+          
           <div class="recycle-badge recycle-badge-2">
-            <i class="fas fa-truck"></i>
-            <span>Penjemputan</span>
+            <div class="badge-icon icon-truck"><i class="fas fa-truck"></i></div>
+            <div class="badge-text">
+              <strong>Penjemputan</strong>
+              <span>Gratis ke rumah</span>
+            </div>
           </div>
+          
           <div class="recycle-badge recycle-badge-3">
-            <i class="fas fa-check-circle"></i>
-            <span>Selesai</span>
+            <div class="badge-icon icon-check"><i class="fas fa-check-circle"></i></div>
+            <div class="badge-text">
+              <strong>Selesai</strong>
+              <span>Dana cair</span>
+            </div>
           </div>
         </div>
       </div>
@@ -88,7 +112,7 @@
         <h2>Lihat Dampak Sampah Terhadap Lingkungan</h2>
       </div>
       <div class="video-wrapper">
-        <video src="../video/sampah-lingkungan.mp4" controls style="width:100%;border-radius:20px;box-shadow:0 20px 50px rgba(0,0,0,0.15);">
+        <video src="video/sampah-lingkungan.mp4" controls style="width:100%;border-radius:20px;box-shadow:0 20px 50px rgba(0,0,0,0.15);">
           Browser kamu tidak mendukung video.
         </video>
       </div>
@@ -101,30 +125,31 @@
       <div class="section-header">
         <span class="section-badge"><i class="fas fa-star"></i> Layanan Kami</span>
         <h2>Fitur Unggulan</h2>
+        <p>Solusi lengkap untuk pengelolaan sampah di Kota Medan</p>
       </div>
       <div class="features-grid">
         <a href="pages/layanan.html" class="feature-card">
           <div class="feature-icon icon-green"><i class="fas fa-map-marked-alt"></i></div>
           <h3>Peta Bank Sampah</h3>
-          <p>Temukan bank sampah di seluruh Medan.</p>
+          <p>Temukan bank sampah di seluruh Medan dengan informasi lengkap lokasi dan jam operasional.</p>
           <span class="feature-link">Cari Lokasi <i class="fas fa-arrow-right"></i></span>
         </a>
         <a href="pages/layanan.html#kalkulator" class="feature-card">
           <div class="feature-icon icon-blue"><i class="fas fa-calculator"></i></div>
           <h3>Kalkulator Nilai</h3>
-          <p>Hitung estimasi nilai rupiah dari sampahmu.</p>
+          <p>Hitung estimasi nilai rupiah dari sampahmu berdasarkan harga pasar terkini.</p>
           <span class="feature-link">Hitung Sekarang <i class="fas fa-arrow-right"></i></span>
         </a>
         <a href="pages/edukasi.html" class="feature-card">
           <div class="feature-icon icon-orange"><i class="fas fa-graduation-cap"></i></div>
           <h3>Edukasi & Tutorial</h3>
-          <p>Pelajari cara memilah sampah dengan benar.</p>
+          <p>Pelajari cara memilah sampah dan membuat kerajinan daur ulang dari para ahli.</p>
           <span class="feature-link">Pelajari <i class="fas fa-arrow-right"></i></span>
         </a>
         <a href="pages/layanan.html#katalog" class="feature-card">
           <div class="feature-icon icon-purple"><i class="fas fa-shopping-bag"></i></div>
           <h3>Marketplace</h3>
-          <p>Produk kreatif hasil daur ulang.</p>
+          <p>Temukan produk kreatif dari hasil daur ulang karya UMKM binaan Medan.</p>
           <span class="feature-link">Jelajahi <i class="fas fa-arrow-right"></i></span>
         </a>
       </div>
@@ -137,25 +162,26 @@
       <div class="section-header">
         <span class="section-badge"><i class="fas fa-cogs"></i> Mudah & Cepat</span>
         <h2>Cara Kerja Waste2Worth</h2>
+        <p>Hanya 3 langkah untuk mulai menghasilkan dari sampahmu</p>
       </div>
       <div class="steps-grid">
         <div class="step-card">
           <div class="step-number">01</div>
           <div class="step-icon"><i class="fas fa-user-plus"></i></div>
           <h3>Daftar Akun</h3>
-          <p>Buat akun gratis dalam 1 menit.</p>
+          <p>Buat akun gratis dalam 1 menit. Cukup isi nama, email, dan password.</p>
         </div>
         <div class="step-card">
           <div class="step-number">02</div>
           <div class="step-icon"><i class="fas fa-truck"></i></div>
           <h3>Setor Sampah</h3>
-          <p>Ajukan penjemputan atau antar ke bank sampah.</p>
+          <p>Ajukan penjemputan atau antar langsung ke bank sampah terdekat.</p>
         </div>
         <div class="step-card">
           <div class="step-number">03</div>
           <div class="step-icon"><i class="fas fa-money-bill-wave"></i></div>
           <h3>Dapat Uang</h3>
-          <p>Terima pembayaran langsung ke rekening.</p>
+          <p>Terima pembayaran langsung ke rekening setelah sampah ditimbang.</p>
         </div>
       </div>
     </div>
@@ -167,27 +193,51 @@
       <div class="section-header">
         <span class="section-badge"><i class="fas fa-quote-left"></i> Testimoni</span>
         <h2>Apa Kata Mereka?</h2>
+        <p>Lebih dari 15.000 pengguna telah bergabung</p>
       </div>
       <div class="testimonials-grid">
         <div class="testimonial-card">
-          <p class="testimonial-text">"Luar biasa! Prosesnya mudah dan dapat uang tambahan."</p>
+          <div class="testimonial-quote"><i class="fas fa-quote-left"></i></div>
+          <p class="testimonial-text">"Luar biasa! Saya sudah setor sampah plastik dan kardus. Prosesnya mudah dan dapat uang tambahan. Lumayan banget!"</p>
           <div class="testimonial-author">
-            <img src="gambar/olin.png" alt="Caroline" class="author-avatar" style="width:50px;height:50px;border-radius:50%;object-fit:cover;">
-            <div class="author-info"><h4>Caroline Yuliana</h4><span>Mahasiswa, Medan Barat</span></div>
+            <img src="gambar/olin.png" alt="Caroline" class="author-avatar">
+            <div class="author-info">
+              <h4>Caroline Yuliana</h4>
+              <span>Mahasiswa, Medan Barat</span>
+            </div>
+          </div>
+          <div class="testimonial-rating">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
           </div>
         </div>
+        
         <div class="testimonial-card">
-          <p class="testimonial-text">"Fitur kalkulator nilainya sangat membantu!"</p>
+          <div class="testimonial-quote"><i class="fas fa-quote-left"></i></div>
+          <p class="testimonial-text">"Fitur kalkulator nilainya sangat membantu! Saya bisa estimasi harga sampah sebelum disetor. Pengiriman tepat waktu dan ramah lingkungan."</p>
           <div class="testimonial-author">
-            <img src="gambar/dita.png" alt="Arina" class="author-avatar" style="width:50px;height:50px;border-radius:50%;object-fit:cover;">
-            <div class="author-info"><h4>ArinaDhita Sidabungke</h4><span>Mahasiswa, Medan Sunggal</span></div>
+            <img src="gambar/dita.png" alt="Arina" class="author-avatar">
+            <div class="author-info">
+              <h4>ArinaDhita Sidabungke</h4>
+              <span>Mahasiswa, Medan Sunggal</span>
+            </div>
+          </div>
+          <div class="testimonial-rating">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
           </div>
         </div>
+        
         <div class="testimonial-card">
-          <p class="testimonial-text">"Konsep bank sampah digital ini revolusioner!"</p>
+          <div class="testimonial-quote"><i class="fas fa-quote-left"></i></div>
+          <p class="testimonial-text">"Konsep bank sampah digital ini revolusioner! Sampah yang tadinya tidak berguna sekarang bisa menghasilkan. Rekomendasi untuk warga Medan!"</p>
           <div class="testimonial-author">
-            <img src="gambar/pio.png" alt="Viona" class="author-avatar" style="width:50px;height:50px;border-radius:50%;object-fit:cover;">
-            <div class="author-info"><h4>Viona</h4><span>Mahasiswa, Medan Timur</span></div>
+            <img src="gambar/pio.png" alt="Viona" class="author-avatar">
+            <div class="author-info">
+              <h4>Viona</h4>
+              <span>Mahasiswa, Medan Timur</span>
+            </div>
+          </div>
+          <div class="testimonial-rating">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
           </div>
         </div>
       </div>
@@ -200,21 +250,33 @@
       <div class="section-header">
         <span class="section-badge"><i class="fas fa-newspaper"></i> Berita Terbaru</span>
         <h2>Update Lingkungan Medan</h2>
+        <p>Informasi terkini seputar pengelolaan sampah di Kota Medan</p>
       </div>
       <div class="news-grid">
         <a href="#" class="news-card">
-          <img src="gambar/peresmian.png" alt="Berita" style="width:100%;height:180px;object-fit:cover;">
+          <div class="news-image" style="background-image: url('gambar/peresmian.png');"></div>
           <div class="news-content">
             <span class="news-date"><i class="fas fa-calendar"></i> 10 Maret 2026</span>
             <h3>Pemko Medan Resmikan 10 Bank Sampah Baru</h3>
+            <p>Pemerintah Kota Medan meresmikan 10 bank sampah baru di berbagai kecamatan.</p>
             <span class="news-link">Baca Selengkapnya <i class="fas fa-arrow-right"></i></span>
           </div>
         </a>
         <a href="#" class="news-card">
-          <img src="gambar/plastiknaik.png" alt="Berita" style="width:100%;height:180px;object-fit:cover;">
+          <div class="news-image" style="background-image: url('gambar/plastiknaik.png');"></div>
           <div class="news-content">
             <span class="news-date"><i class="fas fa-calendar"></i> 5 Maret 2026</span>
-            <h3>Harga Sampah Plastik Naik 15%</h3>
+            <h3>Harga Sampah Plastik Naik 15% di Maret 2026</h3>
+            <p>Bank Sampah Medan menaikkan harga beli sampah plastik jenis PET hingga 15%.</p>
+            <span class="news-link">Baca Selengkapnya <i class="fas fa-arrow-right"></i></span>
+          </div>
+        </a>
+        <a href="#" class="news-card">
+          <div class="news-image" style="background-image: url('gambar/sampah-lingkungan.png');"></div>
+          <div class="news-content">
+            <span class="news-date"><i class="fas fa-calendar"></i> 28 Februari 2026</span>
+            <h3>Waste2Worth Raih Penghargaan Inovasi Digital</h3>
+            <p>Platform bank sampah digital Waste2Worth mendapatkan penghargaan inovasi terbaik.</p>
             <span class="news-link">Baca Selengkapnya <i class="fas fa-arrow-right"></i></span>
           </div>
         </a>
@@ -227,10 +289,10 @@
     <div class="container">
       <div class="cta-wrapper">
         <h2>Siap Menjadi Bagian dari Perubahan?</h2>
-        <p>Bergabung dengan ribuan pengguna di Medan.</p>
+        <p>Bergabung dengan ribuan pengguna di Medan yang telah berkontribusi mengurangi sampah dan mendapatkan keuntungan.</p>
         <div class="cta-buttons">
-          <a href="pages/register.html" class="btn btn-white btn-lg">Daftar Sekarang</a>
-          <a href="pages/login.html" class="btn btn-outline-white btn-lg">Sudah Punya Akun</a>
+          <a href="pages/register.html" class="btn btn-white btn-lg"><i class="fas fa-user-plus"></i> Daftar Sekarang</a>
+          <a href="pages/login.html" class="btn btn-outline-white btn-lg"><i class="fas fa-sign-in-alt"></i> Sudah Punya Akun</a>
         </div>
       </div>
     </div>
@@ -247,7 +309,13 @@
             </div>
             <span>Waste<strong>2</strong>Worth</span>
           </div>
-          <p>Platform bank sampah digital pertama di Medan.</p>
+          <p>Platform bank sampah digital pertama di Medan yang menghubungkan masyarakat dengan ekonomi sirkular.</p>
+          <div class="footer-social">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+          </div>
         </div>
         <div class="footer-col">
           <h4>Menu</h4>
@@ -255,13 +323,17 @@
             <li><a href="#beranda">Beranda</a></li>
             <li><a href="#fitur">Fitur</a></li>
             <li><a href="#cara-kerja">Cara Kerja</a></li>
+            <li><a href="#testimoni">Testimoni</a></li>
+            <li><a href="#berita">Berita</a></li>
           </ul>
         </div>
         <div class="footer-col">
           <h4>Layanan</h4>
           <ul>
             <li><a href="pages/layanan.html">Peta Bank Sampah</a></li>
+            <li><a href="pages/layanan.html#kalkulator">Kalkulator Nilai</a></li>
             <li><a href="pages/edukasi.html">Edukasi</a></li>
+            <li><a href="pages/layanan.html#katalog">Katalog Produk</a></li>
           </ul>
         </div>
         <div class="footer-col">
@@ -269,11 +341,13 @@
           <ul class="footer-contact">
             <li><i class="fas fa-map-marker-alt"></i> Medan, Sumatera Utara</li>
             <li><i class="fas fa-envelope"></i> info@waste2worth.id</li>
+            <li><i class="fas fa-phone"></i> +62 812-3456-7890</li>
           </ul>
         </div>
       </div>
       <div class="footer-bottom">
         <p>&copy; 2026 Waste2Worth. All rights reserved.</p>
+        <p>Dibuat dengan <i class="fas fa-heart"></i> untuk lingkungan Medan</p>
       </div>
     </div>
   </footer>
