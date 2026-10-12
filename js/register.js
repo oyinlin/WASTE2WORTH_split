@@ -1,57 +1,54 @@
 /* ============================================
-   REGISTER JS - Logika Registrasi
+   REGISTER JS - Registrasi Pelanggan
    ============================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
-  
+
   const form = document.getElementById('formRegister');
   const btnRegister = document.getElementById('btnRegister');
-  
+  const passwordInput = document.getElementById('password');
+
   // ========== TOGGLE PASSWORD VISIBILITY ==========
   document.querySelectorAll('.toggle-password').forEach(btn => {
     btn.addEventListener('click', () => {
-      const targetId = btn.dataset.target;
-      const input = document.getElementById(targetId);
+      const input = document.getElementById(btn.dataset.target);
       const icon = btn.querySelector('i');
-      
+
       if (input.type === 'password') {
         input.type = 'text';
-        icon.classList.remove('fa-eye');
-        icon.classList.add('fa-eye-slash');
+        icon.classList.replace('fa-eye', 'fa-eye-slash');
       } else {
         input.type = 'password';
-        icon.classList.remove('fa-eye-slash');
-        icon.classList.add('fa-eye');
+        icon.classList.replace('fa-eye-slash', 'fa-eye');
       }
     });
   });
-  
-  // ========== PASSWORD STRENGTH METER ==========
-  const passwordInput = document.getElementById('password');
+
+  // ========== PASSWORD STRENGTH ==========
   const strengthMeter = document.getElementById('passwordStrength');
   const strengthBar = strengthMeter?.querySelector('.strength-bar');
   const strengthText = strengthMeter?.querySelector('.strength-text');
-  
+
   passwordInput?.addEventListener('input', () => {
     const val = passwordInput.value;
-    
+
     if (!val) {
       strengthMeter.classList.remove('show');
       return;
     }
-    
+
     strengthMeter.classList.add('show');
-    
+
     let score = 0;
     if (val.length >= 6) score++;
     if (val.length >= 10) score++;
     if (/[A-Z]/.test(val)) score++;
     if (/[0-9]/.test(val)) score++;
     if (/[^A-Za-z0-9]/.test(val)) score++;
-    
+
     strengthBar.classList.remove('weak', 'medium', 'strong');
     strengthText.classList.remove('weak', 'medium', 'strong');
-    
+
     if (score <= 2) {
       strengthBar.classList.add('weak');
       strengthText.classList.add('weak');
@@ -66,23 +63,23 @@ document.addEventListener('DOMContentLoaded', () => {
       strengthText.textContent = 'Kuat';
     }
   });
-  
-  // ========== VALIDASI HELPER ==========
+
+  // ========== HELPER ==========
   function setError(fieldId, message) {
-    const el = document.getElementById(`error-${fieldId}`);
+    const el = document.getElementById('error-' + fieldId);
     if (el) el.textContent = message;
   }
-  
+
   function clearError(fieldId) {
-    const el = document.getElementById(`error-${fieldId}`);
+    const el = document.getElementById('error-' + fieldId);
     if (el) el.textContent = '';
   }
-  
+
   function clearAllErrors() {
     ['nama', 'email', 'telepon', 'alamat', 'password', 'konfirmasi', 'setuju'].forEach(clearError);
   }
-  
-  // ========== VALIDASI PER FIELD ==========
+
+  // ========== VALIDATOR ==========
   const validators = {
     nama: (val) => {
       if (!val) return 'Nama lengkap wajib diisi';
@@ -95,8 +92,6 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!val) return 'Email wajib diisi';
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(val)) return 'Format email tidak valid';
-      
-      // Cek email sudah terdaftar
       const users = JSON.parse(localStorage.getItem('users') || '[]');
       if (users.find(u => u.email.toLowerCase() === val.toLowerCase())) {
         return 'Email sudah terdaftar, silakan login';
@@ -114,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
     alamat: (val) => {
       if (!val) return 'Alamat wajib diisi';
       if (val.length < 10) return 'Alamat minimal 10 karakter';
-      if (!/[a-zA-Z]/.test(val)) return 'Alamat harus berisi huruf, bukan angka saja';
+      if (!/[a-zA-Z]/.test(val)) return 'Alamat harus berisi huruf';
       return '';
     },
     password: (val) => {
@@ -135,30 +130,27 @@ document.addEventListener('DOMContentLoaded', () => {
       return '';
     }
   };
-  
+
   // ========== REAL-TIME VALIDATION ==========
-  const fields = ['nama', 'email', 'telepon', 'alamat', 'password', 'konfirmasi'];
-  
-  fields.forEach(fieldId => {
+  ['nama', 'email', 'telepon', 'alamat', 'password', 'konfirmasi'].forEach(fieldId => {
     const input = document.getElementById(fieldId);
     input?.addEventListener('blur', () => {
       const error = validators[fieldId](input.value.trim());
       setError(fieldId, error);
     });
-    
     input?.addEventListener('input', () => {
-      if (document.getElementById(`error-${fieldId}`).textContent) {
+      if (document.getElementById('error-' + fieldId).textContent) {
         const error = validators[fieldId](input.value.trim());
         setError(fieldId, error);
       }
     });
   });
-  
+
   // ========== SUBMIT ==========
   form?.addEventListener('submit', (e) => {
     e.preventDefault();
     clearAllErrors();
-    
+
     const data = {
       nama: document.getElementById('nama').value.trim(),
       email: document.getElementById('email').value.trim().toLowerCase(),
@@ -167,8 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
       password: document.getElementById('password').value,
       konfirmasi: document.getElementById('konfirmasi').value
     };
-    
-    // Validasi semua field
+
     let isValid = true;
     Object.keys(validators).forEach(fieldId => {
       const val = fieldId === 'setuju' ? '' : (data[fieldId] || '');
@@ -178,82 +169,52 @@ document.addEventListener('DOMContentLoaded', () => {
         isValid = false;
       }
     });
-    
+
     if (!isValid) {
-      // Scroll ke error pertama
       const firstError = document.querySelector('.error-message:not(:empty)');
       firstError?.scrollIntoView({ behavior: 'smooth', block: 'center' });
       return;
     }
-    
+
     // Loading state
     btnRegister.disabled = true;
     btnRegister.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Memproses...';
-    
-    // Simulasi kirim ke server (nanti ganti dengan fetch API)
+
     setTimeout(() => {
-      // Simpan user ke localStorage (sementara, sebelum ada backend)
       const users = JSON.parse(localStorage.getItem('users') || '[]');
-      
+
       const newUser = {
         id: 'USR-' + Date.now(),
         nama: data.nama,
         email: data.email,
         telepon: data.telepon,
         alamat: data.alamat,
-        // ⚠️ CATATAN: Di production, password HARUS di-hash di backend!
-        password: btoa(data.password), // Base64 (bukan hash aman, hanya simulasi)
+        password: btoa(data.password), // ⚠️ Simulasi, di production pakai backend hash
         role: 'pelanggan',
         tanggalDaftar: new Date().toISOString(),
         saldo: 0,
         totalSetoran: 0
       };
-      
+
       users.push(newUser);
       localStorage.setItem('users', JSON.stringify(users));
-      
-      // Sukses
+
       showToast('Akun berhasil dibuat! Silakan login.', 'success');
-      
+
       setTimeout(() => {
         window.location.href = 'login.html';
       }, 1500);
-      
+
     }, 1200);
   });
-  
-  // ========== TOAST NOTIFICATION ==========
+
+  // ========== TOAST ==========
   function showToast(message, type = 'info') {
     const toast = document.createElement('div');
-    toast.className = `toast toast-${type}`;
-    toast.innerHTML = `
-      <i class="fas fa-${type === 'success' ? 'check-circle' : 'info-circle'}"></i>
-      <span>${message}</span>
-    `;
-    toast.style.cssText = `
-      position: fixed;
-      top: 30px;
-      right: 30px;
-      background: ${type === 'success' ? '#4caf50' : '#2196f3'};
-      color: white;
-      padding: 16px 24px;
-      border-radius: 12px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-weight: 600;
-      z-index: 9999;
-      animation: fadeInUp 0.4s ease;
-      max-width: 400px;
-    `;
-    
+    toast.innerHTML = '<i class="fas fa-' + (type === 'success' ? 'check-circle' : 'info-circle') + '"></i> <span>' + message + '</span>';
+    toast.style.cssText = 'position:fixed;top:30px;right:30px;background:' + (type === 'success' ? '#4caf50' : '#2196f3') + ';color:white;padding:16px 24px;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,0.2);display:flex;align-items:center;gap:12px;font-weight:600;z-index:9999;max-width:400px;';
     document.body.appendChild(toast);
-    
-    setTimeout(() => {
-      toast.style.animation = 'fadeIn 0.4s ease reverse';
-      setTimeout(() => toast.remove(), 400);
-    }, 3000);
+    setTimeout(() => toast.remove(), 3000);
   }
-  
+
 });
