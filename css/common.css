@@ -638,3 +638,79 @@ select.form-control {
   0%, 100% { transform: scale(1); }
   50% { transform: scale(1.05); }
 }
+/* ========== ANIMASI RECYCLE BESAR (HERO) ========== */
+.hero-recycle {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  aspect-ratio: 1;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-recycle-circle {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+  box-shadow: 0 20px 60px rgba(46, 125, 50, 0.3), inset 0 -10px 30px rgba(46, 125, 50, 0.2);
+  animation: float 4s ease-in-out infinite;
+}
+
+.hero-recycle-icon {
+  position: relative;
+  z-index: 2;
+  font-size: 160px;
+  color: #2e7d32;
+  animation: spin-recycle 8s linear infinite;
+  filter: drop-shadow(0 10px 20px rgba(46, 125, 50, 0.4));
+}
+
+.hero-recycle-ring {
+  position: absolute;
+  inset: -20px;
+  border: 3px dashed #4caf50;
+  border-radius: 50%;
+  animation: spin-recycle 20s linear infinite reverse;
+  opacity: 0.5;
+}
+
+.hero-recycle-ring-2 {
+  position: absolute;
+  inset: -40px;
+  border: 2px dotted #81c784;
+  border-radius: 50%;
+  animation: spin-recycle 30s linear infinite;
+  opacity: 0.3;
+}
+
+.recycle-badge {
+  position: absolute;
+  background: white;
+  padding: 12px 18px;
+  border-radius: 50px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #1a1a2e;
+  animation: float 3s ease-in-out infinite;
+  z-index: 3;
+}
+
+.recycle-badge i { font-size: 16px; }
+.recycle-badge-1 { top: 10%; left: -10%; animation-delay: 0s; }
+.recycle-badge-1 i { color: #ff9800; }
+.recycle-badge-2 { top: 50%; right: -15%; animation-delay: 1s; }
+.recycle-badge-2 i { color: #2196f3; }
+.recycle-badge-3 { bottom: 10%; left: 0; animation-delay: 2s; }
+.recycle-badge-3 i { color: #4caf50; }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
