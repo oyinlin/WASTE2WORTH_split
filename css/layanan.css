@@ -34,7 +34,7 @@
   color: var(--gray-700);
 }
 
-/* ========== TAB NAVIGATION ========== */
+/* ========== TAB ========== */
 .tab-section {
   padding: 40px 0 60px;
   background: var(--gray-100);
@@ -83,11 +83,11 @@
 
 .tab-content {
   display: none;
-  animation: fadeIn 0.4s ease;
 }
 
 .tab-content.active {
   display: block;
+  animation: fadeIn 0.4s ease;
 }
 
 @keyframes fadeIn {
@@ -105,6 +105,7 @@
   padding: 20px;
   box-shadow: var(--shadow-sm);
   height: 600px;
+  min-height: 600px;
 }
 
 .peta-sidebar {
@@ -201,6 +202,7 @@
   display: flex;
   align-items: flex-start;
   gap: 8px;
+  line-height: 1.4;
 }
 
 .peta-item p i {
@@ -208,12 +210,25 @@
   margin-top: 4px;
   font-size: 12px;
   flex-shrink: 0;
+  width: 14px;
 }
 
 .peta-map {
+  height: 100%;
+  min-height: 500px;
+  width: 100%;
   border-radius: var(--radius);
   overflow: hidden;
-  background: var(--gray-100);
+  position: relative;
+  z-index: 1;
+}
+
+#map {
+  height: 100% !important;
+  min-height: 500px !important;
+  width: 100% !important;
+  border-radius: var(--radius);
+  z-index: 1;
 }
 
 .peta-info {
@@ -231,6 +246,43 @@
 
 .peta-info i {
   font-size: 16px;
+}
+
+/* Leaflet popup */
+.leaflet-popup-content-wrapper {
+  border-radius: var(--radius) !important;
+  padding: 4px !important;
+}
+
+.leaflet-popup-content {
+  margin: 12px 16px !important;
+  font-family: var(--font-family) !important;
+}
+
+.popup-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--gray-300);
+}
+
+.popup-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--gray-700);
+  margin-bottom: 6px;
+  line-height: 1.4;
+}
+
+.popup-row i {
+  color: var(--primary);
+  margin-top: 3px;
+  flex-shrink: 0;
+  width: 14px;
 }
 
 /* ========== KATALOG ========== */
@@ -290,7 +342,7 @@
   margin-bottom: 6px;
 }
 
-.produk-content .produk-desc {
+.produk-desc {
   font-size: 13px;
   color: var(--gray-700);
   margin-bottom: 12px;
@@ -316,7 +368,7 @@
   color: var(--gray-500);
 }
 
-/* ========== CTA KALKULATOR ========== */
+/* ========== CTA ========== */
 .cta-kalkulator {
   padding: 60px 0;
   background: var(--white);
@@ -368,56 +420,22 @@
   flex-shrink: 0;
 }
 
-/* ========== LEAFLET CUSTOM ========== */
-.leaflet-popup-content-wrapper {
-  border-radius: var(--radius) !important;
-  padding: 4px !important;
-}
-
-.leaflet-popup-content {
-  margin: 12px 16px !important;
-  font-family: var(--font-family) !important;
-}
-
-.popup-title {
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--dark);
-  margin-bottom: 8px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid var(--gray-300);
-}
-
-.popup-row {
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
-  font-size: 13px;
-  color: var(--gray-700);
-  margin-bottom: 6px;
-  line-height: 1.4;
-}
-
-.popup-row i {
-  color: var(--primary);
-  margin-top: 3px;
-  flex-shrink: 0;
-  width: 14px;
-}
-
 /* ========== RESPONSIVE ========== */
 @media (max-width: 992px) {
   .peta-wrapper {
     grid-template-columns: 1fr;
     height: auto;
+    min-height: auto;
   }
   
   .peta-sidebar {
     max-height: 300px;
   }
   
-  .peta-map {
-    height: 400px;
+  .peta-map,
+  #map {
+    height: 400px !important;
+    min-height: 400px !important;
   }
   
   .cta-card {
@@ -436,8 +454,10 @@
     flex-direction: column;
   }
   
-  .peta-map {
-    height: 300px;
+  .peta-map,
+  #map {
+    height: 300px !important;
+    min-height: 300px !important;
   }
   
   .katalog-grid {
