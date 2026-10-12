@@ -1,227 +1,307 @@
-/* ============================================================
-   WASTE2WORTH - JS HALAMAN LAYANAN (layanan.html)
-   Isi: kalkulator nilai sampah, form penjemputan, FAQ accordion.
-   Butuh common.js (showNotification).
-   ============================================================ */
+/* ============================================
+   LAYANAN JS - Peta + Katalog + Tab
+   ============================================ */
 
-/* ============================================================
-   1. INISIALISASI DATA
-   Baca data pesanan dari localStorage browser
-   Jika belum ada (pertama kali buka), buat array kosong
-   Format penyimpanan: JSON string di key 'waste2worth_pickups'
-   ============================================================ */
-let pickupData = JSON.parse(localStorage.getItem('waste2worth_pickups')) || [];
+document.addEventListener('DOMContentLoaded', () => {
 
+  // ========== DATA MITRA BANK SAMPAH ==========
+  const mitraBankSampah = [
+    {
+      id: 1,
+      nama: 'Bank Sampah Medan Barat',
+      alamat: 'Jl. Gatot Subroto No. 123, Medan Barat',
+      kecamatan: 'medan-barat',
+      kontak: '0812-3456-7890',
+      jamLayanan: 'Senin-Sabtu, 08.00-17.00',
+      lat: 3.5952,
+      lng: 98.6722,
+      icon: 'fa-recycle'
+    },
+    {
+      id: 2,
+      nama: 'Bank Sampah Medan Timur',
+      alamat: 'Jl. Williem Iskandar No. 45, Medan Timur',
+      kecamatan: 'medan-timur',
+      kontak: '0813-4567-8901',
+      jamLayanan: 'Senin-Jumat, 09.00-16.00',
+      lat: 3.6105,
+      lng: 98.6903,
+      icon: 'fa-recycle'
+    },
+    {
+      id: 3,
+      nama: 'Bank Sampah Medan Sunggal',
+      alamat: 'Jl. Sunggal No. 88, Medan Sunggal',
+      kecamatan: 'medan-sunggal',
+      kontak: '0814-5678-9012',
+      jamLayanan: 'Senin-Sabtu, 08.00-16.00',
+      lat: 3.5822,
+      lng: 98.6421,
+      icon: 'fa-recycle'
+    },
+    {
+      id: 4,
+      nama: 'Bank Sampah Medan Petisah',
+      alamat: 'Jl. Petisah Tengah No. 21, Medan Petisah',
+      kecamatan: 'medan-petisah',
+      kontak: '0815-6789-0123',
+      jamLayanan: 'Senin-Sabtu, 08.30-17.30',
+      lat: 3.5915,
+      lng: 98.6614,
+      icon: 'fa-recycle'
+    },
+    {
+      id: 5,
+      nama: 'Bank Sampah Medan Kota',
+      alamat: 'Jl. Mesjid No. 56, Medan Kota',
+      kecamatan: 'medan-kota',
+      kontak: '0816-7890-1234',
+      jamLayanan: 'Senin-Jumat, 08.00-16.00',
+      lat: 3.5855,
+      lng: 98.6789,
+      icon: 'fa-recycle'
+    },
+    {
+      id: 6,
+      nama: 'Bank Sampah Medan Denai',
+      alamat: 'Jl. Denai No. 100, Medan Denai',
+      kecamatan: 'medan-denai',
+      kontak: '0817-8901-2345',
+      jamLayanan: 'Senin-Sabtu, 08.00-17.00',
+      lat: 3.5789,
+      lng: 98.7012,
+      icon: 'fa-recycle'
+    }
+  ];
 
-/* ============================================================
-   8. KALKULATOR NILAI SAMPAH (layanan.html)
-   
-   Data harga (Rp/kg) per kecamatan × jenis sampah
-   Key kecamatan: nilai dari select#locationSelect
-   Key jenis: nilai dari select#wasteType
-   ============================================================ */
-const priceData = {
-    'medan-barat':      { plastik: 5000,  kardus: 3000,  aluminium: 12000, kaca: 1500,  besi: 3500,  elektronik: 8000  },
-    'medan-timur':      { plastik: 4800,  kardus: 2800,  aluminium: 11500, kaca: 1400,  besi: 3300,  elektronik: 7500  },
-    'medan-sunggal':    { plastik: 5200,  kardus: 3200,  aluminium: 12500, kaca: 1600,  besi: 3700,  elektronik: 8500  },
-    'medan-helvetia':   { plastik: 4900,  kardus: 2900,  aluminium: 11800, kaca: 1450,  besi: 3400,  elektronik: 7800  },
-    'medan-tembung':    { plastik: 4700,  kardus: 2700,  aluminium: 11000, kaca: 1350,  besi: 3200,  elektronik: 7200  },
-    'medan-perjuangan': { plastik: 5100,  kardus: 3100,  aluminium: 12200, kaca: 1550,  besi: 3600,  elektronik: 8200  },
-    'medan-area':       { plastik: 4850,  kardus: 2850,  aluminium: 11600, kaca: 1420,  besi: 3350,  elektronik: 7600  },
-    'medan-kota':       { plastik: 5050,  kardus: 3050,  aluminium: 12100, kaca: 1520,  besi: 3550,  elektronik: 8100  },
-    'medan-marelan':    { plastik: 4600,  kardus: 2600,  aluminium: 10800, kaca: 1300,  besi: 3100,  elektronik: 7000  },
-    'medan-labuhan':    { plastik: 4550,  kardus: 2550,  aluminium: 10500, kaca: 1250,  besi: 3000,  elektronik: 6800  }
-};
+  // ========== DATA KATALOG PRODUK ==========
+  const katalogProduk = [
+    {
+      id: 1,
+      nama: 'Tas dari Kain Perca',
+      deskripsi: 'Tas cantik dari kain perca daur ulang',
+      harga: 45000,
+      toko: 'UMKM Medan Kreatif',
+      kategori: 'Tas',
+      icon: 'fa-shopping-bag',
+      badge: 'Best Seller'
+    },
+    {
+      id: 2,
+      nama: 'Vas Bunga dari Botol Plastik',
+      deskripsi: 'Vas unik dari botol plastik bekas',
+      harga: 35000,
+      toko: 'Bank Sampah Medan Barat',
+      kategori: 'Dekorasi',
+      icon: 'fa-wine-bottle',
+      badge: ''
+    },
+    {
+      id: 3,
+      nama: 'Dompet dari Kardus',
+      deskripsi: 'Dompet ramah lingkungan dari kardus',
+      harga: 25000,
+      toko: 'UMKM Denai',
+      kategori: 'Aksesoris',
+      icon: 'fa-wallet',
+      badge: 'Baru'
+    },
+    {
+      id: 4,
+      nama: 'Lampu Hias dari Kaleng',
+      deskripsi: 'Lampu hias cantik dari kaleng bekas',
+      harga: 75000,
+      toko: 'Medan Craft',
+      kategori: 'Dekorasi',
+      icon: 'fa-lightbulb',
+      badge: ''
+    },
+    {
+      id: 5,
+      nama: 'Pot Tanaman dari Plastik',
+      deskripsi: 'Pot tanaman dari plastik daur ulang',
+      harga: 20000,
+      toko: 'Bank Sampah Medan Timur',
+      kategori: 'Tanaman',
+      icon: 'fa-seedling',
+      badge: 'Best Seller'
+    },
+    {
+      id: 6,
+      nama: 'Buku Catatan dari Kertas Bekas',
+      deskripsi: 'Buku catatan dari kertas daur ulang',
+      harga: 30000,
+      toko: 'UMKM Medan Pintar',
+      kategori: 'Alat Tulis',
+      icon: 'fa-book',
+      badge: ''
+    }
+  ];
 
-/** Rekomendasi bank sampah berdasarkan lokasi */
-const bankNames = {
-    'medan-barat':      '🏦 Bank Sampah Medan Barat - Jl. Gajah Mada No.123 (500m dari Anda)',
-    'medan-timur':      '🏦 Bank Sampah Medan Timur - Jl. Krakatau No.45 (700m dari Anda)',
-    'medan-sunggal':    '🏦 Bank Sampah Medan Sunggal - Jl. Kapten Muslim No.78 (300m dari Anda)',
-    'medan-helvetia':   '🏦 Bank Sampah Medan Helvetia - Jl. Cemara No.90 (1km dari Anda)',
-    'medan-tembung':    '🏦 Bank Sampah Medan Tembung - Jl. Pancing No.12 (800m dari Anda)',
-    'medan-perjuangan': '🏦 Bank Sampah Medan Perjuangan - Jl. Bunga Raya No.34 (600m dari Anda)'
-};
+  // ========== TAB SWITCHER ==========
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const tabContents = document.querySelectorAll('.tab-content');
 
-/**
- * hitungNilai(): Dipanggil saat tombol "HITUNG NILAI" diklik
- * Rumus: total = priceData[lokasi][jenis] × berat
- * Hasil ditampilkan di div#calcResult
- */
-function hitungNilai() {
-    const location  = document.getElementById('locationSelect')?.value;
-    const wasteType = document.getElementById('wasteType')?.value;
-    const weight    = parseFloat(document.getElementById('weight')?.value);
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetTab = btn.dataset.tab;
 
-    if (!location || !wasteType) return;
+      tabBtns.forEach(b => b.classList.remove('active'));
+      tabContents.forEach(c => c.classList.remove('active'));
 
-    if (!weight || weight <= 0) {
-        alert('⚠️ Masukkan berat sampah terlebih dahulu!');
-        return;
+      btn.classList.add('active');
+      document.getElementById('tab-' + targetTab)?.classList.add('active');
+
+      // Kalau peta, refresh ukuran leaflet
+      if (targetTab === 'peta' && window.map) {
+        setTimeout(() => window.map.invalidateSize(), 100);
+      }
+    });
+  });
+
+  // ========== PETA - LEAFLET ==========
+  let map = null;
+  let markers = [];
+
+  function initMap() {
+    const mapEl = document.getElementById('map');
+    if (!mapEl || typeof L === 'undefined') return;
+
+    // Pusat peta di Medan
+    map = L.map('map').setView([3.5952, 98.6722], 12);
+    window.map = map;
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors',
+      maxZoom: 19
+    }).addTo(map);
+
+    // Tambahkan marker untuk setiap mitra
+    mitraBankSampah.forEach(mitra => {
+      const marker = L.marker([mitra.lat, mitra.lng]).addTo(map);
+      
+      const popupContent = `
+        <div class="popup-title">${mitra.nama}</div>
+        <div class="popup-row">
+          <i class="fas fa-map-marker-alt"></i>
+          <span>${mitra.alamat}</span>
+        </div>
+        <div class="popup-row">
+          <i class="fas fa-phone"></i>
+          <span>${mitra.kontak}</span>
+        </div>
+        <div class="popup-row">
+          <i class="fas fa-clock"></i>
+          <span>${mitra.jamLayanan}</span>
+        </div>
+      `;
+
+      marker.bindPopup(popupContent);
+      marker.mitraId = mitra.id;
+      markers.push(marker);
+    });
+  }
+
+  // ========== RENDER DAFTAR PETA ==========
+  function renderPetaList(data = mitraBankSampah) {
+    const list = document.getElementById('petaList');
+    if (!list) return;
+
+    list.innerHTML = '';
+
+    if (data.length === 0) {
+      list.innerHTML = `
+        <div style="text-align:center;padding:40px 20px;color:#9e9e9e;">
+          <i class="fas fa-search" style="font-size:36px;margin-bottom:12px;"></i>
+          <p>Lokasi tidak ditemukan</p>
+        </div>
+      `;
+      return;
     }
 
-    const price = priceData[location]?.[wasteType];
-    if (!price) return;
+    data.forEach(mitra => {
+      const item = document.createElement('div');
+      item.className = 'peta-item';
+      item.dataset.id = mitra.id;
+      item.innerHTML = `
+        <h3><i class="fas fa-recycle"></i> ${mitra.nama}</h3>
+        <p><i class="fas fa-map-marker-alt"></i> ${mitra.alamat}</p>
+        <p><i class="fas fa-phone"></i> ${mitra.kontak}</p>
+        <p><i class="fas fa-clock"></i> ${mitra.jamLayanan}</p>
+      `;
 
-    const total = price * weight;
+      item.addEventListener('click', () => {
+        // Highlight item
+        document.querySelectorAll('.peta-item').forEach(i => i.classList.remove('active'));
+        item.classList.add('active');
 
-    // Tampilkan hasil ke DOM
-    const resultDiv   = document.getElementById('calcResult');
-    const resultValue = document.getElementById('resultValue');
-    const pricePerKg    = document.getElementById('pricePerKg');
-    const weightDisplay = document.getElementById('weightDisplay');
-    const bankSpan      = document.getElementById('bankName');
-
-    if (resultValue)   resultValue.textContent   = total.toLocaleString('id-ID');
-    if (pricePerKg)    pricePerKg.textContent    = price.toLocaleString();
-    if (weightDisplay) weightDisplay.textContent = weight;
-    if (bankSpan && bankNames[location]) bankSpan.innerHTML = bankNames[location];
-
-    // Tampilkan kotak hasil (dari display:none → display:block)
-    if (resultDiv) {
-        resultDiv.style.display   = 'block';
-        resultDiv.style.animation = 'fadeInUp 0.5s ease';
-        resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }
-}
-
-
-/* ============================================================
-   9. FORM PICKUP (layanan.html)
-   Mengumpulkan data form, memvalidasi, dan menyimpan ke localStorage
-   ============================================================ */
-
-/**
- * Ambil semua pilihan yang dipilih dari select multiple
- * Return: array nilai yang dipilih (misal: ["Botol Plastik PET", "Kardus / Kertas"])
- */
-function getSelectedJenisSampah() {
-    const select = document.getElementById('pickupJenisSampah');
-    if (!select) return [];
-    return Array.from(select.options).filter(o => o.selected).map(o => o.value);
-}
-
-/**
- * Validasi data form sebelum disimpan
- * Return: true jika valid, false jika ada error
- */
-function validatePickupForm(formData) {
-    if (formData.nama.length < 3) {
-        showNotification('Nama lengkap minimal 3 karakter!', 'error');
-        return false;
-    }
-
-    const phoneRegex = /^[0-9]{10,13}$/;
-    if (!phoneRegex.test(formData.phone.replace(/\D/g, ''))) {
-        showNotification('Nomor HP tidak valid! (10-13 digit)', 'error');
-        return false;
-    }
-
-    if (formData.alamat.length < 10) {
-        showNotification('Alamat terlalu pendek! Minimal 10 karakter.', 'error');
-        return false;
-    }
-
-    if (formData.berat < 5) {
-        showNotification('Minimal berat sampah 5 kg untuk penjemputan gratis!', 'error');
-        return false;
-    }
-
-    // Validasi tanggal: harus hari ini atau setelahnya
-    const today = new Date().toISOString().split('T')[0];
-    if (formData.tanggal < today) {
-        showNotification('Tanggal penjemputan tidak boleh kurang dari hari ini!', 'error');
-        return false;
-    }
-
-    return true;
-}
-
-/**
- * Simpan data pesanan baru ke localStorage
- * Menambahkan: id (timestamp), tanggalDibuat, status awal 'pending'
- */
-function savePickupData(data) {
-    const newData = {
-        id: Date.now(),   // ID unik berdasarkan timestamp millisecond
-        ...data,
-        tanggalDibuat: new Date().toLocaleDateString('id-ID'),
-        status: 'pending'
-    };
-
-    pickupData.push(newData);
-    localStorage.setItem('waste2worth_pickups', JSON.stringify(pickupData));
-    return newData;
-}
-
-/**
- * Handler submit form penjemputan
- * Dipasang sebagai event listener pada pickupForm di DOMContentLoaded
- */
-function handlePickupSubmit(event) {
-    event.preventDefault();
-
-    const formData = {
-        nama:        document.getElementById('pickupNama')?.value        || '',
-        phone:       document.getElementById('pickupPhone')?.value       || '',
-        alamat:      document.getElementById('pickupAlamat')?.value      || '',
-        kecamatan:   document.getElementById('pickupKecamatan')?.value   || '',
-        jenisSampah: getSelectedJenisSampah(),
-        berat:       parseFloat(document.getElementById('pickupBerat')?.value)   || 0,
-        tanggal:     document.getElementById('pickupTanggal')?.value     || '',
-        waktu:       document.getElementById('pickupWaktu')?.value       || '',
-        catatan:     document.getElementById('pickupCatatan')?.value     || ''
-    };
-
-    if (!validatePickupForm(formData)) return;
-
-    const savedData = savePickupData(formData);
-    showNotification(`✅ Pesanan berhasil dibuat! ID: ${savedData.id}`);
-    event.target.reset(); // kosongkan form
-
-    // Setelah 1.5 detik, tawarkan redirect ke riwayat
-    setTimeout(() => {
-        if (confirm('Lihat riwayat penjemputan Anda sekarang?')) {
-            window.location.href = 'riwayat.html';
+        // Zoom ke marker
+        if (map) {
+          map.setView([mitra.lat, mitra.lng], 15);
+          const marker = markers.find(m => m.mitraId === mitra.id);
+          if (marker) marker.openPopup();
         }
-    }, 1500);
-}
+      });
 
+      list.appendChild(item);
+    });
+  }
 
-/* ============================================================
-   13. FAQ ACCORDION (layanan.html)
-   Buka/tutup jawaban FAQ dengan animasi max-height
-   Dipanggil via onclick="toggleFaq(this)" di HTML
-   ============================================================ */
-function toggleFaq(element) {
-    const faqItem = element.parentElement;
-    const answer  = faqItem.querySelector('.faq-answer');
-    const icon    = element.querySelector('i');
+  // ========== SEARCH PETA ==========
+  const searchInput = document.getElementById('searchLokasi');
+  searchInput?.addEventListener('input', (e) => {
+    const keyword = e.target.value.toLowerCase().trim();
 
-    faqItem.classList.toggle('active');
-
-    if (faqItem.classList.contains('active')) {
-        answer.style.maxHeight = answer.scrollHeight + 'px'; // buka (animasi CSS)
-        if (icon) icon.style.transform = 'rotate(180deg)';
-    } else {
-        answer.style.maxHeight = '0'; // tutup
-        if (icon) icon.style.transform = 'rotate(0deg)';
+    if (!keyword) {
+      renderPetaList(mitraBankSampah);
+      return;
     }
-}
 
+    const hasil = mitraBankSampah.filter(m =>
+      m.nama.toLowerCase().includes(keyword) ||
+      m.alamat.toLowerCase().includes(keyword) ||
+      m.kecamatan.toLowerCase().includes(keyword)
+    );
 
-/* ============================================================
-   INISIALISASI HALAMAN: DOMContentLoaded
-   ============================================================ */
-document.addEventListener('DOMContentLoaded', function () {
+    renderPetaList(hasil);
+  });
 
-    /* ---- Handler form penjemputan (hanya di layanan.html) ---- */
-    document.getElementById('pickupForm')?.addEventListener('submit', handlePickupSubmit);
+  // ========== RENDER KATALOG ==========
+  function renderKatalog() {
+    const grid = document.getElementById('katalogGrid');
+    if (!grid) return;
+
+    grid.innerHTML = '';
+
+    katalogProduk.forEach(produk => {
+      const card = document.createElement('div');
+      card.className = 'produk-card';
+      card.innerHTML = `
+        <div class="produk-image">
+          <i class="fas ${produk.icon}"></i>
+          ${produk.badge ? '<span class="produk-badge">' + produk.badge + '</span>' : ''}
+        </div>
+        <div class="produk-content">
+          <h3>${produk.nama}</h3>
+          <p class="produk-desc">${produk.deskripsi}</p>
+          <div class="produk-footer">
+            <div>
+              <div class="produk-harga">Rp ${produk.harga.toLocaleString('id-ID')}</div>
+              <div class="produk-toko">${produk.toko}</div>
+            </div>
+            <button class="btn btn-primary btn-sm" onclick="alert('Fitur pembelian akan segera hadir!')">
+              <i class="fas fa-shopping-cart"></i>
+            </button>
+          </div>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+  }
+
+  // ========== INIT ==========
+  initMap();
+  renderPetaList();
+  renderKatalog();
+
 });
-
-
-/* ============================================================
-   EKSPOR FUNGSI KE GLOBAL SCOPE (dipanggil via onclick="" di HTML)
-   ============================================================ */
-window.hitungNilai     = hitungNilai;
-window.toggleFaq       = toggleFaq;

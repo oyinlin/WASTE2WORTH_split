@@ -1,497 +1,125 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Layanan - Waste2Worth Medan</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/common.css">
-    <link rel="stylesheet" href="css/layanan.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Layanan - Waste2Worth</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="../css/common.css">
+  <link rel="stylesheet" href="../css/layanan.css">
 </head>
 <body>
 
-    <!-- HEADER -->
-    <header class="header" id="header">
-        <div class="nav-container">
-            <div class="logo">
-                <i class="fas fa-recycle"></i>
-                <span>Waste2<span class="highlight">Worth</span></span>
-            </div>
-            <nav>
-                <ul class="nav-menu" id="navMenu">
-                    <li><a href="index.html">Beranda</a></li>
-                    <li><a href="layanan.html" class="active">Layanan</a></li>
-                    <li><a href="riwayat.html">Riwayat</a></li>
-                    <li><a href="edukasi.html">Edukasi</a></li>
-                </ul>
-            </nav>
-            <div class="auth-buttons">
-                <a href="#" class="btn-login" onclick="openModal('login')">Masuk</a>
-                <a href="#" class="btn-register" onclick="openModal('register')">Daftar</a>
-            </div>
-            <div class="hamburger" id="hamburger">
-                <span></span><span></span><span></span>
-            </div>
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo">
+        <div class="nav-logo-icon">
+          <i class="fas fa-recycle"></i>
         </div>
-    </header>
-
-    <!-- MODAL LOGIN / REGISTER -->
-    <div class="modal" id="authModal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeModal()">&times;</span>
-            <div class="modal-tabs">
-                <button class="tab-auth active" onclick="switchAuthTab('login')">Masuk</button>
-                <button class="tab-auth" onclick="switchAuthTab('register')">Daftar</button>
-            </div>
-            <form id="loginForm" class="auth-form active">
-                <h3>Selamat Datang Kembali</h3>
-                <p>Silakan masuk ke akun Anda</p>
-                <div class="form-group"><label>Email</label><input type="email" placeholder="nama@email.com" required></div>
-                <div class="form-group"><label>Password</label><input type="password" placeholder="••••••••" required></div>
-                <button type="submit" class="btn-auth">Masuk</button>
-            </form>
-            <form id="registerForm" class="auth-form">
-                <h3>Buat Akun Baru</h3>
-                <p>Bergabung dengan ribuan pengguna di Medan</p>
-                <div class="form-group"><label>Nama Lengkap</label><input type="text" placeholder="Nama Anda" required></div>
-                <div class="form-group"><label>Email</label><input type="email" placeholder="nama@email.com" required></div>
-                <div class="form-group"><label>Nomor HP</label><input type="tel" placeholder="0812-3456-7890" required></div>
-                <div class="form-group"><label>Password</label><input type="password" placeholder="Minimal 8 karakter" required></div>
-                <button type="submit" class="btn-auth">Daftar</button>
-            </form>
-        </div>
+        <div class="nav-logo-text">Waste<strong>2</strong>Worth</div>
+      </a>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="../index.html" class="nav-link">Beranda</a></li>
+        <li><a href="layanan.html" class="nav-link active">Layanan</a></li>
+        <li><a href="kalkulator.html" class="nav-link">Kalkulator</a></li>
+        <li><a href="edukasi.html" class="nav-link">Edukasi</a></li>
+        <li><a href="riwayat.html" class="nav-link">Riwayat</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="login.html" class="btn btn-outline">Masuk</a>
+        <a href="register.html" class="btn btn-primary">Daftar</a>
+      </div>
+      <button class="nav-toggle" id="navToggle"><i class="fas fa-bars"></i></button>
     </div>
+  </nav>
 
-    <main>
+  <!-- HEADER -->
+  <section class="layanan-header">
+    <div class="container">
+      <div class="header-badge"><i class="fas fa-th-large"></i> Layanan Kami</div>
+      <h1>Semua yang Kamu Butuhkan</h1>
+      <p>Cari bank sampah, hitung nilai, dan lihat produk daur ulang dalam satu tempat</p>
+    </div>
+  </section>
 
-        <!-- ============================================================
-             HERO LAYANAN - SUDAH DIPERBAIKI STRUKTUR HTML NYA
-             ============================================================ -->
-        <section class="hero" style="padding: 100px 0 0;">
-            <div class="container">
-                <div class="hero-content" data-aos="fade-up">
-                    <span class="hero-subtitle">Layanan Kami</span>
-                    <h1>Solusi <span class="highlight">Pengelolaan Sampah</span></h1>
-                    <p>Dari Kalkulator Nilai hingga Penjemputan Langsung, semua ada di sini!</p>
-                </div>
+  <!-- TAB NAVIGATION -->
+  <section class="tab-section">
+    <div class="container">
+      <div class="tab-nav">
+        <button class="tab-btn active" data-tab="peta">
+          <i class="fas fa-map-marked-alt"></i> Peta Bank Sampah
+        </button>
+        <button class="tab-btn" data-tab="katalog">
+          <i class="fas fa-shopping-bag"></i> Katalog Produk
+        </button>
+      </div>
+
+      <!-- TAB: PETA -->
+      <div class="tab-content active" id="tab-peta">
+        <div class="peta-wrapper">
+          <div class="peta-sidebar">
+            <div class="peta-search">
+              <i class="fas fa-search"></i>
+              <input 
+                type="text" 
+                id="searchLokasi" 
+                placeholder="Cari bank sampah atau kecamatan..."
+              >
             </div>
-            <div class="hero-wave">
-                <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                    <path d="M0,0L46.2,16C92.3,32,184.6,64,276.9,74.7C369.2,85,461.5,75,553.8,58.7C646.2,43,738.5,21,830.8,26.7C923.1,32,1015.4,64,1107.7,74.7C1200,85,1200,85,1200,85L1200,120L1107.7,120C1015.4,120,923.1,120,830.8,120C738.5,120,646.2,120,553.8,120C461.5,120,369.2,120,276.9,120C184.6,120,92.3,120,46.2,120L0,120Z" class="wave-fill"></path>
-                </svg>
-            </div>
-        </section>
 
-        <!-- STATISTIK LAYANAN -->
-        <section class="stats-services">
-            <div class="container">
-                <div class="stats-services-grid">
-                    <div class="stat-service-card" data-aos="fade-up" data-aos-delay="100">
-                        <i class="fas fa-trash-alt"></i>
-                        <span class="stat-number">8.567</span>
-                        <span class="stat-label">Ton Sampah Terkelola</span>
-                    </div>
-                    <div class="stat-service-card" data-aos="fade-up" data-aos-delay="200">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span class="stat-number">48</span>
-                        <span class="stat-label">Bank Sampah Mitra</span>
-                    </div>
-                    <div class="stat-service-card" data-aos="fade-up" data-aos-delay="300">
-                        <i class="fas fa-users"></i>
-                        <span class="stat-number">15.234</span>
-                        <span class="stat-label">Pengguna Aktif</span>
-                    </div>
-                    <div class="stat-service-card" data-aos="fade-up" data-aos-delay="400">
-                        <i class="fas fa-truck"></i>
-                        <span class="stat-number">12.345</span>
-                        <span class="stat-label">Penjemputan Selesai</span>
-                    </div>
-                </div>
+            <div class="peta-list" id="petaList">
+              <!-- Daftar bank sampah akan di-render oleh JS -->
             </div>
-        </section>
+          </div>
 
-        <!-- KALKULATOR NILAI SAMPAH -->
-        <section class="calculator-section">
-            <div class="container">
-                <div class="section-header" data-aos="fade-up">
-                    <span class="section-tag">Kalkulator</span>
-                    <h2>Hitung <span class="highlight">Nilai Sampah</span></h2>
-                    <p>Pilih lokasi dan jenis sampah untuk mengetahui estimasi harganya</p>
-                </div>
-                <div class="calculator-wrapper" data-aos="zoom-in" data-aos-delay="100">
-                    <div class="calculator-grid">
-                        <div class="calculator-form">
-                            <div class="form-group">
-                                <label><i class="fas fa-map-marker-alt"></i> 📍 Lokasi Anda</label>
-                                <select id="locationSelect" class="form-control">
-                                    <option value="medan-barat">Medan Barat</option>
-                                    <option value="medan-timur">Medan Timur</option>
-                                    <option value="medan-sunggal">Medan Sunggal</option>
-                                    <option value="medan-helvetia">Medan Helvetia</option>
-                                    <option value="medan-tembung">Medan Tembung</option>
-                                    <option value="medan-perjuangan">Medan Perjuangan</option>
-                                    <option value="medan-area">Medan Area</option>
-                                    <option value="medan-kota">Medan Kota</option>
-                                    <option value="medan-marelan">Medan Marelan</option>
-                                    <option value="medan-labuhan">Medan Labuhan</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label><i class="fas fa-trash-alt"></i> 🗑️ Jenis Sampah</label>
-                                <select id="wasteType" class="form-control">
-                                    <option value="plastik">Botol Plastik PET</option>
-                                    <option value="kardus">Kardus / Kertas</option>
-                                    <option value="aluminium">Kaleng Aluminium</option>
-                                    <option value="kaca">Kaca Botol</option>
-                                    <option value="besi">Besi Tua</option>
-                                    <option value="elektronik">Elektronik Rusak</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label><i class="fas fa-weight-hanging"></i> ⚖️ Berat (Kg)</label>
-                                <input type="number" id="weight" min="0" step="0.1" placeholder="Contoh: 2.5" class="form-control">
-                            </div>
-                            <button type="button" class="btn btn-primary btn-block" onclick="hitungNilai()">
-                                <i class="fas fa-calculator"></i> HITUNG NILAI
-                            </button>
-                        </div>
-                        <div class="calculator-result" id="calcResult" style="display: none;">
-                            <div class="result-icon"><i class="fas fa-coins"></i></div>
-                            <p class="result-label">Estimasi Nilai Anda:</p>
-                            <h3 class="result-value">Rp <span id="resultValue">0</span></h3>
-                            <div class="price-breakdown">
-                                <i class="fas fa-tag"></i> Harga: Rp <span id="pricePerKg">0</span>/kg × <span id="weightDisplay">0</span> kg
-                            </div>
-                            <div class="bank-recommendation" id="bankRecommend">
-                                <i class="fas fa-building"></i>
-                                <span id="bankName">Pilih lokasi terlebih dahulu</span>
-                            </div>
-                            <div class="result-note"><i class="fas fa-info-circle"></i> *Harga dapat berubah sesuai pasar</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- DAFTAR HARGA SAMPAH -->
-        <section class="price-table-section">
-            <div class="container">
-                <div class="section-header" data-aos="fade-up">
-                    <span class="section-tag">Update Harga</span>
-                    <h2>Daftar Harga <span class="highlight">Sampah Medan</span></h2>
-                    <p>Harga per Kg - Berlaku Maret 2026</p>
-                </div>
-                <div class="price-table-wrapper" data-aos="fade-up" data-aos-delay="100">
-                    <table class="price-table">
-                        <thead>
-                            <tr>
-                                <th>Kecamatan</th>
-                                <th>Plastik PET</th>
-                                <th>Kardus</th>
-                                <th>Aluminium</th>
-                                <th>Kaca</th>
-                                <th>Besi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr><td>Medan Barat</td><td>Rp 5.000</td><td>Rp 3.000</td><td>Rp 12.000</td><td>Rp 1.500</td><td>Rp 3.500</td></tr>
-                            <tr><td>Medan Timur</td><td>Rp 4.800</td><td>Rp 2.800</td><td>Rp 11.500</td><td>Rp 1.400</td><td>Rp 3.300</td></tr>
-                            <tr><td>Medan Sunggal</td><td>Rp 5.200</td><td>Rp 3.200</td><td>Rp 12.500</td><td>Rp 1.600</td><td>Rp 3.700</td></tr>
-                            <tr><td>Medan Helvetia</td><td>Rp 4.900</td><td>Rp 2.900</td><td>Rp 11.800</td><td>Rp 1.450</td><td>Rp 3.400</td></tr>
-                            <tr><td>Medan Tembung</td><td>Rp 4.700</td><td>Rp 2.700</td><td>Rp 11.000</td><td>Rp 1.350</td><td>Rp 3.200</td></tr>
-                            <tr><td>Medan Perjuangan</td><td>Rp 5.100</td><td>Rp 3.100</td><td>Rp 12.200</td><td>Rp 1.550</td><td>Rp 3.600</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </section>
-
-        <!-- PETA BANK SAMPAH -->
-        <section class="maps-section">
-            <div class="container">
-                <div class="section-header" data-aos="fade-up">
-                    <span class="section-tag">Lokasi Kami</span>
-                    <h2>Peta <span class="highlight">Bank Sampah</span> Medan</h2>
-                    <p>Temukan 48 bank sampah terdekat di kota Medan</p>
-                </div>
-                <div class="maps-wrapper" data-aos="fade-up" data-aos-delay="100">
-                    <div class="maps-container" data-aos="zoom-in" data-aos-delay="200">
-                        <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d127630.3483387475!2d98.621104!3d3.585242!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3031312b2f7b9b1d%3A0x6b5c8a5e5e5e5e5e!2sMedan%2C%20Medan%20City%2C%20North%20Sumatra!5e0!3m2!1sen!2sid!4v1700000000000!5m2!1sen!2sid"
-                            width="100%" height="450"
-                            style="border:0; border-radius: 20px;"
-                            allowfullscreen="" loading="lazy">
-                        </iframe>
-                    </div>
-                    <div class="maps-list" data-aos="fade-left" data-aos-delay="300">
-                        <h3><i class="fas fa-location-dot"></i> Bank Sampah Mitra</h3>
-                        <ul>
-                            <li>
-                                <a href="https://www.google.com/maps/search/?api=1&query=Jl.+Gajah+Mada+No.123+Medan" target="_blank" class="location-link">
-                                    <i class="fas fa-map-pin"></i>
-                                    <div>
-                                        <strong>Bank Sampah Medan Barat</strong>
-                                        <p>Jl. Gajah Mada No.123, Medan Barat</p>
-                                        <span class="distance"><i class="fas fa-walking"></i> 500m</span>
-                                    </div>
-                                    <i class="fas fa-external-link-alt link-icon"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.google.com/maps/search/?api=1&query=Jl.+Krakatau+No.45+Medan" target="_blank" class="location-link">
-                                    <i class="fas fa-map-pin"></i>
-                                    <div>
-                                        <strong>Bank Sampah Medan Timur</strong>
-                                        <p>Jl. Krakatau No.45, Medan Timur</p>
-                                        <span class="distance"><i class="fas fa-walking"></i> 700m</span>
-                                    </div>
-                                    <i class="fas fa-external-link-alt link-icon"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.google.com/maps/search/?api=1&query=Jl.+Kapten+Muslim+No.78+Medan" target="_blank" class="location-link">
-                                    <i class="fas fa-map-pin"></i>
-                                    <div>
-                                        <strong>Bank Sampah Medan Sunggal</strong>
-                                        <p>Jl. Kapten Muslim No.78, Medan Sunggal</p>
-                                        <span class="distance"><i class="fas fa-walking"></i> 300m</span>
-                                    </div>
-                                    <i class="fas fa-external-link-alt link-icon"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.google.com/maps/search/?api=1&query=Jl.+Cemara+No.90+Medan" target="_blank" class="location-link">
-                                    <i class="fas fa-map-pin"></i>
-                                    <div>
-                                        <strong>Bank Sampah Medan Helvetia</strong>
-                                        <p>Jl. Cemara No.90, Medan Helvetia</p>
-                                        <span class="distance"><i class="fas fa-walking"></i> 1km</span>
-                                    </div>
-                                    <i class="fas fa-external-link-alt link-icon"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.google.com/maps/search/?api=1&query=Jl.+Pancing+No.12+Medan" target="_blank" class="location-link">
-                                    <i class="fas fa-map-pin"></i>
-                                    <div>
-                                        <strong>Bank Sampah Medan Tembung</strong>
-                                        <p>Jl. Pancing No.12, Medan Tembung</p>
-                                        <span class="distance"><i class="fas fa-walking"></i> 800m</span>
-                                    </div>
-                                    <i class="fas fa-external-link-alt link-icon"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.google.com/maps/search/?api=1&query=Jl.+Bunga+Raya+No.34+Medan" target="_blank" class="location-link">
-                                    <i class="fas fa-map-pin"></i>
-                                    <div>
-                                        <strong>Bank Sampah Medan Perjuangan</strong>
-                                        <p>Jl. Bunga Raya No.34, Medan Perjuangan</p>
-                                        <span class="distance"><i class="fas fa-walking"></i> 600m</span>
-                                    </div>
-                                    <i class="fas fa-external-link-alt link-icon"></i>
-                                </a>
-                            </li>
-                        </ul>
-                        <div class="maps-buttons">
-                            <a href="https://www.google.com/maps/search/bank+sampah+medan" target="_blank" class="btn-map">
-                                <i class="fab fa-google"></i> Cari di Google Maps
-                            </a>
-                            <a href="https://www.waze.com/ul?q=bank%20sampah%20medan&navigate=yes" target="_blank" class="btn-map-waze">
-                                <i class="fab fa-waze"></i> Buka Waze
-                            </a>
-                        </div>
-                        <div class="maps-note">
-                            <p><i class="fas fa-info-circle"></i> Klik lokasi di atas untuk melihat rute</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- FORM PENJEMPUTAN SAMPAH -->
-        <section class="pickup-section">
-            <div class="container">
-                <div class="section-header" data-aos="fade-up">
-                    <span class="section-tag">Jemput Sampah</span>
-                    <h2>Form <span class="highlight">Penjemputan</span></h2>
-                    <p>Isi form berikut untuk memesan jemput sampah langsung ke rumah Anda</p>
-                </div>
-                <div class="pickup-wrapper" data-aos="zoom-in" data-aos-delay="100">
-                    <form class="pickup-form" id="pickupForm">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label><i class="fas fa-user"></i> Nama Lengkap <span class="highlight">*</span></label>
-                                <input type="text" id="pickupNama" placeholder="Nama Anda" required class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label><i class="fas fa-phone"></i> Nomor HP <span class="highlight">*</span></label>
-                                <input type="tel" id="pickupPhone" placeholder="0812-3456-7890" required class="form-control">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label><i class="fas fa-map-marker-alt"></i> Alamat Lengkap <span class="highlight">*</span></label>
-                            <textarea id="pickupAlamat" rows="3" placeholder="Jl. Gajah Mada No.123, Medan Barat" required class="form-control"></textarea>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label><i class="fas fa-city"></i> Kecamatan <span class="highlight">*</span></label>
-                                <select id="pickupKecamatan" required class="form-control">
-                                    <option value="">Pilih Kecamatan</option>
-                                    <option>Medan Barat</option>
-                                    <option>Medan Timur</option>
-                                    <option>Medan Sunggal</option>
-                                    <option>Medan Helvetia</option>
-                                    <option>Medan Tembung</option>
-                                    <option>Medan Perjuangan</option>
-                                    <option>Medan Area</option>
-                                    <option>Medan Kota</option>
-                                    <option>Medan Marelan</option>
-                                    <option>Medan Labuhan</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label><i class="fas fa-trash-alt"></i> Jenis Sampah <span class="highlight">*</span></label>
-                                <select id="pickupJenisSampah" multiple class="form-control">
-                                    <option>Botol Plastik PET</option>
-                                    <option>Kardus / Kertas</option>
-                                    <option>Kaleng Aluminium</option>
-                                    <option>Kaca Botol</option>
-                                    <option>Besi Tua</option>
-                                    <option>Elektronik Rusak</option>
-                                </select>
-                                <small class="form-hint">*Tekan Ctrl (Windows) atau Cmd (Mac) untuk pilih lebih dari satu</small>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label><i class="fas fa-weight-hanging"></i> Perkiraan Berat (Kg) <span class="highlight">*</span></label>
-                                <input type="number" id="pickupBerat" min="5" step="0.5" placeholder="Minimal 5 kg" required class="form-control">
-                                <small class="form-hint">*Minimal 5 kg untuk penjemputan gratis</small>
-                            </div>
-                            <div class="form-group">
-                                <label><i class="fas fa-calendar"></i> Tanggal Jemput <span class="highlight">*</span></label>
-                                <input type="date" id="pickupTanggal" required class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label><i class="fas fa-clock"></i> Jam Jemput <span class="highlight">*</span></label>
-                                <select id="pickupWaktu" required class="form-control">
-                                    <option value="">Pilih Waktu</option>
-                                    <option>08:00 - 10:00</option>
-                                    <option>10:00 - 12:00</option>
-                                    <option>13:00 - 15:00</option>
-                                    <option>15:00 - 17:00</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label><i class="fas fa-note-sticky"></i> Catatan Tambahan</label>
-                            <textarea id="pickupCatatan" rows="2" placeholder="Contoh: Rumah warna hijau, dekat masjid" class="form-control"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-block btn-submit">
-                            <i class="fas fa-paper-plane"></i> KIRIM PESANAN
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </section>
-
-        <!-- FAQ -->
-        <section class="faq-section">
-            <div class="container">
-                <div class="section-header" data-aos="fade-up">
-                    <span class="section-tag">FAQ</span>
-                    <h2>Pertanyaan <span class="highlight">Umum</span></h2>
-                </div>
-                <div class="faq-grid">
-                    <div class="faq-item" data-aos="fade-up" data-aos-delay="100">
-                        <div class="faq-question" onclick="toggleFaq(this)">
-                            <h3>📦 Apakah penjemputan sampah gratis?</h3>
-                            <i class="fas fa-chevron-down"></i>
-                        </div>
-                        <div class="faq-answer">Ya, penjemputan sampah GRATIS untuk minimal 5 kg sampah daur ulang.</div>
-                    </div>
-                    <div class="faq-item" data-aos="fade-up" data-aos-delay="200">
-                        <div class="faq-question" onclick="toggleFaq(this)">
-                            <h3>💰 Berapa lama pencairan dana?</h3>
-                            <i class="fas fa-chevron-down"></i>
-                        </div>
-                        <div class="faq-answer">Dana akan ditransfer maksimal 1x24 jam setelah sampah ditimbang.</div>
-                    </div>
-                    <div class="faq-item" data-aos="fade-up" data-aos-delay="300">
-                        <div class="faq-question" onclick="toggleFaq(this)">
-                            <h3>🗺️ Bagaimana cara menjadi mitra bank sampah?</h3>
-                            <i class="fas fa-chevron-down"></i>
-                        </div>
-                        <div class="faq-answer">Hubungi kami di nomor 0812-3456-7890 untuk informasi pendaftaran.</div>
-                    </div>
-                    <div class="faq-item" data-aos="fade-up" data-aos-delay="400">
-                        <div class="faq-question" onclick="toggleFaq(this)">
-                            <h3>📱 Apakah bisa jemput sampah elektronik?</h3>
-                            <i class="fas fa-chevron-down"></i>
-                        </div>
-                        <div class="faq-answer">Bisa. Minimal 5 kg untuk sampah elektronik.</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- CTA -->
-        <section class="cta-light">
-            <div class="container">
-                <div class="cta-light-content" data-aos="zoom-in">
-                    <h2>Butuh bantuan atau ada pertanyaan?</h2>
-                    <p>Tim customer service kami siap membantu Anda Senin - Sabtu, 08.00 - 17.00 WIB</p>
-                    <div class="cta-light-buttons">
-                        <a href="#" class="btn btn-primary"><i class="fab fa-whatsapp"></i> WhatsApp 0812-3456-7890</a>
-                        <a href="#" class="btn btn-secondary"><i class="fas fa-phone-alt"></i> (061) 1234-5678</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- FOOTER -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-col">
-                    <div class="footer-logo"><i class="fas fa-recycle"></i><span>Waste2Worth</span></div>
-                    <p>Platform bank sampah digital pertama di Medan.</p>
-                    <div class="footer-social">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                    </div>
-                </div>
-                <div class="footer-col">
-                    <h4>Navigasi</h4>
-                    <ul>
-                        <li><a href="index.html">Beranda</a></li>
-                        <li><a href="layanan.html">Layanan</a></li>
-                        <li><a href="riwayat.html">Riwayat</a></li>
-                        <li><a href="edukasi.html">Edukasi</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Kantor Medan</h4>
-                    <ul class="contact-info">
-                        <li><i class="fas fa-map-marker-alt"></i> Jl. Gajah Mada No. 123, Medan Barat</li>
-                        <li><i class="fas fa-phone-alt"></i> (061) 1234-5678</li>
-                        <li><i class="fas fa-envelope"></i> info@waste2worth-medan.id</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom"><p>&copy; 2026 Waste2Worth Medan. All Rights Reserved.</p></div>
+          <div class="peta-map" id="map"></div>
         </div>
-    </footer>
 
-    <a href="#" class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></a>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="js/common.js"></script>
-    <script src="js/layanan.js"></script>
+        <div class="peta-info">
+          <i class="fas fa-info-circle"></i>
+          <span>Klik penanda di peta untuk melihat detail bank sampah (alamat, kontak, jam layanan)</span>
+        </div>
+      </div>
+
+      <!-- TAB: KATALOG -->
+      <div class="tab-content" id="tab-katalog">
+        <div class="katalog-grid" id="katalogGrid">
+          <!-- Produk akan di-render oleh JS -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA KE KALKULATOR -->
+  <section class="cta-kalkulator">
+    <div class="container">
+      <div class="cta-card">
+        <div class="cta-content">
+          <h2>Mau Hitung Nilai Sampahmu?</h2>
+          <p>Gunakan kalkulator untuk estimasi nilai rupiah dari sampah yang akan kamu setor</p>
+        </div>
+        <a href="kalkulator.html" class="btn btn-white btn-lg">
+          <i class="fas fa-calculator"></i> Buka Kalkulator
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>&copy; 2026 Waste2Worth. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="../js/common.js"></script>
+  <script src="../js/layanan.js"></script>
 </body>
 </html>

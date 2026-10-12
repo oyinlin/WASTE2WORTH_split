@@ -1,482 +1,450 @@
-/* ============================================================
-   WASTE2WORTH - CSS HALAMAN LAYANAN (layanan.html)
-   Hanya style yang dipakai di layanan.html.
-   ============================================================ */
+/* ============================================
+   LAYANAN CSS
+   ============================================ */
 
-/* ============================================================
-   TOMBOL UTAMA
-   ============================================================ */
-
-.btn-block {
-  width: 100%;
-  justify-content: center;
-}
-
-/* ============================================================
-   STATISTIK LAYANAN
-   ============================================================ */
-
-.stats-services-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 30px;
-}
-
-/* ============================================================
-   KALKULATOR
-   ============================================================ */
-
-.calculator-section {
-  padding: 60px 0;
-  background: var(--bg-light);
-}
-
-.calculator-grid {
-  display: grid;
-  grid-template-columns: 1fr;   /* satu kolom: form di atas, hasil di bawah */
-  gap: 30px;
-  align-items: start;
-  width: 100%;
-}
-
-.calculator-form {
-  width: 100%;
-}
-
-.calculator-result {
-  width: 100%;
-}
-
-.calculator-form {
-  background: var(--white);
-  padding: 30px;
-  border-radius: 20px;
-  box-shadow: var(--shadow-sm);
-}
-
-.calculator-result {
-  background: linear-gradient(
-    135deg,
-    var(--primary-green),
-    var(--primary-green-dark)
-  );
-  padding: 35px;
-  border-radius: 25px;
+.layanan-header {
+  padding: 130px 0 60px;
+  background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
   text-align: center;
-  color: white;
-  animation: fadeInUp 0.5s ease;
 }
 
-.result-icon i {
-  font-size: 3rem;
-  margin-bottom: 15px;
-  color: var(--primary-orange);
-}
-
-.result-label {
-  font-size: 0.9rem;
-  opacity: 0.9;
-  margin-bottom: 5px;
-}
-
-.result-value {
-  font-size: 2.5rem;
-  font-weight: 800;
-  margin: 10px 0;
-}
-
-.price-breakdown {
-  background: rgba(255, 255, 255, 0.15);
-  padding: 10px 15px;
-  border-radius: 50px;
-  display: inline-block;
-  margin: 15px 0;
-  font-size: 0.85rem;
-}
-
-.bank-recommendation {
-  background: rgba(255, 255, 255, 0.1);
-  padding: 15px;
-  border-radius: 15px;
-  margin: 15px 0;
-  font-size: 0.9rem;
-  text-align: left;
-}
-
-.result-note {
-  font-size: 0.7rem;
-  opacity: 0.7;
-  margin-top: 15px;
-}
-
-/* ============================================================
-   DAFTAR HARGA
-   ============================================================ */
-
-.price-table-section {
-  padding: 60px 0;
-  background: var(--white);
-}
-
-.price-table-wrapper {
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-}
-
-.price-table {
-  width: 100%;
-  min-width: 700px;
-  border-collapse: collapse;
-  background: var(--white);
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow: var(--shadow-sm);
-}
-
-.price-table th,
-.price-table td {
-  padding: 15px;
-  text-align: center;
-  border-bottom: 1px solid var(--gray-200);
-}
-
-.price-table th {
-  background: var(--primary-green);
-  color: white;
-  font-weight: 600;
-}
-
-.price-table tr:hover {
-  background: var(--bg-light);
-}
-
-/* ============================================================
-   PETA BANK SAMPAH
-   ============================================================ */
-
-.maps-section {
-  padding: 60px 0;
-  background: var(--bg-light);
-}
-
-.maps-wrapper {
-  display: grid;
-  grid-template-columns: 1.5fr 1fr;
-  gap: 30px;
-}
-
-.maps-container {
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow: var(--shadow-lg);
-}
-
-.maps-container iframe {
-  width: 100%;
-  height: 450px;
-  border-radius: 20px;
-}
-
-.maps-list {
-  background: var(--white);
-  padding: 25px;
-  border-radius: 20px;
-  box-shadow: var(--shadow-sm);
-  max-height: 500px;
-  overflow-y: auto;
-}
-
-.maps-list h3 {
-  margin-bottom: 20px;
-  color: var(--primary-green);
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.maps-list ul {
-  list-style: none;
-  margin-bottom: 20px;
-}
-
-.location-link {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  padding: 15px;
-  text-decoration: none;
-  color: inherit;
-  transition: all 0.3s;
-  border-radius: 12px;
-  border-bottom: 1px solid var(--gray-200);
-}
-
-.location-link:hover {
-  background: rgba(255, 152, 0, 0.1);
-  transform: translateX(5px);
-}
-
-.location-link i:first-child {
-  color: var(--primary-orange);
-  font-size: 1.2rem;
-  margin-top: 3px;
-}
-
-.location-link strong {
-  display: block;
-  color: var(--text-dark);
-  margin-bottom: 5px;
-}
-
-.location-link .distance {
-  font-size: 0.7rem;
-  color: var(--primary-green);
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.link-icon {
-  margin-left: auto;
-  color: var(--primary-orange);
-  font-size: 0.8rem;
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-
-.location-link:hover .link-icon {
-  opacity: 1;
-}
-
-.maps-buttons {
-  display: flex;
-  gap: 15px;
-  margin-top: 20px;
-  flex-wrap: wrap;
-}
-
-.btn-map,
-.btn-map-waze {
-  flex: 1;
+.layanan-header .header-badge {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  gap: 10px;
-  padding: 12px 20px;
-  border-radius: 50px;
-  text-decoration: none;
-  font-weight: 600;
-  transition: all 0.3s;
-  min-width: 140px;
-}
-
-.btn-map {
-  background: var(--primary-green);
-  color: white;
-}
-
-.btn-map:hover {
-  background: var(--primary-green-dark);
-  transform: translateY(-2px);
-}
-
-.btn-map-waze {
-  background: #1b3b5c;
-  color: white;
-}
-
-.btn-map-waze:hover {
-  background: #0e2a44;
-  transform: translateY(-2px);
-}
-
-.maps-note {
-  margin-top: 15px;
-  padding: 10px;
-  background: rgba(255, 152, 0, 0.1);
-  border-radius: 10px;
-  font-size: 0.75rem;
-  text-align: center;
-}
-
-/* ============================================================
-   FORM PENJEMPUTAN
-   ============================================================ */
-
-.pickup-section {
-  padding: 60px 0;
-  background: var(--bg-light);
-}
-
-.pickup-wrapper {
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-.pickup-form {
+  gap: 8px;
+  padding: 8px 20px;
   background: var(--white);
-  padding: 40px;
-  border-radius: 30px;
+  color: var(--primary);
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 20px;
+}
+
+.layanan-header h1 {
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 800;
+  color: var(--dark);
+  margin-bottom: 12px;
+}
+
+.layanan-header p {
+  font-size: 16px;
+  color: var(--gray-700);
+}
+
+/* ========== TAB NAVIGATION ========== */
+.tab-section {
+  padding: 40px 0 60px;
+  background: var(--gray-100);
+}
+
+.tab-nav {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+  background: var(--white);
+  padding: 8px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 14px 20px;
+  border: none;
+  background: transparent;
+  border-radius: var(--radius-sm);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--gray-700);
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.tab-btn:hover {
+  color: var(--primary);
+  background: var(--primary-bg);
+}
+
+.tab-btn.active {
+  background: var(--primary);
+  color: var(--white);
+}
+
+.tab-content {
+  display: none;
+  animation: fadeIn 0.4s ease;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ========== PETA ========== */
+.peta-wrapper {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 20px;
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  box-shadow: var(--shadow-sm);
+  height: 600px;
+}
+
+.peta-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow: hidden;
+}
+
+.peta-search {
+  position: relative;
+}
+
+.peta-search i {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--gray-500);
+  font-size: 14px;
+}
+
+.peta-search input {
+  width: 100%;
+  padding: 12px 16px 12px 42px;
+  border: 2px solid var(--gray-300);
+  border-radius: var(--radius-sm);
+  font-family: inherit;
+  font-size: 14px;
+  transition: var(--transition);
+}
+
+.peta-search input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(46, 125, 50, 0.1);
+}
+
+.peta-list {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-right: 8px;
+}
+
+.peta-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.peta-list::-webkit-scrollbar-thumb {
+  background: var(--gray-300);
+  border-radius: 3px;
+}
+
+.peta-item {
+  padding: 16px;
+  border: 2px solid var(--gray-300);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.peta-item:hover {
+  border-color: var(--primary);
+  background: var(--primary-bg);
+}
+
+.peta-item.active {
+  border-color: var(--primary);
+  background: var(--primary-bg);
+}
+
+.peta-item h3 {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.peta-item h3 i {
+  color: var(--primary);
+  font-size: 14px;
+}
+
+.peta-item p {
+  font-size: 13px;
+  color: var(--gray-700);
+  margin-bottom: 4px;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.peta-item p i {
+  color: var(--gray-500);
+  margin-top: 4px;
+  font-size: 12px;
+  flex-shrink: 0;
+}
+
+.peta-map {
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--gray-100);
+}
+
+.peta-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 16px;
+  padding: 14px 20px;
+  background: var(--primary-bg);
+  border-radius: var(--radius);
+  font-size: 13px;
+  color: var(--primary);
+  font-weight: 500;
+}
+
+.peta-info i {
+  font-size: 16px;
+}
+
+/* ========== KATALOG ========== */
+.katalog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 24px;
+}
+
+.produk-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+  cursor: pointer;
+}
+
+.produk-card:hover {
+  transform: translateY(-6px);
   box-shadow: var(--shadow-lg);
 }
 
-.form-hint {
-  display: block;
-  font-size: 0.7rem;
-  color: var(--text-light);
-  margin-top: 5px;
+.produk-image {
+  height: 200px;
+  background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 60px;
+  color: var(--primary);
+  position: relative;
+  overflow: hidden;
 }
 
-.btn-submit {
-  background: linear-gradient(
-    135deg,
-    var(--primary-green),
-    var(--primary-green-dark)
-  );
-  padding: 14px 28px;
-  font-size: 1rem;
+.produk-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 4px 12px;
+  background: var(--accent);
+  color: var(--white);
+  font-size: 11px;
   font-weight: 700;
-  margin-top: 20px;
+  border-radius: 50px;
+  text-transform: uppercase;
 }
 
-.btn-submit:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 25px rgba(46, 125, 50, 0.4);
+.produk-content {
+  padding: 20px;
 }
 
-/* ============================================================
-   FAQ
-   ============================================================ */
+.produk-content h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 6px;
+}
 
-.faq-section {
+.produk-content .produk-desc {
+  font-size: 13px;
+  color: var(--gray-700);
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+
+.produk-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 12px;
+  border-top: 1px solid var(--gray-300);
+}
+
+.produk-harga {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--primary);
+}
+
+.produk-toko {
+  font-size: 12px;
+  color: var(--gray-500);
+}
+
+/* ========== CTA KALKULATOR ========== */
+.cta-kalkulator {
   padding: 60px 0;
   background: var(--white);
 }
 
-.faq-grid {
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.faq-item {
-  background: var(--bg-light);
-  border-radius: 15px;
-  margin-bottom: 15px;
-  overflow: hidden;
-}
-
-.faq-question {
+.cta-card {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  padding: 40px 50px;
+  border-radius: var(--radius-lg);
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 20px;
-  cursor: pointer;
-  transition: all 0.3s;
-}
-
-.faq-question:hover {
-  background: rgba(255, 152, 0, 0.1);
-}
-
-.faq-question h3 {
-  font-size: 1rem;
-  margin: 0;
-}
-
-.faq-question i {
-  transition: transform 0.3s;
-}
-
-.faq-item.active .faq-question i {
-  transform: rotate(180deg);
-}
-
-.faq-answer {
-  max-height: 0;
+  justify-content: space-between;
+  gap: 30px;
+  color: var(--white);
+  position: relative;
   overflow: hidden;
-  transition: max-height 0.3s ease;
-  padding: 0 20px;
 }
 
-.faq-item.active .faq-answer {
-  max-height: 200px;
-  padding: 0 20px 20px;
+.cta-card::before {
+  content: '';
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  width: 200px;
+  height: 200px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 50%;
 }
 
-/* ============================================================
-   RESPONSIVE GLOBAL
-   ============================================================ */
+.cta-content {
+  position: relative;
+  z-index: 1;
+}
 
-/* Tablet */
-@media (max-width: 1024px) {
-    .stats-services-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+.cta-content h2 {
+  font-size: 26px;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
 
-    .calculator-grid {
+.cta-content p {
+  font-size: 15px;
+  color: rgba(255,255,255,0.9);
+}
+
+.cta-card .btn {
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+}
+
+/* ========== LEAFLET CUSTOM ========== */
+.leaflet-popup-content-wrapper {
+  border-radius: var(--radius) !important;
+  padding: 4px !important;
+}
+
+.leaflet-popup-content {
+  margin: 12px 16px !important;
+  font-family: var(--font-family) !important;
+}
+
+.popup-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--gray-300);
+}
+
+.popup-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--gray-700);
+  margin-bottom: 6px;
+  line-height: 1.4;
+}
+
+.popup-row i {
+  color: var(--primary);
+  margin-top: 3px;
+  flex-shrink: 0;
+  width: 14px;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 992px) {
+  .peta-wrapper {
     grid-template-columns: 1fr;
+    height: auto;
   }
-
-    .maps-wrapper {
-    grid-template-columns: 1fr;
+  
+  .peta-sidebar {
+    max-height: 300px;
+  }
+  
+  .peta-map {
+    height: 400px;
+  }
+  
+  .cta-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 30px;
   }
 }
 
-/* Mobile Large */
-@media (max-width: 768px) {
-    .stats-services-grid {
-    grid-template-columns: 1fr;
+@media (max-width: 576px) {
+  .layanan-header {
+    padding: 110px 0 40px;
   }
-
-    .maps-container iframe {
-    height: 350px;
-  }
-
-    .maps-buttons {
+  
+  .tab-nav {
     flex-direction: column;
   }
-
-    .btn-map,
-  .btn-map-waze {
-    width: 100%;
-    min-width: auto;
+  
+  .peta-map {
+    height: 300px;
   }
-
-    .pickup-form {
-    padding: 25px 20px;
+  
+  .katalog-grid {
+    grid-template-columns: 1fr;
   }
-
-    .faq-question h3 {
-    font-size: 0.9rem;
-  }
-}
-
-/* Mobile Small */
-@media (max-width: 480px) {
-    .result-value {
-    font-size: 2rem;
-  }
-
-    .maps-container iframe {
-    height: 250px;
-  }
-
-    .btn-map,
-  .btn-map-waze {
-    font-size: 0.7rem;
-    padding: 10px 12px;
-  }
-
-    .pickup-form {
-    padding: 20px 15px;
-    border-radius: 20px;
-  }
-
-    .faq-question {
-    padding: 15px;
-  }
-
-    .faq-question h3 {
-    font-size: 0.85rem;
+  
+  .cta-content h2 {
+    font-size: 20px;
   }
 }
