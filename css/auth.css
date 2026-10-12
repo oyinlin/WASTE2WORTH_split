@@ -1,0 +1,472 @@
+/* ============================================
+   AUTH CSS - Register & Login
+   ============================================ */
+
+.auth-body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+  padding: 20px;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* ========== BACKGROUND DECORATION ========== */
+.auth-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.auth-bg-circle {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.circle-1 {
+  width: 400px;
+  height: 400px;
+  top: -150px;
+  left: -150px;
+  animation: float 8s ease-in-out infinite;
+}
+
+.circle-2 {
+  width: 300px;
+  height: 300px;
+  bottom: -100px;
+  right: -100px;
+  animation: float 10s ease-in-out infinite reverse;
+}
+
+.circle-3 {
+  width: 200px;
+  height: 200px;
+  top: 40%;
+  right: 10%;
+  background: rgba(255, 152, 0, 0.15);
+  animation: float 6s ease-in-out infinite;
+}
+
+/* ========== CONTAINER ========== */
+.auth-container {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  max-width: 1100px;
+  width: 100%;
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xl);
+  overflow: hidden;
+  min-height: 700px;
+}
+
+/* ========== SISI KIRI: BRANDING ========== */
+.auth-brand {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: var(--white);
+  padding: 50px 40px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.auth-brand::before {
+  content: '';
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  width: 200px;
+  height: 200px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+}
+
+.auth-brand::after {
+  content: '';
+  position: absolute;
+  bottom: -80px;
+  left: -80px;
+  width: 250px;
+  height: 250px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 50%;
+}
+
+.auth-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 40px;
+  position: relative;
+  z-index: 1;
+}
+
+.auth-logo i {
+  font-size: 30px;
+}
+
+.auth-logo strong {
+  color: var(--accent);
+}
+
+.auth-brand h1 {
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 16px;
+  position: relative;
+  z-index: 1;
+}
+
+.auth-brand > p {
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 30px;
+  line-height: 1.6;
+  position: relative;
+  z-index: 1;
+}
+
+.auth-benefits {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 30px;
+  position: relative;
+  z-index: 1;
+}
+
+.auth-benefits li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+}
+
+.auth-benefits li i {
+  color: var(--accent);
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.auth-illustration {
+  margin-top: auto;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.auth-illustration i {
+  font-size: 120px;
+  color: rgba(255, 255, 255, 0.15);
+  animation: pulse 3s ease-in-out infinite;
+}
+
+/* ========== SISI KANAN: FORM ========== */
+.auth-form-wrapper {
+  padding: 50px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto;
+  max-height: 90vh;
+}
+
+.auth-form-card {
+  width: 100%;
+  max-width: 400px;
+}
+
+.auth-form-header {
+  margin-bottom: 30px;
+}
+
+.auth-form-header h2 {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--dark);
+  margin-bottom: 8px;
+}
+
+.auth-form-header p {
+  font-size: 14px;
+  color: var(--gray-700);
+}
+
+.auth-form-header a {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.auth-form-header a:hover {
+  text-decoration: underline;
+}
+
+/* ========== FORM ELEMENTS ========== */
+.form-group label i {
+  color: var(--primary);
+  margin-right: 4px;
+  font-size: 13px;
+}
+
+.input-password {
+  position: relative;
+}
+
+.input-password .form-control {
+  padding-right: 50px;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--gray-500);
+  font-size: 16px;
+  padding: 8px;
+  transition: var(--transition);
+}
+
+.toggle-password:hover {
+  color: var(--primary);
+}
+
+/* ========== PASSWORD STRENGTH ========== */
+.password-strength {
+  margin-top: 8px;
+  display: none;
+}
+
+.password-strength.show {
+  display: block;
+}
+
+.strength-bar {
+  height: 4px;
+  background: var(--gray-300);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 4px;
+}
+
+.strength-bar::after {
+  content: '';
+  display: block;
+  height: 100%;
+  width: 0;
+  transition: var(--transition);
+  border-radius: 2px;
+}
+
+.strength-bar.weak::after {
+  width: 33%;
+  background: var(--danger);
+}
+
+.strength-bar.medium::after {
+  width: 66%;
+  background: var(--warning);
+}
+
+.strength-bar.strong::after {
+  width: 100%;
+  background: var(--success);
+}
+
+.strength-text {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.strength-text.weak { color: var(--danger); }
+.strength-text.medium { color: var(--warning); }
+.strength-text.strong { color: var(--success); }
+
+/* ========== CHECKBOX ========== */
+.form-check {
+  margin: 20px 0;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--gray-700);
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+.checkbox-label input[type="checkbox"] {
+  display: none;
+}
+
+.checkmark {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--gray-300);
+  border-radius: 4px;
+  flex-shrink: 0;
+  position: relative;
+  transition: var(--transition);
+  margin-top: 1px;
+}
+
+.checkbox-label input:checked + .checkmark {
+  background: var(--primary);
+  border-color: var(--primary);
+}
+
+.checkbox-label input:checked + .checkmark::after {
+  content: '';
+  position: absolute;
+  left: 6px;
+  top: 2px;
+  width: 5px;
+  height: 10px;
+  border: solid var(--white);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.checkbox-label a {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+/* ========== DIVIDER ========== */
+.auth-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 24px 0;
+  color: var(--gray-500);
+  font-size: 13px;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--gray-300);
+}
+
+/* ========== SOCIAL LOGIN ========== */
+.social-login {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.btn-social {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  border: 2px solid var(--gray-300);
+  border-radius: var(--radius-sm);
+  background: var(--white);
+  color: var(--gray-900);
+  transition: var(--transition);
+  cursor: pointer;
+}
+
+.btn-social:hover {
+  border-color: var(--primary);
+  transform: translateY(-2px);
+}
+
+.btn-social.google:hover { color: #db4437; border-color: #db4437; }
+.btn-social.facebook:hover { color: #4267b2; border-color: #4267b2; }
+
+/* ========== LOGIN-SPECIFIC ========== */
+.remember-forgot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 16px 0 24px;
+  font-size: 13px;
+}
+
+.remember-forgot .checkbox-label {
+  font-size: 13px;
+}
+
+.remember-forgot a {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.remember-forgot a:hover {
+  text-decoration: underline;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 900px) {
+  .auth-container {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+  
+  .auth-brand {
+    padding: 40px 30px;
+  }
+  
+  .auth-brand h1 {
+    font-size: 24px;
+  }
+  
+  .auth-illustration {
+    display: none;
+  }
+  
+  .auth-form-wrapper {
+    padding: 40px 30px;
+    max-height: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .auth-body {
+    padding: 10px;
+  }
+  
+  .auth-brand {
+    padding: 30px 20px;
+  }
+  
+  .auth-form-wrapper {
+    padding: 30px 20px;
+  }
+  
+  .auth-form-header h2 {
+    font-size: 24px;
+  }
+  
+  .social-login {
+    grid-template-columns: 1fr;
+  }
+  
+  .remember-forgot {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+}

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daftar Akun - Waste2Worth</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/auth.css">
+</head>
+<body class="auth-body">
+  
+  <!-- Background Decoration -->
+  <div class="auth-bg">
+    <div class="auth-bg-circle circle-1"></div>
+    <div class="auth-bg-circle circle-2"></div>
+    <div class="auth-bg-circle circle-3"></div>
+  </div>
+  
+  <div class="auth-container">
+    
+    <!-- Sisi Kiri: Branding -->
+    <div class="auth-brand">
+      <a href="../index.html" class="auth-logo">
+        <i class="fas fa-recycle"></i>
+        <span>Waste<strong>2</strong>Worth</span>
+      </a>
+      
+      <h1>Mulai Perjalanan HijauMu 🌱</h1>
+      <p>Bergabung dengan 15.000+ pengguna yang sudah mengubah sampah menjadi berkah.</p>
+      
+      <ul class="auth-benefits">
+        <li>
+          <i class="fas fa-check-circle"></i>
+          <span>Dapatkan uang dari sampahmu</span>
+        </li>
+        <li>
+          <i class="fas fa-check-circle"></i>
+          <span>Penjemputan gratis ke rumah</span>
+        </li>
+        <li>
+          <i class="fas fa-check-circle"></i>
+          <span>Lacak transaksi real-time</span>
+        </li>
+        <li>
+          <i class="fas fa-check-circle"></i>
+          <span>Edukasi daur ulang gratis</span>
+        </li>
+      </ul>
+      
+      <div class="auth-illustration">
+        <i class="fas fa-recycle"></i>
+      </div>
+    </div>
+    
+    <!-- Sisi Kanan: Form -->
+    <div class="auth-form-wrapper">
+      <div class="auth-form-card">
+        <div class="auth-form-header">
+          <h2>Daftar Akun</h2>
+          <p>Sudah punya akun? <a href="login.html">Masuk di sini</a></p>
+        </div>
+        
+        <form id="formRegister" novalidate>
+          
+          <!-- Nama Lengkap -->
+          <div class="form-group">
+            <label for="nama">
+              <i class="fas fa-user"></i> Nama Lengkap
+            </label>
+            <input 
+              type="text" 
+              id="nama" 
+              class="form-control" 
+              placeholder="Contoh: Budi Santoso"
+              autocomplete="name"
+            >
+            <span class="error-message" id="error-nama"></span>
+          </div>
+          
+          <!-- Email -->
+          <div class="form-group">
+            <label for="email">
+              <i class="fas fa-envelope"></i> Email
+            </label>
+            <input 
+              type="email" 
+              id="email" 
+              class="form-control" 
+              placeholder="nama@email.com"
+              autocomplete="email"
+            >
+            <span class="error-message" id="error-email"></span>
+          </div>
+          
+          <!-- No. HP -->
+          <div class="form-group">
+            <label for="telepon">
+              <i class="fas fa-phone"></i> Nomor HP
+            </label>
+            <input 
+              type="tel" 
+              id="telepon" 
+              class="form-control" 
+              placeholder="08xx-xxxx-xxxx"
+              autocomplete="tel"
+            >
+            <span class="error-message" id="error-telepon"></span>
+          </div>
+          
+          <!-- Alamat -->
+          <div class="form-group">
+            <label for="alamat">
+              <i class="fas fa-map-marker-alt"></i> Alamat
+            </label>
+            <textarea 
+              id="alamat" 
+              class="form-control" 
+              rows="2"
+              placeholder="Jl. Contoh No. 123, Kelurahan, Kecamatan, Medan"
+            ></textarea>
+            <span class="error-message" id="error-alamat"></span>
+          </div>
+          
+          <!-- Password -->
+          <div class="form-group">
+            <label for="password">
+              <i class="fas fa-lock"></i> Password
+            </label>
+            <div class="input-password">
+              <input 
+                type="password" 
+                id="password" 
+                class="form-control" 
+                placeholder="Minimal 6 karakter"
+                autocomplete="new-password"
+              >
+              <button type="button" class="toggle-password" data-target="password">
+                <i class="fas fa-eye"></i>
+              </button>
+            </div>
+            <div class="password-strength" id="passwordStrength">
+              <div class="strength-bar"></div>
+              <span class="strength-text"></span>
+            </div>
+            <span class="error-message" id="error-password"></span>
+          </div>
+          
+          <!-- Konfirmasi Password -->
+          <div class="form-group">
+            <label for="konfirmasi">
+              <i class="fas fa-lock"></i> Konfirmasi Password
+            </label>
+            <div class="input-password">
+              <input 
+                type="password" 
+                id="konfirmasi" 
+                class="form-control" 
+                placeholder="Ulangi password"
+                autocomplete="new-password"
+              >
+              <button type="button" class="toggle-password" data-target="konfirmasi">
+                <i class="fas fa-eye"></i>
+              </button>
+            </div>
+            <span class="error-message" id="error-konfirmasi"></span>
+          </div>
+          
+          <!-- Setuju Syarat -->
+          <div class="form-group form-check">
+            <label class="checkbox-label">
+              <input type="checkbox" id="setuju">
+              <span class="checkmark"></span>
+              <span>Saya setuju dengan <a href="#">Syarat & Ketentuan</a> dan <a href="#">Kebijakan Privasi</a></span>
+            </label>
+            <span class="error-message" id="error-setuju"></span>
+          </div>
+          
+          <button type="submit" class="btn btn-primary btn-block btn-lg" id="btnRegister">
+            <i class="fas fa-user-plus"></i> Daftar Sekarang
+          </button>
+        </form>
+        
+        <div class="auth-divider">
+          <span>atau daftar dengan</span>
+        </div>
+        
+        <div class="social-login">
+          <button type="button" class="btn-social google" onclick="alert('Fitur Google Sign-In akan segera hadir!')">
+            <i class="fab fa-google"></i> Google
+          </button>
+          <button type="button" class="btn-social facebook" onclick="alert('Fitur Facebook Sign-In akan segera hadir!')">
+            <i class="fab fa-facebook-f"></i> Facebook
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/global.js"></script>
+  <script src="../js/register.js"></script>
+</body>
+</html>
