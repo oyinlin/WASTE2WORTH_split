@@ -1,13 +1,15 @@
 /* ============================================
    AUTH CSS - Register & Login
+   FIX: Navbar overlap
    ============================================ */
 
+/* ========== BODY AUTH ========== */
 .auth-body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
   padding: 100px 20px 40px;
   position: relative;
@@ -71,7 +73,8 @@
   border-radius: var(--radius-lg);
   box-shadow: 0 20px 60px rgba(0,0,0,0.15);
   overflow: hidden;
-  min-height: 600px;
+  margin-top: 20px;
+  margin-bottom: 40px;
 }
 
 /* ========== SISI KIRI: BRANDING ========== */
@@ -128,7 +131,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  backdrop-filter: blur(10px);
 }
 
 .auth-logo .nav-logo-icon i {
@@ -139,6 +141,11 @@
 
 .auth-logo strong {
   color: var(--accent);
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 .auth-brand h1 {
@@ -199,18 +206,12 @@
   50% { transform: scale(1.05); }
 }
 
-@keyframes spin-slow {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
 /* ========== SISI KANAN: FORM ========== */
 .auth-form-wrapper {
   padding: 50px 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow-y: auto;
 }
 
 .auth-form-card {
@@ -385,73 +386,6 @@
 .btn-social.google:hover { color: #db4437; border-color: #db4437; }
 .btn-social.facebook:hover { color: #4267b2; border-color: #4267b2; }
 
-/* ========== DEMO AKUN ========== */
-.demo-akun {
-  margin-top: 24px;
-  padding: 16px;
-  background: #f5f5f5;
-  border-radius: 12px;
-  font-size: 12px;
-  color: #616161;
-  border-left: 4px solid var(--primary);
-}
-
-.demo-akun strong {
-  color: var(--primary);
-  display: block;
-  margin-bottom: 8px;
-  font-size: 13px;
-}
-
-.demo-list {
-  line-height: 1.8;
-}
-
-.demo-list span {
-  font-weight: 600;
-  color: var(--dark);
-}
-
-/* ========== PASSWORD STRENGTH ========== */
-.password-strength {
-  margin-top: 8px;
-  display: none;
-}
-
-.password-strength.show {
-  display: block;
-}
-
-.strength-bar {
-  height: 4px;
-  background: var(--gray-300);
-  border-radius: 2px;
-  overflow: hidden;
-  margin-bottom: 4px;
-}
-
-.strength-bar::after {
-  content: '';
-  display: block;
-  height: 100%;
-  width: 0;
-  transition: var(--transition);
-  border-radius: 2px;
-}
-
-.strength-bar.weak::after { width: 33%; background: var(--danger); }
-.strength-bar.medium::after { width: 66%; background: var(--warning); }
-.strength-bar.strong::after { width: 100%; background: var(--success); }
-
-.strength-text {
-  font-size: 12px;
-  font-weight: 600;
-}
-
-.strength-text.weak { color: var(--danger); }
-.strength-text.medium { color: var(--warning); }
-.strength-text.strong { color: var(--success); }
-
 /* ========== RESPONSIVE ========== */
 @media (max-width: 900px) {
   .auth-body {
@@ -460,7 +394,6 @@
   
   .auth-container {
     grid-template-columns: 1fr;
-    min-height: auto;
   }
   
   .auth-brand {
