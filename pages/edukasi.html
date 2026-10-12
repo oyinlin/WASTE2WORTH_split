@@ -1,366 +1,104 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <!-- Meta viewport: responsif di semua ukuran layar -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edukasi - Waste2Worth Medan</title>
-
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- Font Awesome: library ikon -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- AOS: animasi scroll -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <!-- CSS utama website -->
-    <link rel="stylesheet" href="css/common.css">
-    <link rel="stylesheet" href="css/edukasi.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edukasi - Waste2Worth</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/common.css">
+  <link rel="stylesheet" href="../css/edukasi.css">
 </head>
 <body>
 
-    <!-- ============================================================
-         HEADER: navigasi tetap di atas semua halaman
-         ============================================================ -->
-    <header class="header" id="header">
-        <div class="nav-container">
-            <div class="logo">
-                <i class="fas fa-recycle"></i>
-                <span>Waste2<span class="highlight">Worth</span></span>
-            </div>
-            <nav>
-                <ul class="nav-menu" id="navMenu">
-                    <li><a href="index.html">Beranda</a></li>
-                    <li><a href="layanan.html">Layanan</a></li>
-                    <li><a href="riwayat.html">Riwayat</a></li>
-                    <!-- class="active" menandai halaman edukasi sedang dibuka -->
-                    <li><a href="edukasi.html" class="active">Edukasi</a></li>
-                </ul>
-            </nav>
-            <div class="auth-buttons">
-                <a href="#" class="btn-login" onclick="openModal('login')">Masuk</a>
-                <a href="#" class="btn-register" onclick="openModal('register')">Daftar</a>
-            </div>
-            <div class="hamburger" id="hamburger">
-                <span></span><span></span><span></span>
-            </div>
-        </div>
-    </header>
-
-    <!-- ============================================================
-         MODAL LOGIN / REGISTER
-         ============================================================ -->
-    <div class="modal" id="authModal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeModal()">&times;</span>
-            <div class="modal-tabs">
-                <button class="tab-auth active" onclick="switchAuthTab('login')">Masuk</button>
-                <button class="tab-auth" onclick="switchAuthTab('register')">Daftar</button>
-            </div>
-            <form id="loginForm" class="auth-form active">
-                <h3>Selamat Datang Kembali</h3>
-                <p>Silakan masuk ke akun Anda</p>
-                <div class="form-group"><label>Email</label><input type="email" placeholder="nama@email.com" required></div>
-                <div class="form-group"><label>Password</label><input type="password" placeholder="••••••••" required></div>
-                <button type="submit" class="btn-auth">Masuk</button>
-            </form>
-            <form id="registerForm" class="auth-form">
-                <h3>Buat Akun Baru</h3>
-                <p>Bergabung dengan ribuan pengguna di Medan</p>
-                <div class="form-group"><label>Nama Lengkap</label><input type="text" placeholder="Nama Anda" required></div>
-                <div class="form-group"><label>Email</label><input type="email" placeholder="nama@email.com" required></div>
-                <div class="form-group"><label>Nomor HP</label><input type="tel" placeholder="0812-3456-7890" required></div>
-                <div class="form-group"><label>Password</label><input type="password" placeholder="Minimal 8 karakter" required></div>
-                <button type="submit" class="btn-auth">Daftar</button>
-            </form>
-        </div>
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo">
+        <img src="../gambar/waste2worth.png" alt="Logo" style="height:40px;">
+        <span>Waste<strong>2</strong>Worth</span>
+      </a>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="../index.html" class="nav-link">Beranda</a></li>
+        <li><a href="edukasi.html" class="nav-link active">Edukasi</a></li>
+        <li><a href="layanan.html" class="nav-link">Layanan</a></li>
+        <li><a href="riwayat.html" class="nav-link">Riwayat</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="login.html" class="btn btn-outline">Masuk</a>
+        <a href="register.html" class="btn btn-primary">Daftar</a>
+      </div>
+      <button class="nav-toggle" id="navToggle"><i class="fas fa-bars"></i></button>
     </div>
+  </nav>
 
-    <main>
-        <!-- ============================================================
-             HERO EDUKASI: judul + gelombang dekoratif
-             ============================================================ -->
-        <section class="hero" style="padding: 100px 0 0;">
-            <div class="container">
-                <div class="hero-content" data-aos="fade-up">
-                    <span class="hero-subtitle">#BelajarBersama</span>
-                    <h1>Edukasi <span class="highlight">Daur Ulang</span></h1>
-                    <p>Pelajari cara mengelola sampah dan menciptakan produk bernilai</p>
-                </div>
-                <div class="hero-wave">
-                    <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                        <path d="M0,0L46.2,16C92.3,32,184.6,64,276.9,74.7C369.2,85,461.5,75,553.8,58.7C646.2,43,738.5,21,830.8,26.7C923.1,32,1015.4,64,1107.7,74.7C1200,85,1200,85,1200,85L1200,120L1107.7,120C1015.4,120,923.1,120,830.8,120C738.5,120,646.2,120,553.8,120C461.5,120,369.2,120,276.9,120C184.6,120,92.3,120,46.2,120L0,120Z" class="wave-fill"></path>
-                    </svg>
-                </div>
-            </div>
-        </section>
-
-        <!-- ============================================================
-             SECTION VIDEO TUTORIAL: 3 kartu video dengan PiP & fullscreen
-             Setiap video punya:
-             - tag <video> dengan controls dan poster thumbnail
-             - tombol PiP: togglePip(videoId) → video mengapung
-             - tombol fullscreen: toggleFullscreen(videoId) → layar penuh
-             ============================================================ -->
-        <section class="edukasi-section">
-            <div class="container">
-                <div class="section-header" data-aos="fade-up">
-                    <span class="section-tag">Video Tutorial</span>
-                    <h2>Belajar <span class="highlight">Dari Video</span></h2>
-                    <p>Simak video tutorial berikut untuk memahami proses daur ulang</p>
-                </div>
-
-                <div class="video-grid" data-aos="fade-up" data-aos-delay="100">
-
-                    <!-- Video 1: Kelola Sampah Rumah Tangga -->
-                    <div class="video-card">
-                        <div class="video-thumbnail">
-                            <!-- id="video1": dipakai oleh togglePip('video1') dan toggleFullscreen('video1') -->
-                            <video
-                                id="video1"
-                                src="video/kelola sampah rumah tangga.mp4"
-                                controls
-                                poster="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJBngcUzd55aDtmln65LnMNz-guiOp57ew4hkMQNdnCQ&s=10">
-                            </video>
-                            <!-- Tombol PiP: video mengapung di atas konten lain -->
-                            <button class="btn-pip" onclick="togglePip('video1')" title="Picture-in-Picture">
-                                <i class="fas fa-window-restore"></i>
-                            </button>
-                            <!-- Tombol fullscreen: video tampil penuh layar -->
-                            <button class="btn-fs" onclick="toggleFullscreen('video1')" title="Fullscreen">
-                                <i class="fas fa-expand"></i>
-                            </button>
-                        </div>
-                        <div class="video-info">
-                            <h3>🏠 Kelola Sampah Rumah Tangga</h3>
-                            <p>Pelajari cara mengelola sampah rumah tangga dengan bijak dan benar</p>
-                        </div>
-                    </div>
-
-                    <!-- Video 2: Kelola Sampah Plastik -->
-                    <div class="video-card">
-                        <div class="video-thumbnail">
-                            <video
-                                id="video2"
-                                src="video/kelola plastik.mp4"
-                                controls
-                                poster="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLHHj37I0hEzn0bx9iifCxkSxJUEdSGVNF-aKLUVXtww&s=10">
-                            </video>
-                            <button class="btn-pip" onclick="togglePip('video2')" title="Picture-in-Picture">
-                                <i class="fas fa-window-restore"></i>
-                            </button>
-                            <button class="btn-fs" onclick="toggleFullscreen('video2')" title="Fullscreen">
-                                <i class="fas fa-expand"></i>
-                            </button>
-                        </div>
-                        <div class="video-info">
-                            <h3>♻️ Kelola Sampah Plastik</h3>
-                            <p>Pelajari cara mengelola sampah plastik dengan bijak dan benar</p>
-                        </div>
-                    </div>
-
-                    <!-- Video 3: Kelola Sampah Kertas -->
-                    <div class="video-card">
-                        <div class="video-thumbnail">
-                            <video
-                                id="video3"
-                                src="video/kelola kertas.mp4"
-                                controls
-                                poster="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBUk3WZWar_vBev_f_7iJA9-BUyu0vB2q4t_mNbj2qVA&s=10">
-                            </video>
-                            <button class="btn-pip" onclick="togglePip('video3')" title="Picture-in-Picture">
-                                <i class="fas fa-window-restore"></i>
-                            </button>
-                            <button class="btn-fs" onclick="toggleFullscreen('video3')" title="Fullscreen">
-                                <i class="fas fa-expand"></i>
-                            </button>
-                        </div>
-                        <div class="video-info">
-                            <h3>📄 Kelola Sampah Kertas</h3>
-                            <p>Pelajari cara mengelola sampah kertas dengan bijak dan benar</p>
-                        </div>
-                    </div>
-
-                </div>
-
-                <!-- ============================================================
-                     ARTIKEL EDUKASI: 3 kartu artikel informatif
-                     ============================================================ -->
-                <div class="section-header" data-aos="fade-up">
-                    <span class="section-tag">Artikel</span>
-                    <h2>Baca <span class="highlight">Artikel</span></h2>
-                    <p>Informasi lengkap tentang pengelolaan sampah</p>
-                </div>
-
-                <div class="articles-grid" data-aos="fade-up" data-aos-delay="100">
-
-                    <!-- Artikel 1: Tips plastik -->
-                    <div class="article-card">
-                        <div class="article-content">
-                            <!-- Tag kategori artikel: warna oranye, pill shape -->
-                            <span class="article-category">
-                                <i class="fas fa-leaf"></i> Tips &amp; Trik
-                            </span>
-                            <h3>10 Cara Mudah Mengurangi Sampah Plastik di Rumah</h3>
-                            <p>Mulai dari membawa tas belanja sendiri hingga menghindari sedotan plastik, semua bisa dimulai dari hal kecil.</p>
-                            <a href="#" class="article-read-more">
-                                Baca Selengkapnya <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Artikel 2: Statistik bank sampah -->
-                    <div class="article-card">
-                        <div class="article-content">
-                            <span class="article-category">
-                                <i class="fas fa-chart-line"></i> Statistik
-                            </span>
-                            <h3>Dampak Positif Bank Sampah bagi Lingkungan Medan</h3>
-                            <p>Dalam 2 tahun, bank sampah berhasil mengurangi 8.567 ton sampah yang masuk ke TPA.</p>
-                            <a href="#" class="article-read-more">
-                                Baca Selengkapnya <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Artikel 3: Kerajinan daur ulang -->
-                    <div class="article-card">
-                        <div class="article-content">
-                            <span class="article-category">
-                                <i class="fas fa-lightbulb"></i> Ide Kreatif
-                            </span>
-                            <h3>Kerajinan Tangan dari Sampah yang Bisa Dijual</h3>
-                            <p>Inspirasi bisnis daur ulang yang menguntungkan dan ramah lingkungan.</p>
-                            <a href="#" class="article-read-more">
-                                Baca Selengkapnya <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-        <!-- ============================================================
-             TIPS SECTION: 4 langkah memilah sampah
-             Background hijau gelap (dark section)
-             ============================================================ -->
-        <section class="tips-section">
-            <div class="container">
-                <div class="section-header" data-aos="fade-up">
-                    <!-- style inline untuk override warna teks di background hijau -->
-                    <span class="section-tag" style="background: rgba(255,255,255,0.2); color: white;">Tips &amp; Trik</span>
-                    <h2 style="color: white;">
-                        5 Langkah <span style="color: var(--primary-orange);">Memilah Sampah</span>
-                    </h2>
-                    <p style="color: rgba(255,255,255,0.9);">Ikuti langkah sederhana ini untuk mulai memilah sampah</p>
-                </div>
-
-                <!-- Grid 4 kartu tips: masing-masing punya ikon, judul, deskripsi -->
-                <div class="tips-grid">
-                    <div class="tip-card" data-aos="zoom-in" data-aos-delay="100">
-                        <i class="fas fa-trash-alt"></i>
-                        <h4>1. Pisahkan Organik</h4>
-                        <p>Sisa makanan, daun, dan bahan organik lainnya</p>
-                    </div>
-                    <div class="tip-card" data-aos="zoom-in" data-aos-delay="200">
-                        <i class="fas fa-bottle-water"></i>
-                        <h4>2. Kumpulkan Plastik</h4>
-                        <p>Botol plastik, gelas, dan kemasan plastik</p>
-                    </div>
-                    <div class="tip-card" data-aos="zoom-in" data-aos-delay="300">
-                        <i class="fas fa-newspaper"></i>
-                        <h4>3. Siapkan Kertas</h4>
-                        <p>Kardus, koran, dan kertas bekas</p>
-                    </div>
-                    <div class="tip-card" data-aos="zoom-in" data-aos-delay="400">
-                        <i class="fas fa-battery-full"></i>
-                        <h4>4. B3 Terpisah</h4>
-                        <p>Baterai, elektronik, dan limbah berbahaya</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ============================================================
-             CTA: ajakan daftar dan mulai setorkan sampah
-             Background oranye (cta-light)
-             ============================================================ -->
-        <section class="cta-light">
-            <div class="container">
-                <div class="cta-light-content" data-aos="zoom-in">
-                    <h2>Mulai Sekarang Juga!</h2>
-                    <p>Daftar dan mulai setorkan sampah daur ulang Anda ke bank sampah terdekat</p>
-                    <div class="cta-light-buttons">
-                        <!-- openModal('register'): buka modal daftar akun baru -->
-                        <a href="#" class="btn btn-primary" onclick="openModal('register')">
-                            <i class="fas fa-user-plus"></i> Daftar Sekarang
-                        </a>
-                        <a href="layanan.html" class="btn btn-secondary">
-                            <i class="fas fa-map-marked-alt"></i> Cari Bank Sampah
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- ============================================================
-         FOOTER: informasi kontak dan navigasi
-         ============================================================ -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-col">
-                    <div class="footer-logo"><i class="fas fa-recycle"></i><span>Waste2Worth</span></div>
-                    <p>Platform bank sampah digital pertama di Medan.</p>
-                    <div class="footer-social">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                    </div>
-                </div>
-                <div class="footer-col">
-                    <h4>Navigasi</h4>
-                    <ul>
-                        <li><a href="index.html">Beranda</a></li>
-                        <li><a href="layanan.html">Layanan</a></li>
-                        <li><a href="riwayat.html">Riwayat</a></li>
-                        <li><a href="edukasi.html">Edukasi</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Kantor Medan</h4>
-                    <ul class="contact-info">
-                        <li><i class="fas fa-map-marker-alt"></i> Jl. Gajah Mada No. 123, Medan Barat</li>
-                        <li><i class="fas fa-phone-alt"></i> (061) 1234-5678</li>
-                        <li><i class="fas fa-envelope"></i> info@waste2worth-medan.id</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom"><p>&copy; 2026 Waste2Worth Medan. All Rights Reserved.</p></div>
-        </div>
-    </footer>
-
-    <!-- ============================================================
-         VIDEO MODAL: popup untuk memutar video dalam ukuran besar
-         id="videoModal": dikontrol playVideo() dan closeVideoModal()
-         id="closeVideoModal": event listener 'click' dipasang di DOMContentLoaded
-         ============================================================ -->
-    <div class="video-modal" id="videoModal">
-        <div class="video-modal-content">
-            <span class="close-video-modal" id="closeVideoModal">&times;</span>
-            <video id="videoPlayer" controls>
-                <source src="" type="video/mp4">
-            </video>
-        </div>
+  <section style="padding: 120px 0 60px; background: #e8f5e9;">
+    <div class="container">
+      <h1 style="text-align:center; font-size: 42px; color: #1a1a2e;">Edukasi & Tutorial</h1>
+      <p style="text-align:center; color: #616161; margin-top: 12px;">Pelajari cara memilah dan mendaur ulang sampah dengan benar</p>
     </div>
+  </section>
 
-    <!-- Tombol kembali ke atas -->
-    <a href="#" class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></a>
+  <section style="padding: 60px 0;">
+    <div class="container">
+      <h2 style="margin-bottom: 30px; color: #1a1a2e;">Video Tutorial</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+        
+        <div style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.1);">
+          <video src="../video/kelola-kertas.mp4" controls style="width: 100%; height: 200px; object-fit: cover;"></video>
+          <div style="padding: 20px;">
+            <h3>Cara Mengelola Kertas</h3>
+            <p style="color: #616161; margin-top: 8px;">Pelajari cara memilah dan mendaur ulang kertas dengan benar.</p>
+          </div>
+        </div>
 
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <!-- Script utama: semua fungsi interaktivitas -->
-    <script src="js/common.js"></script>
-    <script src="js/edukasi.js"></script>
+        <div style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.1);">
+          <video src="../video/kelola-plastik.mp4" controls style="width: 100%; height: 200px; object-fit: cover;"></video>
+          <div style="padding: 20px;">
+            <h3>Cara Mengelola Plastik</h3>
+            <p style="color: #616161; margin-top: 8px;">Pelajari cara memilah dan mendaur ulang plastik dengan benar.</p>
+          </div>
+        </div>
+
+        <div style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.1);">
+          <video src="../video/kelola-sampah-rumah-tangga.mp4" controls style="width: 100%; height: 200px; object-fit: cover;"></video>
+          <div style="padding: 20px;">
+            <h3>Kelola Sampah Rumah Tangga</h3>
+            <p style="color: #616161; margin-top: 8px;">Tips mengelola sampah rumah tangga sehari-hari.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section style="padding: 60px 0; background: #f5f5f5;">
+    <div class="container">
+      <h2 style="margin-bottom: 30px; color: #1a1a2e;">Artikel Edukasi</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px;">
+        
+        <article style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.1);">
+          <img src="../gambar/sampah-lingkungan.png" alt="Artikel" style="width: 100%; height: 180px; object-fit: cover;">
+          <div style="padding: 20px;">
+            <h3>Mengapa Daur Ulang Penting?</h3>
+            <p style="color: #616161; margin-top: 8px;">Daur ulang membantu mengurangi sampah di TPA dan menghemat sumber daya alam.</p>
+            <a href="#" style="color: #2e7d32; font-weight: 600; margin-top: 12px; display: inline-block;">Baca Selengkapnya →</a>
+          </div>
+        </article>
+
+        <article style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.1);">
+          <img src="../gambar/plastiknaik.png" alt="Artikel" style="width: 100%; height: 180px; object-fit: cover;">
+          <div style="padding: 20px;">
+            <h3>Jenis Plastik yang Bisa Didaur Ulang</h3>
+            <p style="color: #616161; margin-top: 8px;">Tidak semua plastik bisa didaur ulang. Kenali jenisnya di sini.</p>
+            <a href="#" style="color: #2e7d32; font-weight: 600; margin-top: 12px; display: inline-block;">Baca Selengkapnya →</a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <script src="../js/common.js"></script>
+  <script src="../js/edukasi.js"></script>
 </body>
 </html>
