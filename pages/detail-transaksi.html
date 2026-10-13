@@ -12,13 +12,10 @@
 </head>
 <body>
 
-  <!-- NAVBAR -->
   <nav class="navbar" id="navbar">
     <div class="nav-container">
       <a href="../index.html" class="nav-logo">
-        <div class="nav-logo-icon">
-          <i class="fas fa-recycle"></i>
-        </div>
+        <div class="nav-logo-icon"><i class="fas fa-recycle"></i></div>
         <div class="nav-logo-text">Waste<strong>2</strong>Worth</div>
       </a>
       <ul class="nav-menu" id="navMenu">
@@ -37,7 +34,6 @@
     </div>
   </nav>
 
-  <!-- HEADER -->
   <section class="detail-header">
     <div class="container">
       <a href="riwayat.html" class="back-link">
@@ -58,17 +54,14 @@
     </div>
   </section>
 
-  <!-- MAIN CONTENT -->
   <section class="detail-section">
     <div class="container">
       
-      <!-- Loading -->
       <div id="loadingState" class="loading-state">
         <i class="fas fa-spinner fa-spin"></i>
         <p>Memuat detail transaksi...</p>
       </div>
 
-      <!-- Not Found -->
       <div id="notFoundState" class="not-found" style="display:none;">
         <i class="fas fa-search"></i>
         <h3>Transaksi Tidak Ditemukan</h3>
@@ -78,16 +71,11 @@
         </a>
       </div>
 
-      <!-- Content -->
       <div id="contentState" class="content-wrapper" style="display:none;">
-
-        <!-- GRID: KIRI (Detail) + KANAN (Timeline) -->
         <div class="detail-grid">
 
-          <!-- KOLOM KIRI -->
           <div class="detail-main">
 
-            <!-- Card Info Pelanggan -->
             <div class="card">
               <h2><i class="fas fa-user"></i> Info Pelanggan</h2>
               <div class="info-list">
@@ -114,7 +102,6 @@
               </div>
             </div>
 
-            <!-- Card Jadwal -->
             <div class="card">
               <h2><i class="fas fa-calendar-alt"></i> Jadwal Penjemputan</h2>
               <div class="info-list">
@@ -129,7 +116,6 @@
               </div>
             </div>
 
-            <!-- Card Daftar Sampah -->
             <div class="card">
               <h2><i class="fas fa-box"></i> Daftar Sampah</h2>
               <table class="tabel-detail">
@@ -151,7 +137,6 @@
               </table>
             </div>
 
-            <!-- Card Pembayaran -->
             <div class="card payment-card" id="paymentCard">
               <h2><i class="fas fa-money-bill-wave"></i> Pembayaran</h2>
               <div class="payment-info">
@@ -166,26 +151,25 @@
                   </span>
                 </div>
               </div>
+
+              <!-- TOMBOL TARIK DANA (Muncul kalau sudah dibayar) -->
               <div id="konfirmasiDanaBox" style="display:none;">
-                <div class="alert-info">
-                  <i class="fas fa-info-circle"></i>
-                  <span>Admin sudah mengirim dana ke rekeningmu. Konfirmasi jika dana sudah diterima.</span>
+                <div class="alert-info" style="background:#e8f5e9;color:#2e7d32;display:flex;align-items:flex-start;gap:10px;padding:14px 16px;border-radius:8px;font-size:13px;line-height:1.5;margin-bottom:16px;">
+                  <i class="fas fa-check-circle" style="margin-top:2px;flex-shrink:0;font-size:16px;"></i>
+                  <span><strong>Dana sudah masuk ke saldo kamu!</strong><br>Silakan tarik ke rekening bank atau e-wallet.</span>
                 </div>
-                <button class="btn btn-success btn-block btn-lg" id="btnKonfirmasiDana">
-                  <i class="fas fa-check-circle"></i> Konfirmasi Dana Diterima
-                </button>
+                <a href="tarik-dana.html" class="btn btn-success btn-block btn-lg" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;background:#4caf50;color:#fff;padding:14px 24px;border-radius:8px;font-weight:600;width:100%;box-sizing:border-box;">
+                  <i class="fas fa-wallet"></i> Tarik Dana Sekarang
+                </a>
               </div>
             </div>
 
           </div>
 
-          <!-- KOLOM KANAN: TIMELINE -->
           <div class="detail-sidebar">
             <div class="card timeline-card">
               <h2><i class="fas fa-stream"></i> Status Transaksi</h2>
-              <div class="timeline" id="timeline">
-                <!-- Timeline akan di-render oleh JS -->
-              </div>
+              <div class="timeline" id="timeline"></div>
             </div>
 
             <div class="card">
@@ -205,13 +189,11 @@
           </div>
 
         </div>
-
       </div>
 
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer class="footer">
     <div class="container">
       <div class="footer-bottom">

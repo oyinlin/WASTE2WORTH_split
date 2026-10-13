@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tarik Dana - Waste2Worth</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/common.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="../css/tarik-dana.css">
+</head>
+<body class="dashboard-body">
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <a href="../index.html" class="sidebar-logo">
+        <div class="nav-logo-icon"><i class="fas fa-recycle"></i></div>
+        <div class="nav-logo-text">Waste<strong>2</strong>Worth</div>
+      </a>
+      <button class="sidebar-close" id="sidebarClose"><i class="fas fa-times"></i></button>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a href="dashboard-pelanggan.html" class="sidebar-link">
+        <i class="fas fa-home"></i><span>Dashboard</span>
+      </a>
+      <a href="layanan.html" class="sidebar-link">
+        <i class="fas fa-map-marked-alt"></i><span>Peta Bank Sampah</span>
+      </a>
+      <a href="kalkulator.html" class="sidebar-link">
+        <i class="fas fa-calculator"></i><span>Kalkulator</span>
+      </a>
+      <a href="form-penjemputan.html" class="sidebar-link">
+        <i class="fas fa-truck"></i><span>Ajukan Penjemputan</span>
+      </a>
+      <a href="riwayat.html" class="sidebar-link">
+        <i class="fas fa-history"></i><span>Riwayat Transaksi</span>
+      </a>
+      <a href="tarik-dana.html" class="sidebar-link active">
+        <i class="fas fa-wallet"></i><span>Tarik Dana</span>
+      </a>
+      <a href="edukasi.html" class="sidebar-link">
+        <i class="fas fa-book-open"></i><span>Edukasi</span>
+      </a>
+      <a href="katalog.html" class="sidebar-link">
+        <i class="fas fa-shopping-bag"></i><span>Katalog Produk</span>
+      </a>
+      <a href="berita.html" class="sidebar-link">
+        <i class="fas fa-newspaper"></i><span>Berita</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button class="sidebar-link logout-btn" onclick="logoutUser()">
+        <i class="fas fa-sign-out-alt"></i><span>Keluar</span>
+      </button>
+    </div>
+  </aside>
+
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <main class="main-content">
+    <header class="topbar">
+      <button class="topbar-toggle" id="topbarToggle"><i class="fas fa-bars"></i></button>
+      <div class="topbar-title">
+        <h1>Tarik Dana</h1>
+        <p>Pindahkan saldo ke rekening bank atau e-wallet</p>
+      </div>
+      <div class="topbar-user">
+        <div class="user-info">
+          <span class="user-name" id="userName">Pelanggan</span>
+          <span class="user-role">Pelanggan</span>
+        </div>
+        <div class="user-avatar" id="userAvatar">P</div>
+      </div>
+    </header>
+
+    <section class="saldo-card">
+      <div class="saldo-info">
+        <div class="saldo-label">
+          <i class="fas fa-wallet"></i>
+          <span>Saldo Tersedia</span>
+        </div>
+        <h2 class="saldo-value" id="saldoValue">Rp 0</h2>
+        <p class="saldo-desc">Saldo berasal dari pembayaran sampahmu yang sudah dikonfirmasi</p>
+      </div>
+      <div class="saldo-icon">
+        <i class="fas fa-money-bill-wave"></i>
+      </div>
+    </section>
+
+    <section class="tarik-section">
+      <div class="tab-nav-tarik">
+        <button class="tab-btn-tarik active" data-tab="rekening">
+          <i class="fas fa-university"></i> Transfer Bank
+        </button>
+        <button class="tab-btn-tarik" data-tab="ewallet">
+          <i class="fas fa-mobile-alt"></i> E-Wallet
+        </button>
+        <button class="tab-btn-tarik" data-tab="riwayat">
+          <i class="fas fa-history"></i> Riwayat Tarik
+        </button>
+      </div>
+
+      <!-- TAB REKENING -->
+      <div class="tab-tarik active" id="tab-rekening">
+        <div class="form-card">
+          <h3><i class="fas fa-university"></i> Transfer ke Rekening Bank</h3>
+
+          <div class="form-group">
+            <label>Pilih Bank <span style="color:#f44336;">*</span></label>
+            <div class="bank-grid">
+              <label class="bank-option">
+                <input type="radio" name="bank" value="BCA">
+                <div class="bank-card">
+                  <i class="fas fa-university"></i>
+                  <span>BCA</span>
+                </div>
+              </label>
+              <label class="bank-option">
+                <input type="radio" name="bank" value="Mandiri">
+                <div class="bank-card">
+                  <i class="fas fa-university"></i>
+                  <span>Mandiri</span>
+                </div>
+              </label>
+              <label class="bank-option">
+                <input type="radio" name="bank" value="BNI">
+                <div class="bank-card">
+                  <i class="fas fa-university"></i>
+                  <span>BNI</span>
+                </div>
+              </label>
+              <label class="bank-option">
+                <input type="radio" name="bank" value="BRI">
+                <div class="bank-card">
+                  <i class="fas fa-university"></i>
+                  <span>BRI</span>
+                </div>
+              </label>
+            </div>
+            <span class="error-message" id="error-bank"></span>
+          </div>
+
+          <div class="form-group">
+            <label>Nomor Rekening <span style="color:#f44336;">*</span></label>
+            <input type="text" id="inputRekening" class="form-control" placeholder="Contoh: 1234567890" inputmode="numeric">
+            <span class="error-message" id="error-rekening"></span>
+          </div>
+
+          <div class="form-group">
+            <label>Nama Pemilik Rekening <span style="color:#f44336;">*</span></label>
+            <input type="text" id="inputNamaRek" class="form-control" placeholder="Nama sesuai buku rekening">
+            <span class="error-message" id="error-namaRek"></span>
+          </div>
+
+          <div class="form-group">
+            <label>Jumlah Tarik (Rp) <span style="color:#f44336;">*</span></label>
+            <input type="number" id="inputJumlahRek" class="form-control" placeholder="Minimal Rp 10.000" min="10000" step="1000">
+            <span class="hint">Minimal penarikan: Rp 10.000</span>
+            <span class="error-message" id="error-jumlahRek"></span>
+          </div>
+
+          <div class="form-group">
+            <button class="btn-quick" data-amount="50000">Rp 50.000</button>
+            <button class="btn-quick" data-amount="100000">Rp 100.000</button>
+            <button class="btn-quick" data-amount="all">Semua Saldo</button>
+          </div>
+
+          <button class="btn btn-primary btn-block btn-lg" id="btnTarikRek">
+            <i class="fas fa-paper-plane"></i> Ajukan Penarikan
+          </button>
+        </div>
+      </div>
+
+      <!-- TAB EWALLET -->
+      <div class="tab-tarik" id="tab-ewallet">
+        <div class="form-card">
+          <h3><i class="fas fa-mobile-alt"></i> Transfer ke E-Wallet</h3>
+
+          <div class="form-group">
+            <label>Pilih E-Wallet <span style="color:#f44336;">*</span></label>
+            <div class="wallet-grid">
+              <label class="wallet-option">
+                <input type="radio" name="wallet" value="GoPay">
+                <div class="wallet-card gopay">
+                  <i class="fas fa-wallet"></i>
+                  <span>GoPay</span>
+                </div>
+              </label>
+              <label class="wallet-option">
+                <input type="radio" name="wallet" value="OVO">
+                <div class="wallet-card ovo">
+                  <i class="fas fa-wallet"></i>
+                  <span>OVO</span>
+                </div>
+              </label>
+              <label class="wallet-option">
+                <input type="radio" name="wallet" value="Dana">
+                <div class="wallet-card dana">
+                  <i class="fas fa-wallet"></i>
+                  <span>Dana</span>
+                </div>
+              </label>
+              <label class="wallet-option">
+                <input type="radio" name="wallet" value="ShopeePay">
+                <div class="wallet-card shopeepay">
+                  <i class="fas fa-wallet"></i>
+                  <span>ShopeePay</span>
+                </div>
+              </label>
+            </div>
+            <span class="error-message" id="error-wallet"></span>
+          </div>
+
+          <div class="form-group">
+            <label>Nomor HP Terdaftar <span style="color:#f44336;">*</span></label>
+            <input type="tel" id="inputNoHp" class="form-control" placeholder="08xx-xxxx-xxxx">
+            <span class="error-message" id="error-noHp"></span>
+          </div>
+
+          <div class="form-group">
+            <label>Nama Pemilik <span style="color:#f44336;">*</span></label>
+            <input type="text" id="inputNamaWallet" class="form-control" placeholder="Nama sesuai akun e-wallet">
+            <span class="error-message" id="error-namaWallet"></span>
+          </div>
+
+          <div class="form-group">
+            <label>Jumlah Tarik (Rp) <span style="color:#f44336;">*</span></label>
+            <input type="number" id="inputJumlahWallet" class="form-control" placeholder="Minimal Rp 10.000" min="10000" step="1000">
+            <span class="hint">Minimal penarikan: Rp 10.000</span>
+            <span class="error-message" id="error-jumlahWallet"></span>
+          </div>
+
+          <div class="form-group">
+            <button class="btn-quick-wallet" data-amount="50000">Rp 50.000</button>
+            <button class="btn-quick-wallet" data-amount="100000">Rp 100.000</button>
+            <button class="btn-quick-wallet" data-amount="all">Semua Saldo</button>
+          </div>
+
+          <button class="btn btn-primary btn-block btn-lg" id="btnTarikWallet">
+            <i class="fas fa-paper-plane"></i> Ajukan Penarikan
+          </button>
+        </div>
+      </div>
+
+      <!-- TAB RIWAYAT -->
+      <div class="tab-tarik" id="tab-riwayat">
+        <div class="form-card">
+          <h3><i class="fas fa-history"></i> Riwayat Penarikan</h3>
+          
+          <div id="emptyRiwayat" class="empty-state-riwayat">
+            <i class="fas fa-inbox"></i>
+            <h3>Belum Ada Penarikan</h3>
+            <p>Kamu belum pernah melakukan penarikan dana</p>
+          </div>
+          
+          <div id="riwayatList" class="riwayat-list"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="../js/common.js"></script>
+  <script src="../js/tarik-dana.js"></script>
+</body>
+</html>

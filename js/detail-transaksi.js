@@ -1,5 +1,6 @@
 /* ============================================
-   DETAIL TRANSAKSI JS
+   DETAIL TRANSAKSI JS - Final
+   Auto Update Status + Tombol Tarik Dana
    ============================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -31,6 +32,18 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!transaksi) {
     showNotFound();
     return;
+  }
+
+  // ========== AUTO UPDATE: "Dibayar" → "Dana Diterima" ==========
+  // Kalau status "Dibayar", otomatis ubah jadi "Dana Diterima" biar saldo langsung masuk
+  if (transaksi.status === 'Dibayar') {
+    const index = semuaPengajuan.findIndex(t => t.id === trxId);
+    if (index !== -1) {
+      semuaPengajuan[index].status = 'Dana Diterima';
+      semuaPengajuan[index].tanggalDiterima = new Date().toISOString();
+      localStorage.setItem('pengajuan', JSON.stringify(semuaPengajuan));
+      transaksi.status = 'Dana Diterima';
+    }
   }
 
   // ========== RENDER ==========
@@ -88,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     document.getElementById('totalEstimasi').textContent = 'Rp ' + total.toLocaleString('id-ID');
-    document.getElementById('totalBayar').textContent = 'Rp ' + (trx.totalEstimasi || total).toLocaleString('id-ID');
+    document.getElementById('totalBayar').textContent = 'Rp ' + (trx.nilaiAkhir || trx.totalEstimasi || total).toLocaleString('id-ID');
 
     // Status Pembayaran
     const statusBayar = document.getElementById('statusBayar');
@@ -102,8 +115,8 @@ document.addEventListener('DOMContentLoaded', () => {
       statusBayar.innerHTML = '<i class="fas fa-hourglass-half"></i> Belum Dibayar';
     }
 
-    // Tampilkan tombol konfirmasi kalau status "Dibayar"
-    if (trx.status === 'Dibayar') {
+    // Tampilkan tombol tarik dana kalau status "Dana Diterima" atau "Dibayar"
+    if (trx.status === 'Dana Diterima' || trx.status === 'Dibayar') {
       document.getElementById('konfirmasiDanaBox').style.display = 'block';
     }
 
@@ -114,18 +127,25 @@ document.addEventListener('DOMContentLoaded', () => {
   // ========== TIMELINE ==========
   function renderTimeline(currentStatus) {
     const steps = [
-      { key: 'Menunggu Verifikasi', title: 'Menunggu Verifikasi', desc: 'Pengajuan kamu sedang diverifikasi admin', icon: 'fa-clock' },
+      { key: 'Menunggu', title: 'Menunggu Verifikasi', desc: 'Pengajuan kamu sedang diverifikasi admin', icon: 'fa-clock' },
       { key: 'Ditugaskan', title: 'Ditugaskan ke Supir', desc: 'Admin sudah menugaskan supir untuk jemput', icon: 'fa-user-check' },
       { key: 'Dijemput', title: 'Dalam Penjemputan', desc: 'Supir sedang menuju lokasimu', icon: 'fa-truck' },
-      { key: 'Sedang Diperiksa', title: 'Sedang Diperiksa', desc: 'Sampah sedang ditimbang oleh supir', icon: 'fa-weight-hanging' },
+      { key: 'Diperiksa', title: 'Sedang Diperiksa', desc: 'Sampah sedang ditimbang oleh supir', icon: 'fa-weight-hanging' },
       { key: 'Selesai', title: 'Selesai', desc: 'Sampah sudah diterima bank sampah', icon: 'fa-check-circle' },
-      { key: 'Dibayar', title: 'Dibayar', desc: 'Dana sudah ditransfer ke rekeningmu', icon: 'fa-money-bill-wave' },
-      { key: 'Dana Diterima', title: 'Dana Diterima', desc: 'Kamu sudah konfirmasi dana diterima', icon: 'fa-hand-holding-usd' }
+      { key: 'Dibayar', title: 'Dibayar', desc: 'Dana sudah ditransfer ke saldomu', icon: 'fa-money-bill-wave' },
+      { key: 'Diterima', title: 'Dana Diterima', desc: 'Dana sudah masuk ke saldo kamu', icon: 'fa-hand-holding-usd' }
     ];
 
-    const currentIndex = steps.findIndex(s => 
-      currentStatus && currentStatus.toLowerCase().includes(s.key.toLowerCase())
-    );
+    let currentIndex = 0;
+    const s = (currentStatus || '').toLowerCase();
+    
+    if (s.includes('menunggu') || s.includes('verifikasi')) currentIndex = 0;
+    else if (s.includes('tugas')) currentIndex = 1;
+    else if (s.includes('dijemput')) currentIndex = 2;
+    else if (s.includes('diperiksa')) currentIndex = 3;
+    else if (s.includes('selesai')) currentIndex = 4;
+    else if (s.includes('dibayar')) currentIndex = 5;
+    else if (s.includes('diterima')) currentIndex = 6;
 
     const timeline = document.getElementById('timeline');
     timeline.innerHTML = '';
@@ -153,30 +173,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ========== TOMBOL KONFIRMASI DANA ==========
-  document.getElementById('btnKonfirmasiDana')?.addEventListener('click', () => {
-    if (!confirm('Yakin dana sudah kamu terima?')) return;
-
-    const semuaPengajuan = JSON.parse(localStorage.getItem('pengajuan') || '[]');
-    const index = semuaPengajuan.findIndex(t => t.id === trxId);
-    
-    if (index !== -1) {
-      semuaPengajuan[index].status = 'Dana Diterima';
-      semuaPengajuan[index].tanggalDiterima = new Date().toISOString();
-      localStorage.setItem('pengajuan', JSON.stringify(semuaPengajuan));
-
-      showToast('Terima kasih! Transaksi selesai.', 'success');
-
-      setTimeout(() => {
-        window.location.reload();
-      }, 1500);
-    }
-  });
-
   // ========== FUNGSI NOT FOUND ==========
   function showNotFound() {
-    document.getElementById('loadingState').style.display = 'none';
-    document.getElementById('notFoundState').style.display = 'block';
+    const loading = document.getElementById('loadingState');
+    const notFound = document.getElementById('notFoundState');
+    if (loading) loading.style.display = 'none';
+    if (notFound) notFound.style.display = 'block';
   }
 
   // ========== HELPER ==========
@@ -218,21 +220,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (s.includes('diterima')) return 'fa-hand-holding-usd';
     if (s.includes('selesai')) return 'fa-check-circle';
     return 'fa-clock';
-  }
-
-  // ========== TOAST ==========
-  function showToast(message, type = 'info') {
-    const toast = document.createElement('div');
-    toast.className = 'toast toast-' + type;
-    toast.innerHTML = 
-      '<i class="fas fa-' + (type === 'success' ? 'check-circle' : 'info-circle') + '"></i>' +
-      '<span>' + message + '</span>';
-    document.body.appendChild(toast);
-    
-    setTimeout(() => {
-      toast.style.animation = 'slideIn 0.4s ease reverse';
-      setTimeout(() => toast.remove(), 400);
-    }, 3000);
   }
 
 });
