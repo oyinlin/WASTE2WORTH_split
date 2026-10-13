@@ -1,5 +1,6 @@
 /* ============================================
-   TARIK DANA JS - Fitur Withdraw Pelanggan
+   TARIK DANA JS - Final
+   Auto Refresh + Status Update
    ============================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -28,12 +29,14 @@ document.addEventListener('DOMContentLoaded', () => {
     let totalPendapatan = 0;
     let totalPenarikan = 0;
 
+    // Pendapatan dari transaksi "Dana Diterima" atau "Dibayar"
     transaksiPelanggan.forEach(trx => {
       if (trx.status === 'Dana Diterima' || trx.status === 'Dibayar') {
         totalPendapatan += trx.nilaiAkhir || trx.totalEstimasi || 0;
       }
     });
 
+    // Total penarikan yang sedang diproses atau selesai
     const penarikan = JSON.parse(localStorage.getItem('penarikan') || '[]');
     penarikan.forEach(p => {
       if (p.userId === currentUser.id && (p.status === 'Selesai' || p.status === 'Diproses')) {
@@ -61,7 +64,10 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.classList.add('active');
       document.getElementById('tab-' + tab).classList.add('active');
 
-      if (tab === 'riwayat') renderRiwayat();
+      if (tab === 'riwayat') {
+        updateSaldo();
+        renderRiwayat();
+      }
     });
   });
 
@@ -185,7 +191,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     showToast('Pengajuan penarikan berhasil! Menunggu konfirmasi admin.', 'success');
 
-    // Reset form
     document.getElementById('inputRekening').value = '';
     document.getElementById('inputNamaRek').value = '';
     document.getElementById('inputJumlahRek').value = '';
@@ -194,17 +199,19 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('inputJumlahWallet').value = '';
     document.querySelectorAll('input[name="bank"], input[name="wallet"]').forEach(r => r.checked = false);
 
+    updateSaldo();
     setTimeout(() => {
       document.querySelector('[data-tab="riwayat"]').click();
     }, 1000);
   }
 
-  // ========== RENDER RIWAYAT ==========
+  // ========== RENDER RIWAYAT (SELALU FRESH) ==========
   function renderRiwayat() {
     const list = document.getElementById('riwayatList');
     const empty = document.getElementById('emptyRiwayat');
     if (!list) return;
 
+    // Ambil data FRESH dari localStorage
     const penarikan = JSON.parse(localStorage.getItem('penarikan') || '[]')
       .filter(p => p.userId === currentUser.id)
       .sort((a, b) => new Date(b.tanggal) - new Date(a.tanggal));
@@ -221,7 +228,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
     penarikan.forEach(p => {
       const isBank = p.metode === 'Bank';
-      const statusClass = p.status.toLowerCase();
+      
+      // Status label + warna
+      let statusLabel = p.status;
+      let statusClass = 'menunggu';
+      let statusIcon = 'fa-clock';
+      
+      if (p.status === 'Menunggu') {
+        statusClass = 'menunggu';
+        statusIcon = 'fa-clock';
+      } else if (p.status === 'Diproses') {
+        statusClass = 'diproses';
+        statusIcon = 'fa-spinner';
+      } else if (p.status === 'Selesai') {
+        statusClass = 'selesai';
+        statusIcon = 'fa-check-circle';
+      } else if (p.status === 'Gagal') {
+        statusClass = 'gagal';
+        statusIcon = 'fa-times-circle';
+      }
+
+      // Info keterangan tambahan
+      let infoTambahan = '';
+      if (p.status === 'Diproses' && p.tanggalDiproses) {
+        infoTambahan = '<small style="color:#1976d2;display:block;margin-top:4px;"><i class="fas fa-info-circle"></i> Sedang diproses admin</small>';
+      } else if (p.status === 'Selesai' && p.tanggalSelesai) {
+        infoTambahan = '<small style="color:#2e7d32;display:block;margin-top:4px;"><i class="fas fa-check"></i> Dana sudah dikirim ke ' + (isBank ? 'rekening' : 'e-wallet') + ' kamu</small>';
+      } else if (p.status === 'Gagal' && p.alasanGagal) {
+        infoTambahan = '<small style="color:#f44336;display:block;margin-top:4px;"><i class="fas fa-times"></i> ' + p.alasanGagal + '</small>';
+      }
 
       const item = document.createElement('div');
       item.className = 'riwayat-item';
@@ -232,10 +267,13 @@ document.addEventListener('DOMContentLoaded', () => {
         '<div class="riwayat-content">' +
           '<h4>' + (isBank ? 'Transfer ' + p.bank : p.wallet) + '</h4>' +
           '<p>' + (isBank ? 'Rek: ' + p.rekening : 'HP: ' + p.noHp) + ' • ' + formatTanggal(p.tanggal) + '</p>' +
+          infoTambahan +
         '</div>' +
         '<div class="riwayat-right">' +
           '<span class="riwayat-amount">Rp ' + p.jumlah.toLocaleString('id-ID') + '</span>' +
-          '<span class="badge-status ' + statusClass + '">' + p.status + '</span>' +
+          '<span class="badge-status ' + statusClass + '">' +
+            '<i class="fas ' + statusIcon + (statusClass === 'diproses' ? ' fa-spin' : '') + '"></i> ' + statusLabel +
+          '</span>' +
         '</div>';
 
       list.appendChild(item);
@@ -275,7 +313,27 @@ document.addEventListener('DOMContentLoaded', () => {
   sidebarClose?.addEventListener('click', closeSidebar);
   sidebarOverlay?.addEventListener('click', closeSidebar);
 
+  // ========== INIT ==========
   renderRiwayat();
+
+  // ⭐ AUTO REFRESH setiap 5 detik → biar status update otomatis
+  setInterval(() => {
+    updateSaldo();
+    // Cek tab aktif, kalau riwayat sedang dibuka → refresh
+    const tabRiwayat = document.getElementById('tab-riwayat');
+    if (tabRiwayat && tabRiwayat.classList.contains('active')) {
+      renderRiwayat();
+    }
+  }, 5000);
+
+  // Refresh saat window dapat fokus (user balik dari tab lain)
+  window.addEventListener('focus', () => {
+    updateSaldo();
+    const tabRiwayat = document.getElementById('tab-riwayat');
+    if (tabRiwayat && tabRiwayat.classList.contains('active')) {
+      renderRiwayat();
+    }
+  });
 
 });
 
