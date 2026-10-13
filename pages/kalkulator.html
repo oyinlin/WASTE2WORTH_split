@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kalkulator Nilai Sampah - Waste2Worth</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/common.css">
+  <link rel="stylesheet" href="../css/kalkulator.css">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo">
+        <div class="nav-logo-icon"><i class="fas fa-recycle"></i></div>
+        <div class="nav-logo-text">Waste<strong>2</strong>Worth</div>
+      </a>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="../index.html" class="nav-link">Beranda</a></li>
+        <li><a href="layanan.html" class="nav-link">Layanan</a></li>
+        <li><a href="kalkulator.html" class="nav-link active">Kalkulator</a></li>
+        <li><a href="edukasi.html" class="nav-link">Edukasi</a></li>
+        <li><a href="riwayat.html" class="nav-link">Riwayat</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="login.html" class="btn btn-outline">Masuk</a>
+        <a href="register.html" class="btn btn-primary">Daftar</a>
+      </div>
+      <button class="nav-toggle" id="navToggle"><i class="fas fa-bars"></i></button>
+    </div>
+  </nav>
+
+  <!-- HEADER -->
+  <section class="kalkulator-header">
+    <div class="container">
+      <div class="header-badge"><i class="fas fa-calculator"></i> Kalkulator Nilai</div>
+      <h1>Hitung Estimasi Nilai Sampahmu</h1>
+      <p>Tambahkan jenis sampah satu per satu, sistem otomatis menghitung totalnya</p>
+    </div>
+  </section>
+
+  <!-- KALKULATOR -->
+  <section class="kalkulator-section">
+    <div class="container">
+      <div class="kalkulator-wrapper">
+        
+        <!-- KOLOM KIRI: FORM INPUT -->
+        <div class="kalkulator-form">
+          <div class="card">
+            <h2><i class="fas fa-plus-circle"></i> Tambah Jenis Sampah</h2>
+            
+            <div class="form-group">
+              <label for="kecamatan"><i class="fas fa-map-marker-alt"></i> Kecamatan</label>
+              <select id="kecamatan" class="form-control">
+                <option value="">-- Pilih Kecamatan --</option>
+                <option value="medan-barat">Medan Barat</option>
+                <option value="medan-timur">Medan Timur</option>
+                <option value="medan-sunggal">Medan Sunggal</option>
+                <option value="medan-petisah">Medan Petisah</option>
+                <option value="medan-kota">Medan Kota</option>
+                <option value="medan-denai">Medan Denai</option>
+              </select>
+              <span class="error-message" id="error-kecamatan"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="jenisSampah"><i class="fas fa-trash-alt"></i> Jenis Sampah</label>
+              <select id="jenisSampah" class="form-control">
+                <option value="">-- Pilih Jenis --</option>
+                <option value="plastik" data-harga="5000">Plastik - Rp 5.000/kg</option>
+                <option value="kardus" data-harga="4000">Kardus - Rp 4.000/kg</option>
+                <option value="kertas" data-harga="3000">Kertas - Rp 3.000/kg</option>
+                <option value="logam" data-harga="10000">Logam - Rp 10.000/kg</option>
+                <option value="kaleng" data-harga="7000">Kaleng - Rp 7.000/kg</option>
+                <option value="botol" data-harga="6000">Botol Plastik - Rp 6.000/kg</option>
+              </select>
+              <span class="error-message" id="error-jenis"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="berat"><i class="fas fa-weight-hanging"></i> Berat (kg)</label>
+              <input type="number" id="berat" class="form-control" placeholder="Contoh: 2.5" min="0.1" step="0.1">
+              <span class="error-message" id="error-berat"></span>
+            </div>
+
+            <button id="btnTambah" class="btn btn-primary btn-block btn-lg">
+              <i class="fas fa-plus"></i> Tambah ke Daftar
+            </button>
+          </div>
+        </div>
+
+        <!-- KOLOM KANAN -->
+        <div class="kalkulator-result">
+          <div class="card">
+            <h2><i class="fas fa-list"></i> Daftar Sampah Anda</h2>
+            
+            <div id="emptyState" class="empty-state">
+              <i class="fas fa-shopping-basket"></i>
+              <p>Belum ada sampah ditambahkan</p>
+              <span>Tambahkan jenis sampah di sebelah kiri</span>
+            </div>
+
+            <table id="tabelSampah" class="tabel-sampah" style="display:none;">
+              <thead>
+                <tr>
+                  <th>Jenis</th>
+                  <th>Berat</th>
+                  <th>Harga/kg</th>
+                  <th>Subtotal</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="bodyTabel"></tbody>
+            </table>
+          </div>
+
+          <div class="card total-card" id="totalCard" style="display:none;">
+            <div class="total-row">
+              <span>Total Estimasi</span>
+              <strong id="totalNilai">Rp 0</strong>
+            </div>
+            <div class="total-info">
+              <i class="fas fa-info-circle"></i>
+              Nilai akhir ditentukan setelah penimbangan aktual oleh supir
+            </div>
+            <button id="btnAjukan" class="btn btn-primary btn-block btn-lg">
+              <i class="fas fa-truck"></i> Ajukan Penjemputan
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-card">
+          <i class="fas fa-check-circle"></i>
+          <h3>Akurat</h3>
+          <p>Harga diambil dari data resmi bank sampah</p>
+        </div>
+        <div class="info-card">
+          <i class="fas fa-bolt"></i>
+          <h3>Cepat</h3>
+          <p>Total otomatis dihitung real-time</p>
+        </div>
+        <div class="info-card">
+          <i class="fas fa-shield-alt"></i>
+          <h3>Aman</h3>
+          <p>Data tersimpan di akunmu</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>&copy; 2026 Waste2Worth. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/common.js"></script>
+  <script src="../js/kalkulator.js"></script>
+</body>
+</html>

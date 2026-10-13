@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Katalog Produk Daur Ulang - Waste2Worth</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/common.css">
+  <link rel="stylesheet" href="../css/katalog.css">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo">
+        <div class="nav-logo-icon"><i class="fas fa-recycle"></i></div>
+        <div class="nav-logo-text">Waste<strong>2</strong>Worth</div>
+      </a>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="../index.html" class="nav-link">Beranda</a></li>
+        <li><a href="layanan.html" class="nav-link">Layanan</a></li>
+        <li><a href="kalkulator.html" class="nav-link">Kalkulator</a></li>
+        <li><a href="edukasi.html" class="nav-link">Edukasi</a></li>
+        <li><a href="katalog.html" class="nav-link active">Katalog</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="login.html" class="btn btn-outline">Masuk</a>
+        <a href="register.html" class="btn btn-primary">Daftar</a>
+      </div>
+      <button class="nav-toggle" id="navToggle"><i class="fas fa-bars"></i></button>
+    </div>
+  </nav>
+
+  <section class="katalog-header">
+    <div class="container">
+      <div class="header-badge"><i class="fas fa-shopping-bag"></i> Katalog Produk</div>
+      <h1>Produk Daur Ulang Kreatif</h1>
+      <p>Hasil karya UMKM binaan Waste2Worth dari bahan daur ulang</p>
+    </div>
+  </section>
+
+  <section class="katalog-section">
+    <div class="container">
+
+      <!-- Filter Kategori -->
+      <div class="filter-bar">
+        <div class="filter-label">
+          <i class="fas fa-filter"></i><span>Kategori:</span>
+        </div>
+        <div class="filter-buttons" id="filterKategori">
+          <button class="filter-btn active" data-kategori="all">Semua</button>
+          <button class="filter-btn" data-kategori="Tas">Tas</button>
+          <button class="filter-btn" data-kategori="Dekorasi">Dekorasi</button>
+          <button class="filter-btn" data-kategori="Aksesoris">Aksesoris</button>
+          <button class="filter-btn" data-kategori="Tanaman">Tanaman</button>
+          <button class="filter-btn" data-kategori="Alat Tulis">Alat Tulis</button>
+        </div>
+      </div>
+
+      <!-- Grid Katalog -->
+      <div class="katalog-grid" id="katalogGrid"></div>
+
+      <!-- Empty -->
+      <div id="emptyKatalog" class="empty-katalog" style="display:none;">
+        <i class="fas fa-search"></i>
+        <h3>Produk Tidak Ditemukan</h3>
+        <p>Coba pilih kategori lain</p>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>&copy; 2026 Waste2Worth. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/common.js"></script>
+  <script src="../js/katalog.js"></script>
+</body>
+</html>

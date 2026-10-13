@@ -1,247 +1,402 @@
-/* ============================================================
-   WASTE2WORTH - CSS HALAMAN RIWAYAT (riwayat.html)
-   Hanya style yang dipakai di riwayat.html.
-   ============================================================ */
+/* ============================================
+   RIWAYAT CSS
+   ============================================ */
 
-/* ============================================================
-   STATISTIK LAYANAN
-   ============================================================ */
-
-.stats-services-grid-riwayat {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
+.riwayat-header {
+  padding: 130px 0 60px;
+  background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+  text-align: center;
 }
 
-/* ============================================================
-   RIWAYAT PAGE
-   ============================================================ */
-
-.riwayat-section {
-  padding: 80px 0 60px;
-  background: var(--bg-light);
-  min-height: 100vh;
-}
-
-.table-container {
+.riwayat-header .header-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 20px;
   background: var(--white);
-  border-radius: 20px;
-  padding: 20px;
-  box-shadow: var(--shadow-md);
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-}
-
-.data-table {
-  width: 100%;
-  min-width: 800px;
-  border-collapse: collapse;
-}
-
-.data-table th,
-.data-table td {
-  padding: 15px;
-  text-align: left;
-  border-bottom: 1px solid var(--gray-200);
-}
-
-.data-table th {
-  background: var(--primary-green);
-  color: white;
-  font-weight: 600;
-}
-
-.data-table tr:hover {
-  background: var(--bg-light);
-}
-
-.status-badge {
-  display: inline-block;
-  padding: 5px 12px;
+  color: var(--primary);
   border-radius: 50px;
-  font-size: 0.75rem;
+  font-size: 14px;
   font-weight: 600;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 20px;
 }
 
-.status-pending {
-  background: #fff3e0;
-  color: var(--primary-orange);
+.riwayat-header h1 {
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 800;
+  color: var(--dark);
+  margin-bottom: 12px;
 }
 
-.status-proses {
-  background: #e3f2fd;
-  color: #1976d2;
+.riwayat-header p {
+  font-size: 16px;
+  color: var(--gray-700);
 }
 
-.status-selesai {
-  background: #e8f5e9;
-  color: var(--primary-green);
+/* ========== STATISTIK ========== */
+.riwayat-stats {
+  padding: 40px 0 0;
+  background: var(--gray-100);
 }
 
-.action-btn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 5px 8px;
-  border-radius: 8px;
-  transition: all 0.3s;
+.riwayat-stats .stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
 }
 
-.action-btn.edit {
-  color: var(--primary-green);
-}
-
-.action-btn.edit:hover {
-  background: rgba(46, 125, 50, 0.1);
-}
-
-.action-btn.delete {
-  color: #f44336;
-}
-
-.action-btn.delete:hover {
-  background: rgba(244, 67, 54, 0.1);
-}
-
-.filter-section {
+.riwayat-stats .stat-card {
+  background: var(--white);
+  padding: 24px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
   display: flex;
-  gap: 15px;
-  margin-bottom: 30px;
+  align-items: center;
+  gap: 16px;
+  transition: var(--transition);
+}
+
+.riwayat-stats .stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.riwayat-stats .stat-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.icon-blue { background: #e3f2fd; color: #1976d2; }
+.icon-green { background: var(--primary-bg); color: var(--primary); }
+.icon-orange { background: #fff3e0; color: #f57c00; }
+
+.riwayat-stats .stat-label {
+  display: block;
+  font-size: 13px;
+  color: var(--gray-500);
+  margin-bottom: 4px;
+}
+
+.riwayat-stats .stat-value {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--dark);
+}
+
+/* ========== SECTION ========== */
+.riwayat-section {
+  padding: 40px 0 80px;
+  background: var(--gray-100);
+  min-height: 400px;
+}
+
+/* ========== FILTER ========== */
+.filter-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
   flex-wrap: wrap;
 }
 
-.filter-search {
-  flex: 1;
-  position: relative;
-  min-width: 200px;
+.filter-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--gray-700);
 }
 
-.filter-search input {
-  width: 100%;
-  padding: 12px 20px;
-  padding-left: 45px;
-  border: 2px solid var(--gray-200);
-  border-radius: 50px;
-  font-family: "Poppins", sans-serif;
-  font-size: 0.9rem;
-  transition: border-color 0.3s;
+.filter-label i {
+  color: var(--primary);
 }
 
-.filter-search input:focus {
-  outline: none;
-  border-color: var(--primary-orange);
+.filter-buttons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
 }
 
-.filter-search i {
-  position: absolute;
-  left: 18px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--text-light);
-}
-
-.filter-select {
-  padding: 12px 20px;
-  border: 2px solid var(--gray-200);
-  border-radius: 50px;
-  font-family: "Poppins", sans-serif;
+.filter-btn {
+  padding: 8px 18px;
+  border: 2px solid var(--gray-300);
   background: var(--white);
-  font-size: 0.9rem;
+  border-radius: 50px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gray-700);
   cursor: pointer;
-  transition: border-color 0.3s;
-  min-width: 140px;
+  transition: var(--transition);
 }
 
-.filter-select:focus {
-  outline: none;
-  border-color: var(--primary-orange);
+.filter-btn:hover {
+  border-color: var(--primary);
+  color: var(--primary);
 }
 
+.filter-btn.active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--white);
+}
+
+/* ========== EMPTY STATE ========== */
 .empty-state {
   text-align: center;
-  padding: 60px 20px;
+  padding: 80px 20px;
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
 }
 
 .empty-state i {
-  font-size: 4rem;
-  color: var(--gray-200);
+  font-size: 80px;
+  color: var(--gray-300);
   margin-bottom: 20px;
 }
 
 .empty-state h3 {
-  font-size: 1.2rem;
-  color: var(--text-dark);
-  margin-bottom: 10px;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 8px;
 }
 
 .empty-state p {
-  color: var(--text-light);
-  font-size: 0.9rem;
+  font-size: 15px;
+  color: var(--gray-700);
+  margin-bottom: 24px;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
 }
 
-/* ============================================================
-   RESPONSIVE GLOBAL
-   ============================================================ */
-
-/* Tablet */
-@media (max-width: 1024px) {
-    .stats-services-grid-riwayat {
-    grid-template-columns: repeat(2, 1fr);
-  }
+.empty-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
-/* Mobile Large */
+/* ========== RIWAYAT LIST ========== */
+.riwayat-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.transaksi-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition: var(--transition);
+  border-left: 5px solid var(--gray-300);
+}
+
+.transaksi-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.transaksi-card.status-menunggu { border-left-color: #f57c00; }
+.transaksi-card.status-diproses { border-left-color: #1976d2; }
+.transaksi-card.status-selesai { border-left-color: #2e7d32; }
+
+.transaksi-header {
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  border-bottom: 1px solid var(--gray-300);
+  flex-wrap: wrap;
+}
+
+.transaksi-id {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.transaksi-id strong {
+  font-size: 15px;
+  color: var(--dark);
+  font-weight: 700;
+}
+
+.transaksi-tanggal {
+  font-size: 12px;
+  color: var(--gray-500);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 50px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.status-menunggu .status-badge,
+.status-badge.status-menunggu {
+  background: #fff3e0;
+  color: #f57c00;
+}
+
+.status-diproses .status-badge,
+.status-badge.status-diproses {
+  background: #e3f2fd;
+  color: #1976d2;
+}
+
+.status-selesai .status-badge,
+.status-badge.status-selesai {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.transaksi-body {
+  padding: 20px 24px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 20px;
+  align-items: center;
+}
+
+.transaksi-items {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.transaksi-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--gray-700);
+}
+
+.transaksi-item i {
+  color: var(--primary);
+  font-size: 12px;
+}
+
+.transaksi-item strong {
+  color: var(--dark);
+  font-weight: 600;
+}
+
+.transaksi-total {
+  text-align: right;
+}
+
+.transaksi-total .label {
+  display: block;
+  font-size: 12px;
+  color: var(--gray-500);
+  margin-bottom: 4px;
+}
+
+.transaksi-total .value {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--primary);
+}
+
+.transaksi-footer {
+  padding: 16px 24px;
+  background: var(--gray-100);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.transaksi-alamat {
+  font-size: 13px;
+  color: var(--gray-700);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.transaksi-alamat i {
+  color: var(--primary);
+}
+
+.btn-detail {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: var(--primary);
+  color: var(--white);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: var(--transition);
+  border: none;
+  cursor: pointer;
+}
+
+.btn-detail:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+}
+
+/* ========== RESPONSIVE ========== */
 @media (max-width: 768px) {
-    .stats-services-grid-riwayat {
+  .riwayat-header {
+    padding: 110px 0 40px;
+  }
+  
+  .filter-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .filter-buttons {
+    justify-content: center;
+  }
+  
+  .transaksi-body {
     grid-template-columns: 1fr;
   }
-
-    .filter-section {
+  
+  .transaksi-total {
+    text-align: left;
+    padding-top: 12px;
+    border-top: 1px dashed var(--gray-300);
+  }
+  
+  .empty-actions {
     flex-direction: column;
   }
-
-    .filter-search {
-    min-width: auto;
-  }
-
-    .filter-select {
+  
+  .empty-actions .btn {
     width: 100%;
-  }
-
-    .data-table {
-    min-width: 700px;
-  }
-
-    .data-table th,
-  .data-table td {
-    padding: 10px 8px;
-    font-size: 0.8rem;
-  }
-}
-
-/* Mobile Small */
-@media (max-width: 480px) {
-    .data-table {
-    min-width: 600px;
-  }
-
-    .data-table th,
-  .data-table td {
-    padding: 8px 6px;
-    font-size: 0.7rem;
-  }
-
-    .table-container {
-    padding: 10px;
-  }
-
-    #editModal .modal-content {
-    padding: 25px 15px;
-    max-width: 95%;
-  }
-
-    #editModal .form-row {
-    grid-template-columns: 1fr;
-    gap: 10px;
+    justify-content: center;
   }
 }

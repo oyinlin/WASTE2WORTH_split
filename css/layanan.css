@@ -87,15 +87,9 @@
 
 .tab-content.active {
   display: block;
-  animation: fadeIn 0.4s ease;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* ========== PETA ========== */
+/* ========== PETA WRAPPER ========== */
 .peta-wrapper {
   display: grid;
   grid-template-columns: 380px 1fr;
@@ -113,10 +107,12 @@
   flex-direction: column;
   gap: 16px;
   overflow: hidden;
+  height: 100%;
 }
 
 .peta-search {
   position: relative;
+  flex-shrink: 0;
 }
 
 .peta-search i {
@@ -168,6 +164,7 @@
   border-radius: var(--radius-sm);
   cursor: pointer;
   transition: var(--transition);
+  flex-shrink: 0;
 }
 
 .peta-item:hover {
@@ -213,22 +210,24 @@
   width: 14px;
 }
 
+/* ========== PETA MAP (IFRAME GOOGLE MAPS) ========== */
 .peta-map {
-  height: 100%;
-  min-height: 500px;
   width: 100%;
+  height: 100%;
+  min-height: 560px;
   border-radius: var(--radius);
   overflow: hidden;
+  background: #e8f5e9;
   position: relative;
-  z-index: 1;
 }
 
-#map {
-  height: 100% !important;
-  min-height: 500px !important;
-  width: 100% !important;
+.peta-map iframe {
+  width: 100%;
+  height: 100%;
+  min-height: 560px;
+  border: 0;
+  display: block;
   border-radius: var(--radius);
-  z-index: 1;
 }
 
 .peta-info {
@@ -246,43 +245,6 @@
 
 .peta-info i {
   font-size: 16px;
-}
-
-/* Leaflet popup */
-.leaflet-popup-content-wrapper {
-  border-radius: var(--radius) !important;
-  padding: 4px !important;
-}
-
-.leaflet-popup-content {
-  margin: 12px 16px !important;
-  font-family: var(--font-family) !important;
-}
-
-.popup-title {
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--dark);
-  margin-bottom: 8px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid var(--gray-300);
-}
-
-.popup-row {
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
-  font-size: 13px;
-  color: var(--gray-700);
-  margin-bottom: 6px;
-  line-height: 1.4;
-}
-
-.popup-row i {
-  color: var(--primary);
-  margin-top: 3px;
-  flex-shrink: 0;
-  width: 14px;
 }
 
 /* ========== KATALOG ========== */
@@ -433,9 +395,9 @@
   }
   
   .peta-map,
-  #map {
-    height: 400px !important;
-    min-height: 400px !important;
+  .peta-map iframe {
+    height: 400px;
+    min-height: 400px;
   }
   
   .cta-card {
@@ -455,9 +417,9 @@
   }
   
   .peta-map,
-  #map {
-    height: 300px !important;
-    min-height: 300px !important;
+  .peta-map iframe {
+    height: 300px;
+    min-height: 300px;
   }
   
   .katalog-grid {

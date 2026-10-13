@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Edukasi - Waste2Worth</title>
+  
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/common.css">
@@ -11,92 +12,156 @@
 </head>
 <body>
 
+  <!-- NAVBAR -->
   <nav class="navbar" id="navbar">
     <div class="nav-container">
       <a href="../index.html" class="nav-logo">
-        <img src="../gambar/waste2worth.png" alt="Logo" style="height:40px;">
-        <span>Waste<strong>2</strong>Worth</span>
+        <div class="nav-logo-icon">
+          <i class="fas fa-recycle"></i>
+        </div>
+        <div class="nav-logo-text">Waste<strong>2</strong>Worth</div>
       </a>
       <ul class="nav-menu" id="navMenu">
         <li><a href="../index.html" class="nav-link">Beranda</a></li>
-        <li><a href="edukasi.html" class="nav-link active">Edukasi</a></li>
         <li><a href="layanan.html" class="nav-link">Layanan</a></li>
+        <li><a href="kalkulator.html" class="nav-link">Kalkulator</a></li>
+        <li><a href="edukasi.html" class="nav-link active">Edukasi</a></li>
         <li><a href="riwayat.html" class="nav-link">Riwayat</a></li>
       </ul>
       <div class="nav-actions">
-        <a href="login.html" class="btn btn-outline">Masuk</a>
-        <a href="register.html" class="btn btn-primary">Daftar</a>
+        <a href="dashboard-pelanggan.html" class="btn btn-outline">Dashboard</a>
+        <!-- <a href="register.html" class="btn btn-primary">Daftar</a> -->
       </div>
       <button class="nav-toggle" id="navToggle"><i class="fas fa-bars"></i></button>
     </div>
   </nav>
 
-  <section style="padding: 120px 0 60px; background: #e8f5e9;">
+  <!-- HEADER -->
+  <section class="edukasi-header">
     <div class="container">
-      <h1 style="text-align:center; font-size: 42px; color: #1a1a2e;">Edukasi & Tutorial</h1>
-      <p style="text-align:center; color: #616161; margin-top: 12px;">Pelajari cara memilah dan mendaur ulang sampah dengan benar</p>
+      <div class="header-badge"><i class="fas fa-graduation-cap"></i> Edukasi & Tutorial</div>
+      <h1>Belajar Daur Ulang Sampah</h1>
+      <p>Video tutorial dan artikel edukasi untuk kamu yang peduli lingkungan</p>
     </div>
   </section>
 
-  <section style="padding: 60px 0;">
+  <!-- TAB NAVIGATION -->
+  <section class="edukasi-section">
     <div class="container">
-      <h2 style="margin-bottom: 30px; color: #1a1a2e;">Video Tutorial</h2>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
-        
-        <div style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.1);">
-          <video src="../video/kelola-kertas.mp4" controls style="width: 100%; height: 200px; object-fit: cover;"></video>
-          <div style="padding: 20px;">
-            <h3>Cara Mengelola Kertas</h3>
-            <p style="color: #616161; margin-top: 8px;">Pelajari cara memilah dan mendaur ulang kertas dengan benar.</p>
-          </div>
-        </div>
+      <div class="tab-nav">
+        <button class="tab-btn active" data-tab="video">
+          <i class="fas fa-play-circle"></i> Video Tutorial
+        </button>
+        <button class="tab-btn" data-tab="artikel">
+          <i class="fas fa-file-alt"></i> Artikel
+        </button>
+      </div>
 
-        <div style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.1);">
-          <video src="../video/kelola-plastik.mp4" controls style="width: 100%; height: 200px; object-fit: cover;"></video>
-          <div style="padding: 20px;">
-            <h3>Cara Mengelola Plastik</h3>
-            <p style="color: #616161; margin-top: 8px;">Pelajari cara memilah dan mendaur ulang plastik dengan benar.</p>
+      <!-- TAB VIDEO -->
+      <div class="tab-content active" id="tab-video">
+        <div class="video-grid">
+          
+          <div class="video-card">
+            <div class="video-thumb">
+              <video 
+                src="../video/kelola-kertas.mp4" 
+                controls 
+                preload="metadata"
+              >
+                Browser tidak mendukung video.
+              </video>
+            </div>
+            <div class="video-info">
+              <span class="video-badge"><i class="fas fa-play"></i> Video</span>
+              <h3>Cara Mengelola Kertas</h3>
+              <p>Pelajari cara memilah dan mendaur ulang kertas dengan benar.</p>
+              <div class="video-meta">
+                <span><i class="fas fa-clock"></i> 3 menit</span>
+                <span><i class="fas fa-eye"></i> 1.234 views</span>
+              </div>
+            </div>
           </div>
-        </div>
 
-        <div style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.1);">
-          <video src="../video/kelola-sampah-rumah-tangga.mp4" controls style="width: 100%; height: 200px; object-fit: cover;"></video>
-          <div style="padding: 20px;">
-            <h3>Kelola Sampah Rumah Tangga</h3>
-            <p style="color: #616161; margin-top: 8px;">Tips mengelola sampah rumah tangga sehari-hari.</p>
+          <div class="video-card">
+            <div class="video-thumb">
+              <video 
+                src="../video/kelola-plastik.mp4" 
+                controls 
+                preload="metadata"
+              >
+                Browser tidak mendukung video.
+              </video>
+            </div>
+            <div class="video-info">
+              <span class="video-badge"><i class="fas fa-play"></i> Video</span>
+              <h3>Cara Mengelola Plastik</h3>
+              <p>Pelajari cara memilah dan mendaur ulang plastik dengan benar.</p>
+              <div class="video-meta">
+                <span><i class="fas fa-clock"></i> 4 menit</span>
+                <span><i class="fas fa-eye"></i> 2.567 views</span>
+              </div>
+            </div>
           </div>
-        </div>
 
+          <div class="video-card">
+            <div class="video-thumb">
+              <video 
+                src="../video/kelola sampah-rumah-tangga.mp4" 
+                controls 
+                preload="metadata"
+              >
+                Browser tidak mendukung video.
+              </video>
+            </div>
+            <div class="video-info">
+              <span class="video-badge"><i class="fas fa-play"></i> Video</span>
+              <h3>Kelola Sampah Rumah Tangga</h3>
+              <p>Tips mengelola sampah rumah tangga sehari-hari.</p>
+              <div class="video-meta">
+                <span><i class="fas fa-clock"></i> 5 menit</span>
+                <span><i class="fas fa-eye"></i> 3.890 views</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- TAB ARTIKEL -->
+      <div class="tab-content" id="tab-artikel">
+        <div class="artikel-grid" id="artikelGrid"></div>
       </div>
     </div>
   </section>
 
-  <section style="padding: 60px 0; background: #f5f5f5;">
+  <!-- CTA -->
+  <section class="cta-edukasi">
     <div class="container">
-      <h2 style="margin-bottom: 30px; color: #1a1a2e;">Artikel Edukasi</h2>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px;">
-        
-        <article style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.1);">
-          <img src="../gambar/sampah-lingkungan.png" alt="Artikel" style="width: 100%; height: 180px; object-fit: cover;">
-          <div style="padding: 20px;">
-            <h3>Mengapa Daur Ulang Penting?</h3>
-            <p style="color: #616161; margin-top: 8px;">Daur ulang membantu mengurangi sampah di TPA dan menghemat sumber daya alam.</p>
-            <a href="#" style="color: #2e7d32; font-weight: 600; margin-top: 12px; display: inline-block;">Baca Selengkapnya →</a>
-          </div>
-        </article>
-
-        <article style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.1);">
-          <img src="../gambar/plastiknaik.png" alt="Artikel" style="width: 100%; height: 180px; object-fit: cover;">
-          <div style="padding: 20px;">
-            <h3>Jenis Plastik yang Bisa Didaur Ulang</h3>
-            <p style="color: #616161; margin-top: 8px;">Tidak semua plastik bisa didaur ulang. Kenali jenisnya di sini.</p>
-            <a href="#" style="color: #2e7d32; font-weight: 600; margin-top: 12px; display: inline-block;">Baca Selengkapnya →</a>
-          </div>
-        </article>
-
+      <div class="cta-card">
+        <div class="cta-content">
+          <h2>Siap Mulai Aksi Nyata?</h2>
+          <p>Setelah belajar, sekarang saatnya action! Hitung nilai sampahmu dan ajukan penjemputan.</p>
+        </div>
+        <div class="cta-buttons">
+          <a href="kalkulator.html" class="btn btn-white">
+            <i class="fas fa-calculator"></i> Hitung Sampah
+          </a>
+          <a href="form-penjemputan.html" class="btn btn-outline-white">
+            <i class="fas fa-truck"></i> Ajukan Penjemputan
+          </a>
+        </div>
       </div>
     </div>
   </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>&copy; 2026 Waste2Worth. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
 
   <script src="../js/common.js"></script>
   <script src="../js/edukasi.js"></script>

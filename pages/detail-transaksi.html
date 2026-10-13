@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detail Transaksi - Waste2Worth</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/common.css">
+  <link rel="stylesheet" href="../css/detail-transaksi.css">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo">
+        <div class="nav-logo-icon">
+          <i class="fas fa-recycle"></i>
+        </div>
+        <div class="nav-logo-text">Waste<strong>2</strong>Worth</div>
+      </a>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="../index.html" class="nav-link">Beranda</a></li>
+        <li><a href="layanan.html" class="nav-link">Layanan</a></li>
+        <li><a href="kalkulator.html" class="nav-link">Kalkulator</a></li>
+        <li><a href="edukasi.html" class="nav-link">Edukasi</a></li>
+        <li><a href="riwayat.html" class="nav-link active">Riwayat</a></li>
+      </ul>
+      <div class="nav-actions" id="navActions">
+        <a href="dashboard-pelanggan.html" class="btn btn-primary">
+          <i class="fas fa-tachometer-alt"></i> Dashboard
+        </a>
+      </div>
+      <button class="nav-toggle" id="navToggle"><i class="fas fa-bars"></i></button>
+    </div>
+  </nav>
+
+  <!-- HEADER -->
+  <section class="detail-header">
+    <div class="container">
+      <a href="riwayat.html" class="back-link">
+        <i class="fas fa-arrow-left"></i> Kembali ke Riwayat
+      </a>
+      <div class="header-content">
+        <div class="header-left">
+          <div class="header-badge"><i class="fas fa-receipt"></i> Detail Transaksi</div>
+          <h1 id="trxId">TRX-XXXXXXXX</h1>
+          <p id="trxTanggal">Tanggal: -</p>
+        </div>
+        <div class="header-right">
+          <span class="status-badge" id="statusBadge">
+            <i class="fas fa-clock"></i> Memuat...
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN CONTENT -->
+  <section class="detail-section">
+    <div class="container">
+      
+      <!-- Loading -->
+      <div id="loadingState" class="loading-state">
+        <i class="fas fa-spinner fa-spin"></i>
+        <p>Memuat detail transaksi...</p>
+      </div>
+
+      <!-- Not Found -->
+      <div id="notFoundState" class="not-found" style="display:none;">
+        <i class="fas fa-search"></i>
+        <h3>Transaksi Tidak Ditemukan</h3>
+        <p>Transaksi dengan ID tersebut tidak ada di akun kamu.</p>
+        <a href="riwayat.html" class="btn btn-primary">
+          <i class="fas fa-arrow-left"></i> Kembali ke Riwayat
+        </a>
+      </div>
+
+      <!-- Content -->
+      <div id="contentState" class="content-wrapper" style="display:none;">
+
+        <!-- GRID: KIRI (Detail) + KANAN (Timeline) -->
+        <div class="detail-grid">
+
+          <!-- KOLOM KIRI -->
+          <div class="detail-main">
+
+            <!-- Card Info Pelanggan -->
+            <div class="card">
+              <h2><i class="fas fa-user"></i> Info Pelanggan</h2>
+              <div class="info-list">
+                <div class="info-row">
+                  <span class="info-label"><i class="fas fa-user"></i> Nama</span>
+                  <span class="info-value" id="infoNama">-</span>
+                </div>
+                <div class="info-row">
+                  <span class="info-label"><i class="fas fa-phone"></i> Telepon</span>
+                  <span class="info-value" id="infoTelepon">-</span>
+                </div>
+                <div class="info-row">
+                  <span class="info-label"><i class="fas fa-map-marker-alt"></i> Kecamatan</span>
+                  <span class="info-value" id="infoKecamatan">-</span>
+                </div>
+                <div class="info-row">
+                  <span class="info-label"><i class="fas fa-home"></i> Alamat</span>
+                  <span class="info-value" id="infoAlamat">-</span>
+                </div>
+                <div class="info-row" id="rowCatatan" style="display:none;">
+                  <span class="info-label"><i class="fas fa-sticky-note"></i> Catatan</span>
+                  <span class="info-value" id="infoCatatan">-</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card Jadwal -->
+            <div class="card">
+              <h2><i class="fas fa-calendar-alt"></i> Jadwal Penjemputan</h2>
+              <div class="info-list">
+                <div class="info-row">
+                  <span class="info-label"><i class="fas fa-calendar"></i> Tanggal</span>
+                  <span class="info-value" id="infoTanggalJemput">-</span>
+                </div>
+                <div class="info-row">
+                  <span class="info-label"><i class="fas fa-clock"></i> Jam</span>
+                  <span class="info-value" id="infoJamJemput">-</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card Daftar Sampah -->
+            <div class="card">
+              <h2><i class="fas fa-box"></i> Daftar Sampah</h2>
+              <table class="tabel-detail">
+                <thead>
+                  <tr>
+                    <th>Jenis</th>
+                    <th>Berat</th>
+                    <th>Harga/kg</th>
+                    <th>Subtotal</th>
+                  </tr>
+                </thead>
+                <tbody id="bodyDetailSampah"></tbody>
+                <tfoot>
+                  <tr>
+                    <td colspan="3"><strong>Total Estimasi</strong></td>
+                    <td><strong id="totalEstimasi">Rp 0</strong></td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+
+            <!-- Card Pembayaran -->
+            <div class="card payment-card" id="paymentCard">
+              <h2><i class="fas fa-money-bill-wave"></i> Pembayaran</h2>
+              <div class="payment-info">
+                <div class="payment-row">
+                  <span>Total Nilai</span>
+                  <strong id="totalBayar">Rp 0</strong>
+                </div>
+                <div class="payment-row">
+                  <span>Status</span>
+                  <span class="payment-status" id="statusBayar">
+                    <i class="fas fa-hourglass-half"></i> Belum Dibayar
+                  </span>
+                </div>
+              </div>
+              <div id="konfirmasiDanaBox" style="display:none;">
+                <div class="alert-info">
+                  <i class="fas fa-info-circle"></i>
+                  <span>Admin sudah mengirim dana ke rekeningmu. Konfirmasi jika dana sudah diterima.</span>
+                </div>
+                <button class="btn btn-success btn-block btn-lg" id="btnKonfirmasiDana">
+                  <i class="fas fa-check-circle"></i> Konfirmasi Dana Diterima
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- KOLOM KANAN: TIMELINE -->
+          <div class="detail-sidebar">
+            <div class="card timeline-card">
+              <h2><i class="fas fa-stream"></i> Status Transaksi</h2>
+              <div class="timeline" id="timeline">
+                <!-- Timeline akan di-render oleh JS -->
+              </div>
+            </div>
+
+            <div class="card">
+              <h2><i class="fas fa-headset"></i> Bantuan</h2>
+              <p style="font-size:13px;color:#616161;margin-bottom:12px;">
+                Ada kendala dengan transaksi ini?
+              </p>
+              <div class="contact-item">
+                <i class="fas fa-phone"></i>
+                <span>+62 812-3456-7890</span>
+              </div>
+              <div class="contact-item">
+                <i class="fas fa-envelope"></i>
+                <span>info@waste2worth.id</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>&copy; 2026 Waste2Worth. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/common.js"></script>
+  <script src="../js/detail-transaksi.js"></script>
+</body>
+</html>

@@ -1,0 +1,521 @@
+/* ============================================
+   FORM PENJEMPUTAN CSS
+   ============================================ */
+
+.form-header {
+  padding: 130px 0 60px;
+  background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+  text-align: center;
+}
+
+.form-header .header-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 20px;
+  background: #fff;
+  color: #2e7d32;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  margin-bottom: 20px;
+}
+
+.form-header h1 {
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 800;
+  color: #1a1a2e;
+  margin-bottom: 12px;
+}
+
+.form-header p {
+  font-size: 16px;
+  color: #616161;
+}
+
+.form-section {
+  padding: 40px 0 80px;
+  background: #f5f5f5;
+}
+
+.form-section .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ========== STEP PROGRESS ========== */
+.step-progress {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 0 auto 32px;
+  padding: 20px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  max-width: 700px;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.step-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #e0e0e0;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.step.active .step-circle {
+  background: #2e7d32;
+}
+
+.step span {
+  font-size: 12px;
+  font-weight: 600;
+  color: #9e9e9e;
+  text-align: center;
+}
+
+.step.active span {
+  color: #2e7d32;
+}
+
+.step-line {
+  flex: 1;
+  height: 2px;
+  background: #e0e0e0;
+  margin-bottom: 20px;
+}
+
+/* ========== FORM WRAPPER ========== */
+.form-wrapper {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 24px;
+  align-items: start;
+}
+
+.form-main {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 0;
+}
+
+.form-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: sticky;
+  top: 90px;
+}
+
+/* ========== CARD ========== */
+.card {
+  background: #fff;
+  padding: 28px;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  overflow: hidden;
+}
+
+.card h2 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.card h2 i {
+  color: #2e7d32;
+}
+
+/* ========== EMPTY SAMPAH ========== */
+.empty-sampah {
+  text-align: center;
+  padding: 30px 20px;
+  background: #e8f5e9;
+  border-radius: 12px;
+  border: 2px dashed #4caf50;
+}
+
+.empty-sampah i {
+  font-size: 36px;
+  color: #2e7d32;
+  margin-bottom: 12px;
+}
+
+.empty-sampah p {
+  font-size: 14px;
+  color: #616161;
+  margin-bottom: 16px;
+}
+
+/* ========== TABEL SAMPAH ========== */
+.tabel-sampah {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 16px;
+}
+
+.tabel-sampah thead {
+  background: #e8f5e9;
+}
+
+.tabel-sampah th {
+  padding: 12px;
+  text-align: left;
+  font-size: 12px;
+  font-weight: 700;
+  color: #2e7d32;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.tabel-sampah td {
+  padding: 12px;
+  border-bottom: 1px solid #e0e0e0;
+  font-size: 14px;
+  color: #212121;
+}
+
+.tabel-sampah tfoot td {
+  padding-top: 16px;
+  font-size: 15px;
+  color: #2e7d32;
+}
+
+.info-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 12px 16px;
+  background: #fff3e0;
+  border-radius: 8px;
+  font-size: 12px;
+  color: #f57c00;
+  line-height: 1.5;
+}
+
+.info-box i {
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+/* ========== FORM ROW ========== */
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #212121;
+}
+
+.form-group label i {
+  color: #2e7d32;
+  margin-right: 4px;
+  font-size: 13px;
+}
+
+.required {
+  color: #f44336;
+}
+
+.form-control {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 15px;
+  font-family: 'Poppins', sans-serif;
+  color: #212121;
+  background: #fff;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: #2e7d32;
+  box-shadow: 0 0 0 4px rgba(46, 125, 50, 0.1);
+}
+
+.form-control::placeholder {
+  color: #9e9e9e;
+}
+
+select.form-control {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23616161' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 40px;
+}
+
+textarea.form-control {
+  resize: vertical;
+  min-height: 80px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.error-message {
+  display: block;
+  margin-top: 6px;
+  font-size: 13px;
+  color: #f44336;
+  min-height: 18px;
+}
+
+.hint {
+  display: block;
+  margin-top: 6px;
+  font-size: 12px;
+  color: #9e9e9e;
+}
+
+/* ========== FORM ACTIONS ========== */
+.form-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+  padding-top: 8px;
+}
+
+.form-actions .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  font-family: 'Poppins', sans-serif;
+}
+
+.form-actions .btn-primary {
+  background: #2e7d32;
+  color: #fff;
+  border-color: #2e7d32;
+}
+
+.form-actions .btn-primary:hover {
+  background: #1b5e20;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(46, 125, 50, 0.3);
+}
+
+.form-actions .btn-outline {
+  background: transparent;
+  color: #616161;
+  border-color: #e0e0e0;
+}
+
+.form-actions .btn-outline:hover {
+  border-color: #2e7d32;
+  color: #2e7d32;
+}
+
+.form-actions .btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+/* ========== SIDEBAR CARDS ========== */
+.info-card h3,
+.contact-card h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.info-card h3 i,
+.contact-card h3 i {
+  color: #2e7d32;
+}
+
+.tips-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tips-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13px;
+  color: #616161;
+  line-height: 1.5;
+}
+
+.tips-list li i {
+  color: #2e7d32;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.contact-card p {
+  font-size: 13px;
+  color: #9e9e9e;
+  margin-bottom: 16px;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 0;
+  font-size: 13px;
+  color: #616161;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.contact-item:last-child {
+  border-bottom: none;
+}
+
+.contact-item i {
+  color: #2e7d32;
+  width: 20px;
+}
+
+/* ========== TOAST ========== */
+.toast {
+  position: fixed;
+  top: 30px;
+  right: 30px;
+  padding: 16px 24px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 600;
+  z-index: 9999;
+  max-width: 400px;
+  animation: slideIn 0.4s ease;
+}
+
+.toast-success {
+  background: #4caf50;
+  color: #fff;
+}
+
+.toast-error {
+  background: #f44336;
+  color: #fff;
+}
+
+@keyframes slideIn {
+  from { transform: translateX(400px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 992px) {
+  .form-wrapper {
+    grid-template-columns: 1fr;
+  }
+  
+  .form-sidebar {
+    position: static;
+  }
+}
+
+@media (max-width: 768px) {
+  .form-header {
+    padding: 110px 0 40px;
+  }
+  
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  
+  .form-actions {
+    flex-direction: column-reverse;
+  }
+  
+  .form-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .step-progress {
+    padding: 16px 10px;
+  }
+  
+  .step span {
+    font-size: 10px;
+  }
+  
+  .step-circle {
+    width: 32px;
+    height: 32px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 576px) {
+  .form-section .container {
+    padding: 0 16px;
+  }
+  
+  .card {
+    padding: 20px;
+  }
+  
+  .card h2 {
+    font-size: 16px;
+  }
+  
+  .tabel-sampah th,
+  .tabel-sampah td {
+    padding: 10px 8px;
+    font-size: 13px;
+  }
+}

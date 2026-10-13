@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ajukan Penjemputan - Waste2Worth</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/common.css">
+  <link rel="stylesheet" href="../css/form-penjemputan.css">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo">
+        <div class="nav-logo-icon">
+          <i class="fas fa-recycle"></i>
+        </div>
+        <div class="nav-logo-text">Waste<strong>2</strong>Worth</div>
+      </a>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="../index.html" class="nav-link">Beranda</a></li>
+        <li><a href="layanan.html" class="nav-link">Layanan</a></li>
+        <li><a href="kalkulator.html" class="nav-link">Kalkulator</a></li>
+        <li><a href="edukasi.html" class="nav-link">Edukasi</a></li>
+        <li><a href="riwayat.html" class="nav-link">Riwayat</a></li>
+      </ul>
+      <div class="nav-actions" id="navActions">
+        <a href="login.html" class="btn btn-outline">Masuk</a>
+        <a href="register.html" class="btn btn-primary">Daftar</a>
+      </div>
+      <button class="nav-toggle" id="navToggle"><i class="fas fa-bars"></i></button>
+    </div>
+  </nav>
+
+  <!-- HEADER -->
+  <section class="form-header">
+    <div class="container">
+      <div class="header-badge"><i class="fas fa-truck"></i> Ajukan Penjemputan</div>
+      <h1>Jemput Sampahmu Sekarang</h1>
+      <p>Isi detail penjemputan, supir kami akan datang ke lokasimu</p>
+    </div>
+  </section>
+
+  <!-- FORM -->
+  <section class="form-section">
+    <div class="container">
+      
+      <!-- STEP PROGRESS -->
+      <div class="step-progress">
+        <div class="step active">
+          <div class="step-circle">1</div>
+          <span>Pilih Sampah</span>
+        </div>
+        <div class="step-line"></div>
+        <div class="step active">
+          <div class="step-circle">2</div>
+          <span>Alamat & Jadwal</span>
+        </div>
+        <div class="step-line"></div>
+        <div class="step">
+          <div class="step-circle">3</div>
+          <span>Selesai</span>
+        </div>
+      </div>
+
+      <div class="form-wrapper">
+
+        <!-- KOLOM KIRI: FORM -->
+        <div class="form-main">
+          <form id="formPenjemputan" novalidate>
+
+            <!-- RINGKASAN SAMPAH -->
+            <div class="card">
+              <h2><i class="fas fa-box"></i> Ringkasan Sampah</h2>
+              
+              <div id="emptySampah" class="empty-sampah">
+                <i class="fas fa-info-circle"></i>
+                <p>Belum ada sampah dipilih</p>
+                <a href="kalkulator.html" class="btn btn-outline">
+                  <i class="fas fa-plus"></i> Tambah dari Kalkulator
+                </a>
+              </div>
+
+              <div id="daftarSampahBox" style="display:none;">
+                <table class="tabel-sampah">
+                  <thead>
+                    <tr>
+                      <th>Jenis</th>
+                      <th>Berat</th>
+                      <th>Subtotal</th>
+                    </tr>
+                  </thead>
+                  <tbody id="bodySampah"></tbody>
+                  <tfoot>
+                    <tr>
+                      <td colspan="2"><strong>Total Estimasi</strong></td>
+                      <td><strong id="totalEstimasi">Rp 0</strong></td>
+                    </tr>
+                  </tfoot>
+                </table>
+                <div class="info-box">
+                  <i class="fas fa-info-circle"></i>
+                  <span>Nilai akhir ditentukan setelah penimbangan aktual oleh supir</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- DETAIL ALAMAT -->
+            <div class="card">
+              <h2><i class="fas fa-map-marker-alt"></i> Alamat Penjemputan</h2>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="nama"><i class="fas fa-user"></i> Nama Penerima <span class="required">*</span></label>
+                  <input type="text" id="nama" class="form-control" placeholder="Nama lengkap penerima">
+                  <span class="error-message" id="error-nama"></span>
+                </div>
+
+                <div class="form-group">
+                  <label for="telepon"><i class="fas fa-phone"></i> Nomor HP <span class="required">*</span></label>
+                  <input type="tel" id="telepon" class="form-control" placeholder="08xx-xxxx-xxxx">
+                  <span class="error-message" id="error-telepon"></span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="kecamatan"><i class="fas fa-map"></i> Kecamatan <span class="required">*</span></label>
+                <select id="kecamatan" class="form-control">
+                  <option value="">-- Pilih Kecamatan --</option>
+                  <option value="medan-barat">Medan Barat</option>
+                  <option value="medan-timur">Medan Timur</option>
+                  <option value="medan-sunggal">Medan Sunggal</option>
+                  <option value="medan-petisah">Medan Petisah</option>
+                  <option value="medan-kota">Medan Kota</option>
+                  <option value="medan-denai">Medan Denai</option>
+                </select>
+                <span class="error-message" id="error-kecamatan"></span>
+              </div>
+
+              <div class="form-group">
+                <label for="alamat"><i class="fas fa-home"></i> Alamat Lengkap <span class="required">*</span></label>
+                <textarea id="alamat" class="form-control" rows="3" placeholder="Jl. Contoh No. 123, Kelurahan, Kecamatan, Medan"></textarea>
+                <span class="error-message" id="error-alamat"></span>
+                <span class="hint">Sertakan nama jalan, nomor rumah, dan patokan jika ada</span>
+              </div>
+
+              <div class="form-group">
+                <label for="catatan"><i class="fas fa-sticky-note"></i> Catatan Tambahan (opsional)</label>
+                <textarea id="catatan" class="form-control" rows="2" placeholder="Contoh: Sampah ada di depan pagar, hubungi saya saat tiba"></textarea>
+              </div>
+            </div>
+
+            <!-- JADWAL -->
+            <div class="card">
+              <h2><i class="fas fa-calendar-alt"></i> Jadwal Penjemputan</h2>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="tanggal"><i class="fas fa-calendar"></i> Tanggal <span class="required">*</span></label>
+                  <input type="date" id="tanggal" class="form-control">
+                  <span class="error-message" id="error-tanggal"></span>
+                </div>
+
+                <div class="form-group">
+                  <label for="jam"><i class="fas fa-clock"></i> Jam <span class="required">*</span></label>
+                  <select id="jam" class="form-control">
+                    <option value="">-- Pilih Jam --</option>
+                    <option value="08:00-10:00">08.00 - 10.00</option>
+                    <option value="10:00-12:00">10.00 - 12.00</option>
+                    <option value="13:00-15:00">13.00 - 15.00</option>
+                    <option value="15:00-17:00">15.00 - 17.00</option>
+                  </select>
+                  <span class="error-message" id="error-jam"></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- SUBMIT -->
+            <div class="form-actions">
+              <a href="kalkulator.html" class="btn btn-outline">
+                <i class="fas fa-arrow-left"></i> Kembali
+              </a>
+              <button type="submit" class="btn btn-primary btn-lg" id="btnSubmit">
+                <i class="fas fa-paper-plane"></i> Ajukan Penjemputan
+              </button>
+            </div>
+
+          </form>
+        </div>
+
+        <!-- KOLOM KANAN: INFO -->
+        <div class="form-sidebar">
+          <div class="card info-card">
+            <h3><i class="fas fa-lightbulb"></i> Tips Penjemputan</h3>
+            <ul class="tips-list">
+              <li>
+                <i class="fas fa-check-circle"></i>
+                <span>Pastikan sampah sudah dipilah per jenis</span>
+              </li>
+              <li>
+                <i class="fas fa-check-circle"></i>
+                <span>Kemas sampah dalam kantong/karung</span>
+              </li>
+              <li>
+                <i class="fas fa-check-circle"></i>
+                <span>Siapkan sampah di lokasi penjemputan</span>
+              </li>
+              <li>
+                <i class="fas fa-check-circle"></i>
+                <span>Pastikan nomor HP aktif</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="card contact-card">
+            <h3><i class="fas fa-headset"></i> Butuh Bantuan?</h3>
+            <p>Hubungi kami jika ada kendala</p>
+            <div class="contact-item">
+              <i class="fas fa-phone"></i>
+              <span>+62 812-3456-7890</span>
+            </div>
+            <div class="contact-item">
+              <i class="fas fa-envelope"></i>
+              <span>info@waste2worth.id</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>&copy; 2026 Waste2Worth. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/common.js"></script>
+  <script src="../js/form-penjemputan.js"></script>
+</body>
+</html>

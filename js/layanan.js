@@ -6,12 +6,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ========== DATA MITRA ==========
   const mitraBankSampah = [
-    { id: 1, nama: 'Bank Sampah Medan Barat', alamat: 'Jl. Gatot Subroto No. 123, Medan Barat', kecamatan: 'medan-barat', kontak: '0812-3456-7890', jamLayanan: 'Senin-Sabtu, 08.00-17.00', lat: 3.5952, lng: 98.6722 },
-    { id: 2, nama: 'Bank Sampah Medan Timur', alamat: 'Jl. Williem Iskandar No. 45, Medan Timur', kecamatan: 'medan-timur', kontak: '0813-4567-8901', jamLayanan: 'Senin-Jumat, 09.00-16.00', lat: 3.6105, lng: 98.6903 },
-    { id: 3, nama: 'Bank Sampah Medan Sunggal', alamat: 'Jl. Sunggal No. 88, Medan Sunggal', kecamatan: 'medan-sunggal', kontak: '0814-5678-9012', jamLayanan: 'Senin-Sabtu, 08.00-16.00', lat: 3.5822, lng: 98.6421 },
-    { id: 4, nama: 'Bank Sampah Medan Petisah', alamat: 'Jl. Petisah Tengah No. 21, Medan Petisah', kecamatan: 'medan-petisah', kontak: '0815-6789-0123', jamLayanan: 'Senin-Sabtu, 08.30-17.30', lat: 3.5915, lng: 98.6614 },
-    { id: 5, nama: 'Bank Sampah Medan Kota', alamat: 'Jl. Mesjid No. 56, Medan Kota', kecamatan: 'medan-kota', kontak: '0816-7890-1234', jamLayanan: 'Senin-Jumat, 08.00-16.00', lat: 3.5855, lng: 98.6789 },
-    { id: 6, nama: 'Bank Sampah Medan Denai', alamat: 'Jl. Denai No. 100, Medan Denai', kecamatan: 'medan-denai', kontak: '0817-8901-2345', jamLayanan: 'Senin-Sabtu, 08.00-17.00', lat: 3.5789, lng: 98.7012 }
+    { id: 1, nama: 'Bank Sampah Medan Barat', alamat: 'Jl. Gatot Subroto No. 123, Medan Barat', kecamatan: 'medan-barat', kontak: '0812-3456-7890', jamLayanan: 'Senin-Sabtu, 08.00-17.00' },
+    { id: 2, nama: 'Bank Sampah Medan Timur', alamat: 'Jl. Williem Iskandar No. 45, Medan Timur', kecamatan: 'medan-timur', kontak: '0813-4567-8901', jamLayanan: 'Senin-Jumat, 09.00-16.00' },
+    { id: 3, nama: 'Bank Sampah Medan Sunggal', alamat: 'Jl. Sunggal No. 88, Medan Sunggal', kecamatan: 'medan-sunggal', kontak: '0814-5678-9012', jamLayanan: 'Senin-Sabtu, 08.00-16.00' },
+    { id: 4, nama: 'Bank Sampah Medan Petisah', alamat: 'Jl. Petisah Tengah No. 21, Medan Petisah', kecamatan: 'medan-petisah', kontak: '0815-6789-0123', jamLayanan: 'Senin-Sabtu, 08.30-17.30' },
+    { id: 5, nama: 'Bank Sampah Medan Kota', alamat: 'Jl. Mesjid No. 56, Medan Kota', kecamatan: 'medan-kota', kontak: '0816-7890-1234', jamLayanan: 'Senin-Jumat, 08.00-16.00' },
+    { id: 6, nama: 'Bank Sampah Medan Denai', alamat: 'Jl. Denai No. 100, Medan Denai', kecamatan: 'medan-denai', kontak: '0817-8901-2345', jamLayanan: 'Senin-Sabtu, 08.00-17.00' }
   ];
 
   // ========== DATA KATALOG ==========
@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
     { id: 6, nama: 'Buku Catatan dari Kertas Bekas', deskripsi: 'Buku catatan dari kertas daur ulang', harga: 30000, toko: 'UMKM Medan Pintar', icon: 'fa-book', badge: '' }
   ];
 
-  // ========== TAB ==========
+  // ========== TAB SWITCHER ==========
   const tabBtns = document.querySelectorAll('.tab-btn');
   const tabContents = document.querySelectorAll('.tab-content');
 
@@ -37,63 +37,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
       btn.classList.add('active');
       document.getElementById('tab-' + targetTab)?.classList.add('active');
-
-      if (targetTab === 'peta' && window.map) {
-        setTimeout(() => window.map.invalidateSize(), 100);
-      }
     });
   });
 
-  // ========== PETA ==========
-  let map = null;
-  let markers = [];
-
-  function initMap() {
-    const mapEl = document.getElementById('map');
-    if (!mapEl || typeof L === 'undefined') {
-      console.warn('Leaflet tidak ke-load');
-      return;
-    }
-    if (window.map) return;
-
-    map = L.map('map').setView([3.5952, 98.6722], 12);
-    window.map = map;
-
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '© OpenStreetMap contributors',
-      maxZoom: 19
-    }).addTo(map);
-
-    mitraBankSampah.forEach(mitra => {
-      const marker = L.marker([mitra.lat, mitra.lng]).addTo(map);
-
-      const popupContent = 
-        '<div class="popup-title">' + mitra.nama + '</div>' +
-        '<div class="popup-row"><i class="fas fa-map-marker-alt"></i> ' + mitra.alamat + '</div>' +
-        '<div class="popup-row"><i class="fas fa-phone"></i> ' + mitra.kontak + '</div>' +
-        '<div class="popup-row"><i class="fas fa-clock"></i> ' + mitra.jamLayanan + '</div>';
-
-      marker.bindPopup(popupContent);
-      marker.mitraId = mitra.id;
-      markers.push(marker);
-    });
-
-    setTimeout(() => map.invalidateSize(), 300);
-  }
-
   // ========== RENDER LIST ==========
-  function renderPetaList(data = mitraBankSampah) {
+  function renderPetaList(data) {
     const list = document.getElementById('petaList');
     if (!list) return;
 
+    const dataToRender = data || mitraBankSampah;
     list.innerHTML = '';
 
-    if (data.length === 0) {
-      list.innerHTML = '<div style="text-align:center;padding:40px 20px;color:#9e9e9e;"><i class="fas fa-search" style="font-size:36px;margin-bottom:12px;"></i><p>Lokasi tidak ditemukan</p></div>';
+    if (dataToRender.length === 0) {
+      list.innerHTML = 
+        '<div style="text-align:center;padding:40px 20px;color:#9e9e9e;">' +
+          '<i class="fas fa-search" style="font-size:36px;margin-bottom:12px;"></i>' +
+          '<p>Lokasi tidak ditemukan</p>' +
+        '</div>';
       return;
     }
 
-    data.forEach(mitra => {
+    dataToRender.forEach(mitra => {
       const item = document.createElement('div');
       item.className = 'peta-item';
       item.dataset.id = mitra.id;
@@ -106,12 +70,6 @@ document.addEventListener('DOMContentLoaded', () => {
       item.addEventListener('click', () => {
         document.querySelectorAll('.peta-item').forEach(i => i.classList.remove('active'));
         item.classList.add('active');
-
-        if (map) {
-          map.setView([mitra.lat, mitra.lng], 15);
-          const marker = markers.find(m => m.mitraId === mitra.id);
-          if (marker) marker.openPopup();
-        }
       });
 
       list.appendChild(item);
@@ -170,10 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ========== INIT ==========
-  setTimeout(() => {
-    initMap();
-    renderPetaList();
-    renderKatalog();
-  }, 100);
+  renderPetaList();
+  renderKatalog();
 
 });
