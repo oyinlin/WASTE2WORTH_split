@@ -1,5 +1,6 @@
 /* ============================================
-   ADMIN PEMBAYARAN JS
+   ADMIN PEMBAYARAN JS - Final
+   Proses Bayar → Otomatis "Dana Diterima"
    ============================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -20,12 +21,10 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('userName').textContent = currentUser.nama || 'Admin';
   document.getElementById('userAvatar').textContent = (currentUser.nama || 'A').charAt(0).toUpperCase();
 
-  // ========== STATE ==========
   let filterAktif = 'perlu-konfirmasi';
   let trxDipilihBerat = null;
   let trxDipilihBayar = null;
 
-  // ========== HELPER ==========
   function formatRupiah(angka) {
     return 'Rp ' + Number(angka).toLocaleString('id-ID');
   }
@@ -34,11 +33,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!dateStr) return '-';
     const date = new Date(dateStr);
     return date.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
-  }
-
-  function formatKecamatan(kec) {
-    if (!kec) return '-';
-    return kec.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
   }
 
   function getStatusClass(status) {
@@ -66,7 +60,6 @@ document.addEventListener('DOMContentLoaded', () => {
     return 'fa-clock';
   }
 
-  // ========== AMBIL DATA ==========
   function getPengajuan() {
     return JSON.parse(localStorage.getItem('pengajuan') || '[]');
   }
@@ -137,17 +130,15 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       const beratAktual = trx.beratAktual ? trx.beratAktual + ' kg' : '-';
-      const nilaiAkhir = trx.beratAktual 
-        ? (trx.beratAktual * (trx.items?.[0]?.harga || 5000)) 
-        : trx.totalEstimasi;
+      const nilaiAkhir = trx.nilaiAkhir || trx.totalEstimasi || 0;
 
-      // Tombol aksi berdasarkan status
+      // Tombol aksi
       let actionHtml = '';
       if (statusClass === 'diperiksa') {
         actionHtml = '<button class="btn btn-primary btn-sm btn-konfirmasi-berat" data-id="' + trx.id + '">' +
           '<i class="fas fa-weight-hanging"></i> Konfirmasi Berat' +
         '</button>';
-      } else if (statusClass === 'selesai' && !trx.status.toLowerCase().includes('dibayar')) {
+      } else if (statusClass === 'selesai' && !trx.status.toLowerCase().includes('dibayar') && !trx.status.toLowerCase().includes('diterima')) {
         actionHtml = '<button class="btn btn-success btn-sm btn-proses-bayar" data-id="' + trx.id + '">' +
           '<i class="fas fa-money-bill-wave"></i> Proses Pembayaran' +
         '</button>';
@@ -196,7 +187,7 @@ document.addEventListener('DOMContentLoaded', () => {
             '<div class="admin-info-icon"><i class="fas fa-money-bill-wave"></i></div>' +
             '<div class="admin-info-content">' +
               '<span class="label">Nilai</span>' +
-              '<span class="value">' + formatRupiah(nilaiAkhir || 0) + '</span>' +
+              '<span class="value">' + formatRupiah(nilaiAkhir) + '</span>' +
             '</div>' +
           '</div>' +
           '<div class="admin-items">' +
@@ -211,16 +202,8 @@ document.addEventListener('DOMContentLoaded', () => {
           '<div class="admin-actions">' + actionHtml + '</div>' +
         '</div>';
 
-      // Event listeners
-      const btnBerat = card.querySelector('.btn-konfirmasi-berat');
-      if (btnBerat) {
-        btnBerat.addEventListener('click', () => bukaModalBerat(trx.id));
-      }
-
-      const btnBayar = card.querySelector('.btn-proses-bayar');
-      if (btnBayar) {
-        btnBayar.addEventListener('click', () => bukaModalBayar(trx.id));
-      }
+      card.querySelector('.btn-konfirmasi-berat')?.addEventListener('click', () => bukaModalBerat(trx.id));
+      card.querySelector('.btn-proses-bayar')?.addEventListener('click', () => bukaModalBayar(trx.id));
 
       list.appendChild(card);
     });
@@ -284,12 +267,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const index = pengajuan.findIndex(t => t.id === trxDipilihBerat);
     if (index === -1) return;
 
-    // Hitung nilai akhir berdasarkan berat aktual
     let nilaiAkhir = 0;
-    if (pengajuan[index].items) {
+    if (pengajuan[index].items && pengajuan[index].items.length > 0) {
+      const totalBeratEstimasi = pengajuan[index].items.reduce((s, i) => s + i.berat, 0);
       pengajuan[index].items.forEach(item => {
-        // Proporsi berat aktual dibagi rata
-        const proporsi = item.berat / pengajuan[index].items.reduce((s, i) => s + i.berat, 0);
+        const proporsi = item.berat / totalBeratEstimasi;
         nilaiAkhir += (berat * proporsi) * item.harga;
       });
     }
@@ -365,6 +347,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const index = pengajuan.findIndex(t => t.id === trxDipilihBayar);
     if (index === -1) return;
 
+    const trxId = trxDipilihBayar;
+
+    // Update status jadi "Dibayar"
     pengajuan[index].status = 'Dibayar';
     pengajuan[index].tanggalDibayar = new Date().toISOString();
     pengajuan[index].metodePembayaran = metode;
@@ -381,11 +366,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
     localStorage.setItem('pengajuan', JSON.stringify(pengajuan));
 
+    // ⭐ OTOMATIS: Setelah 800ms, ubah jadi "Dana Diterima"
+    // Biar saldo pelanggan langsung bertambah
+    setTimeout(() => {
+      const updatedPengajuan = JSON.parse(localStorage.getItem('pengajuan') || '[]');
+      const idx2 = updatedPengajuan.findIndex(t => t.id === trxId);
+      if (idx2 !== -1) {
+        updatedPengajuan[idx2].status = 'Dana Diterima';
+        updatedPengajuan[idx2].tanggalDiterima = new Date().toISOString();
+        
+        if (!updatedPengajuan[idx2].riwayatStatus) updatedPengajuan[idx2].riwayatStatus = [];
+        updatedPengajuan[idx2].riwayatStatus.push({
+          status: 'Dana Diterima',
+          waktu: new Date().toISOString(),
+          oleh: 'Sistem',
+          keterangan: 'Dana otomatis masuk ke saldo pelanggan'
+        });
+        
+        localStorage.setItem('pengajuan', JSON.stringify(updatedPengajuan));
+      }
+    }, 800);
+
     tutupModalBayar();
     hitungStatistik();
     renderList();
 
-    alert('Pembayaran berhasil diproses! Pelanggan akan diminta konfirmasi dana diterima.');
+    alert('Pembayaran berhasil diproses!\n\nDana otomatis masuk ke saldo pelanggan.\nPelanggan bisa tarik dana kapan saja.');
   });
 
   // ========== FILTER ==========
@@ -417,7 +423,6 @@ document.addEventListener('DOMContentLoaded', () => {
   sidebarClose?.addEventListener('click', closeSidebar);
   sidebarOverlay?.addEventListener('click', closeSidebar);
 
-  // ========== INIT ==========
   hitungStatistik();
   renderList();
 
