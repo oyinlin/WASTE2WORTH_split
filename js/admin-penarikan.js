@@ -1,5 +1,6 @@
 /* ============================================
-   ADMIN PENARIKAN JS
+   ADMIN PENARIKAN JS - Final
+   Auto Refresh + Approve/Tolak/Selesai
    ============================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -29,27 +30,41 @@ document.addEventListener('DOMContentLoaded', () => {
   function formatTanggal(dateStr) {
     if (!dateStr) return '-';
     const date = new Date(dateStr);
-    return date.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+    return date.toLocaleDateString('id-ID', { 
+      day: 'numeric', 
+      month: 'short', 
+      year: 'numeric', 
+      hour: '2-digit', 
+      minute: '2-digit' 
+    });
   }
 
   function getPenarikan() {
     return JSON.parse(localStorage.getItem('penarikan') || '[]');
   }
 
+  // ========== HITUNG STATISTIK ==========
   function hitungStatistik() {
     const penarikan = getPenarikan();
     const menunggu = penarikan.filter(p => p.status === 'Menunggu').length;
     const diproses = penarikan.filter(p => p.status === 'Diproses').length;
     const selesai = penarikan.filter(p => p.status === 'Selesai').length;
+    const gagal = penarikan.filter(p => p.status === 'Gagal').length;
 
     document.getElementById('statMenunggu').textContent = menunggu;
     document.getElementById('statDiproses').textContent = diproses;
     document.getElementById('statSelesai').textContent = selesai;
+    
+    // Kalau ada elemen statGagal, update juga
+    const statGagalEl = document.getElementById('statGagal');
+    if (statGagalEl) statGagalEl.textContent = gagal;
   }
 
+  // ========== RENDER LIST ==========
   function renderList() {
     const list = document.getElementById('penarikanList');
     const empty = document.getElementById('emptyState');
+    if (!list) return;
 
     let filtered = getPenarikan();
     if (filterAktif !== 'all') {
@@ -72,6 +87,40 @@ document.addEventListener('DOMContentLoaded', () => {
       const isBank = p.metode === 'Bank';
       const statusClass = p.status.toLowerCase();
 
+      // Tentukan kelas badge
+      let badgeClass = 'menunggu';
+      let badgeIcon = 'clock';
+      if (p.status === 'Diproses') { badgeClass = 'ditugaskan'; badgeIcon = 'spinner'; }
+      else if (p.status === 'Selesai') { badgeClass = 'selesai'; badgeIcon = 'check-circle'; }
+      else if (p.status === 'Gagal') { badgeClass = 'gagal'; badgeIcon = 'times-circle'; }
+
+      // Tombol aksi berdasarkan status
+      let actionHtml = '';
+      if (p.status === 'Menunggu') {
+        actionHtml = 
+          '<button class="btn btn-primary btn-sm btn-approve" data-id="' + p.id + '">' +
+            '<i class="fas fa-check"></i> Approve' +
+          '</button>' +
+          '<button class="btn btn-outline btn-sm btn-reject" data-id="' + p.id + '" style="border-color:#f44336;color:#f44336;">' +
+            '<i class="fas fa-times"></i> Tolak' +
+          '</button>';
+      } else if (p.status === 'Diproses') {
+        actionHtml = 
+          '<button class="btn btn-success btn-sm btn-selesai" data-id="' + p.id + '" style="background:#4caf50;color:#fff;border:none;padding:8px 16px;border-radius:8px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:6px;">' +
+            '<i class="fas fa-check-circle"></i> Tandai Selesai' +
+          '</button>';
+      } else if (p.status === 'Selesai') {
+        actionHtml = 
+          '<span style="font-size:13px;color:#2e7d32;font-weight:600;">' +
+            '<i class="fas fa-check-circle"></i> Sudah Selesai' +
+          '</span>';
+      } else if (p.status === 'Gagal') {
+        actionHtml = 
+          '<span style="font-size:13px;color:#f44336;font-weight:600;">' +
+            '<i class="fas fa-times-circle"></i> Ditolak' +
+          '</span>';
+      }
+
       const card = document.createElement('div');
       card.className = 'admin-card';
       card.innerHTML = 
@@ -82,8 +131,8 @@ document.addEventListener('DOMContentLoaded', () => {
               '<i class="fas fa-calendar"></i> ' + formatTanggal(p.tanggal) +
             '</span>' +
           '</div>' +
-          '<span class="status-badge status-' + (statusClass === 'menunggu' ? 'menunggu' : statusClass === 'diproses' ? 'ditugaskan' : 'selesai') + '">' +
-            '<i class="fas fa-' + (p.status === 'Selesai' ? 'check-circle' : p.status === 'Diproses' ? 'spinner' : 'clock') + '"></i> ' + p.status +
+          '<span class="status-badge status-' + badgeClass + '">' +
+            '<i class="fas fa-' + badgeIcon + (p.status === 'Diproses' ? ' fa-spin' : '') + '"></i> ' + p.status +
           '</span>' +
         '</div>' +
         '<div class="admin-body">' +
@@ -120,22 +169,12 @@ document.addEventListener('DOMContentLoaded', () => {
         '</div>' +
         '<div class="admin-footer">' +
           '<div class="admin-total">' +
-            'Diajukan: <strong>' + formatTanggal(p.tanggal) + '</strong>' +
+            (p.status === 'Gagal' && p.alasanGagal 
+              ? '<span style="color:#f44336;"><i class="fas fa-info-circle"></i> Alasan: ' + p.alasanGagal + '</span>'
+              : 'Diajukan: <strong>' + formatTanggal(p.tanggal) + '</strong>'
+            ) +
           '</div>' +
-          '<div class="admin-actions">' +
-            (p.status === 'Menunggu' ? 
-              '<button class="btn btn-primary btn-sm btn-approve" data-id="' + p.id + '">' +
-                '<i class="fas fa-check"></i> Approve' +
-              '</button>' +
-              '<button class="btn btn-outline btn-sm btn-reject" data-id="' + p.id + '" style="border-color:#f44336;color:#f44336;">' +
-                '<i class="fas fa-times"></i> Tolak' +
-              '</button>'
-            : p.status === 'Diproses' ?
-              '<button class="btn btn-success btn-sm btn-selesai" data-id="' + p.id + '" style="background:#4caf50;color:#fff;border:none;padding:8px 16px;border-radius:8px;font-weight:600;cursor:pointer;">' +
-                '<i class="fas fa-check-circle"></i> Tandai Selesai' +
-              '</button>'
-            : '<span style="font-size:13px;color:#2e7d32;font-weight:600;"><i class="fas fa-check-circle"></i> Sudah Selesai</span>')
-          '</div>' +
+          '<div class="admin-actions">' + actionHtml + '</div>' +
         '</div>';
 
       card.querySelector('.btn-approve')?.addEventListener('click', () => approvePenarikan(p.id));
@@ -146,48 +185,87 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // ========== APPROVE ==========
   function approvePenarikan(id) {
-    if (!confirm('Approve pengajuan penarikan ini?')) return;
+    if (!confirm('Approve pengajuan penarikan ini?\n\nSetelah approve, kamu perlu transfer dana ke pelanggan, lalu klik "Tandai Selesai".')) return;
+    
     const penarikan = getPenarikan();
     const idx = penarikan.findIndex(p => p.id === id);
     if (idx === -1) return;
+    
     penarikan[idx].status = 'Diproses';
     penarikan[idx].tanggalDiproses = new Date().toISOString();
     penarikan[idx].diprosesOleh = currentUser.nama;
+    
     localStorage.setItem('penarikan', JSON.stringify(penarikan));
-    alert('Penarikan di-approve! Status: Diproses');
+    
+    showToast('Penarikan di-approve! Status: Diproses', 'success');
+    
     hitungStatistik();
     renderList();
   }
 
+  // ========== TOLAK ==========
   function rejectPenarikan(id) {
     const reason = prompt('Alasan penolakan:');
     if (reason === null) return;
+    if (!reason.trim()) {
+      alert('Alasan penolakan harus diisi!');
+      return;
+    }
+
     const penarikan = getPenarikan();
     const idx = penarikan.findIndex(p => p.id === id);
     if (idx === -1) return;
+    
     penarikan[idx].status = 'Gagal';
-    penarikan[idx].alasanGagal = reason || 'Ditolak admin';
+    penarikan[idx].alasanGagal = reason;
     penarikan[idx].tanggalGagal = new Date().toISOString();
+    penarikan[idx].ditolakOleh = currentUser.nama;
+    
     localStorage.setItem('penarikan', JSON.stringify(penarikan));
-    alert('Penarikan ditolak!');
+    
+    showToast('Penarikan ditolak: ' + reason, 'info');
+    
     hitungStatistik();
     renderList();
   }
 
+  // ========== SELESAI ==========
   function selesaiPenarikan(id) {
-    if (!confirm('Tandai penarikan ini sebagai selesai?')) return;
+    if (!confirm('Tandai penarikan ini sebagai selesai?\n\nPastikan dana sudah kamu transfer ke pelanggan.')) return;
+    
     const penarikan = getPenarikan();
     const idx = penarikan.findIndex(p => p.id === id);
     if (idx === -1) return;
+    
     penarikan[idx].status = 'Selesai';
     penarikan[idx].tanggalSelesai = new Date().toISOString();
+    penarikan[idx].diselesaikanOleh = currentUser.nama;
+    
     localStorage.setItem('penarikan', JSON.stringify(penarikan));
-    alert('Penarikan selesai! Dana sudah dikirim ke pelanggan.');
+    
+    showToast('Penarikan selesai! Dana sudah dikirim ke pelanggan.', 'success');
+    
     hitungStatistik();
     renderList();
   }
 
+  // ========== TOAST ==========
+  function showToast(message, type) {
+    const toast = document.createElement('div');
+    toast.className = 'toast toast-' + type;
+    toast.style.cssText = 'position:fixed;top:30px;right:30px;background:' + 
+      (type === 'success' ? '#4caf50' : type === 'error' ? '#f44336' : '#2196f3') + 
+      ';color:#fff;padding:16px 24px;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,0.2);display:flex;align-items:center;gap:12px;font-weight:600;z-index:9999;max-width:400px;';
+    toast.innerHTML = '<i class="fas fa-' + 
+      (type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle') + 
+      '"></i><span>' + message + '</span>';
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), 3500);
+  }
+
+  // ========== FILTER ==========
   document.querySelectorAll('.filter-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
@@ -197,6 +275,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // ========== SIDEBAR ==========
   const sidebar = document.getElementById('sidebar');
   const sidebarOverlay = document.getElementById('sidebarOverlay');
   const topbarToggle = document.getElementById('topbarToggle');
@@ -215,8 +294,21 @@ document.addEventListener('DOMContentLoaded', () => {
   sidebarClose?.addEventListener('click', closeSidebar);
   sidebarOverlay?.addEventListener('click', closeSidebar);
 
+  // ========== INIT ==========
   hitungStatistik();
   renderList();
+
+  // ⭐ AUTO REFRESH tiap 5 detik (biar kalau ada pengajuan baru dari pelanggan, langsung muncul)
+  setInterval(() => {
+    hitungStatistik();
+    renderList();
+  }, 5000);
+
+  // Refresh saat window dapat fokus
+  window.addEventListener('focus', () => {
+    hitungStatistik();
+    renderList();
+  });
 
 });
 

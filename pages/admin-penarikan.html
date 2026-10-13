@@ -71,6 +71,7 @@
       </div>
     </header>
 
+    <!-- STATISTIK -->
     <section class="stats-grid" style="margin-bottom:24px;">
       <div class="stat-card">
         <div class="stat-icon icon-orange"><i class="fas fa-clock"></i></div>
@@ -93,8 +94,16 @@
           <h3 class="stat-value" id="statSelesai">0</h3>
         </div>
       </div>
+      <div class="stat-card">
+        <div class="stat-icon" style="background:#ffebee;color:#f44336;"><i class="fas fa-times-circle"></i></div>
+        <div class="stat-info">
+          <span class="stat-label">Ditolak</span>
+          <h3 class="stat-value" id="statGagal">0</h3>
+        </div>
+      </div>
     </section>
 
+    <!-- FILTER -->
     <div class="filter-bar">
       <div class="filter-label">
         <i class="fas fa-filter"></i><span>Filter:</span>
@@ -103,10 +112,12 @@
         <button class="filter-btn active" data-filter="menunggu">Menunggu</button>
         <button class="filter-btn" data-filter="diproses">Diproses</button>
         <button class="filter-btn" data-filter="selesai">Selesai</button>
+        <button class="filter-btn" data-filter="gagal">Ditolak</button>
         <button class="filter-btn" data-filter="all">Semua</button>
       </div>
     </div>
 
+    <!-- LIST -->
     <section>
       <div id="emptyState" class="empty-state">
         <i class="fas fa-inbox"></i>
