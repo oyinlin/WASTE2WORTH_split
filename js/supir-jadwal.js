@@ -1,5 +1,6 @@
 /* ============================================
-   SUPIR JADWAL JS
+   SUPIR JADWAL JS - Final Version
+   Data Fresh + Sinkronisasi ke Admin & Pelanggan
    ============================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -21,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('userName').textContent = userName;
   document.getElementById('userAvatar').textContent = userName.charAt(0).toUpperCase();
 
-  // Tanggal
+  // Tanggal hari ini
   const hari = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
   const bulan = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 
                  'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
@@ -29,36 +30,46 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('tanggalHariIni').textContent = 
     hari[now.getDay()] + ', ' + now.getDate() + ' ' + bulan[now.getMonth()] + ' ' + now.getFullYear();
 
-  // ========== AMBIL DATA ==========
-  const semuaPengajuan = JSON.parse(localStorage.getItem('pengajuan') || '[]');
-  
-  // Tugas untuk supir ini (yang di-assign ke dia)
-  const tugasSupir = semuaPengajuan
-    .filter(t => t.supirId === currentUser.id || t.supirNama === currentUser.nama)
-    .sort((a, b) => new Date(b.tanggal) - new Date(a.tanggal));
-
-  // ========== STATISTIK ==========
-  const total = tugasSupir.length;
-  const proses = tugasSupir.filter(t => {
-    const s = (t.status || '').toLowerCase();
-    return s.includes('tugas') || s.includes('dijemput') || s.includes('diperiksa');
-  }).length;
-  const selesai = tugasSupir.filter(t => {
-    const s = (t.status || '').toLowerCase();
-    return s.includes('selesai') || s.includes('dibayar') || s.includes('diterima');
-  }).length;
-
-  document.getElementById('statTotal').textContent = total;
-  document.getElementById('statProses').textContent = proses;
-  document.getElementById('statSelesai').textContent = selesai;
-
   // ========== FILTER ==========
   let filterAktif = 'all';
 
+  // ========== AMBIL DATA FRESH ==========
+  function getTugasSupir() {
+    const semuaPengajuan = JSON.parse(localStorage.getItem('pengajuan') || '[]');
+    return semuaPengajuan
+      .filter(t => t.supirId === currentUser.id || t.supirNama === currentUser.nama)
+      .sort((a, b) => new Date(b.tanggal) - new Date(a.tanggal));
+  }
+
+  // ========== UPDATE STATISTIK ==========
+  function updateStatistik(tugasSupir) {
+    const total = tugasSupir.length;
+    const proses = tugasSupir.filter(t => {
+      const s = (t.status || '').toLowerCase();
+      return s.includes('tugas') || s.includes('dijemput') || s.includes('diperiksa');
+    }).length;
+    const selesai = tugasSupir.filter(t => {
+      const s = (t.status || '').toLowerCase();
+      return s.includes('selesai') || s.includes('dibayar') || s.includes('diterima');
+    }).length;
+
+    document.getElementById('statTotal').textContent = total;
+    document.getElementById('statProses').textContent = proses;
+    document.getElementById('statSelesai').textContent = selesai;
+  }
+
+  // ========== RENDER ==========
   function renderJadwal() {
     const list = document.getElementById('jadwalList');
     const empty = document.getElementById('emptyJadwal');
 
+    // Ambil data FRESH setiap kali render
+    const tugasSupir = getTugasSupir();
+
+    // Update statistik
+    updateStatistik(tugasSupir);
+
+    // Filter
     let filtered = tugasSupir;
     if (filterAktif !== 'all') {
       filtered = tugasSupir.filter(t => {
@@ -66,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (filterAktif === 'ditugaskan') return s.includes('tugas');
         if (filterAktif === 'dijemput') return s.includes('dijemput');
         if (filterAktif === 'diperiksa') return s.includes('diperiksa');
-        if (filterAktif === 'selesai') return s.includes('selesai') || s.includes('dibayar');
+        if (filterAktif === 'selesai') return s.includes('selesai') || s.includes('dibayar') || s.includes('diterima');
         return true;
       });
     }
@@ -85,6 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const statusClass = getStatusClass(trx.status);
       const statusIcon = getStatusIcon(trx.status);
 
+      // Items sampah
       let itemsHtml = '';
       let totalBerat = 0;
       if (trx.items && Array.isArray(trx.items)) {
@@ -93,6 +105,12 @@ document.addEventListener('DOMContentLoaded', () => {
           itemsHtml += '<span class="jadwal-item-chip"><i class="fas fa-circle"></i> ' + 
             item.nama + ' ' + item.berat + ' kg</span>';
         });
+      }
+
+      // Info berat aktual (kalau sudah ada)
+      let beratInfo = '';
+      if (trx.beratAktual) {
+        beratInfo = ' — Aktual: ' + trx.beratAktual + ' kg';
       }
 
       const card = document.createElement('div');
@@ -135,7 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
             '</div>' +
           '</div>' +
           '<div class="jadwal-items">' +
-            '<h4>Jenis Sampah (' + totalBerat.toFixed(1) + ' kg)</h4>' +
+            '<h4>Jenis Sampah (' + totalBerat.toFixed(1) + ' kg' + beratInfo + ')</h4>' +
             '<div class="jadwal-items-list">' + itemsHtml + '</div>' +
           '</div>' +
         '</div>' +
@@ -158,6 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // ========== FILTER BUTTONS ==========
   document.querySelectorAll('.filter-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
@@ -167,7 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Sidebar toggle
+  // ========== SIDEBAR TOGGLE ==========
   const sidebar = document.getElementById('sidebar');
   const sidebarOverlay = document.getElementById('sidebarOverlay');
   const topbarToggle = document.getElementById('topbarToggle');
@@ -209,7 +228,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (s.includes('tugas')) return 'ditugaskan';
     if (s.includes('dijemput')) return 'dijemput';
     if (s.includes('diperiksa')) return 'diperiksa';
-    if (s.includes('selesai') || s.includes('dibayar')) return 'selesai';
+    if (s.includes('selesai') || s.includes('dibayar') || s.includes('diterima')) return 'selesai';
     return 'menunggu';
   }
 
@@ -220,11 +239,19 @@ document.addEventListener('DOMContentLoaded', () => {
     if (s.includes('tugas')) return 'fa-user-check';
     if (s.includes('dijemput')) return 'fa-truck';
     if (s.includes('diperiksa')) return 'fa-weight-hanging';
+    if (s.includes('dibayar')) return 'fa-money-bill-wave';
+    if (s.includes('diterima')) return 'fa-hand-holding-usd';
     if (s.includes('selesai')) return 'fa-check-circle';
     return 'fa-clock';
   }
 
+  // ========== INIT ==========
   renderJadwal();
+
+  // ========== AUTO REFRESH tiap 5 detik (opsional, biar data selalu fresh) ==========
+  setInterval(() => {
+    renderJadwal();
+  }, 5000);
 
 });
 

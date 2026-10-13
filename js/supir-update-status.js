@@ -4,7 +4,6 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  // ========== CEK LOGIN ==========
   const currentUser = Auth.getUser();
   
   if (!currentUser) {
@@ -18,11 +17,9 @@ document.addEventListener('DOMContentLoaded', () => {
     return;
   }
 
-  // ========== TAMPILKAN USER ==========
   document.getElementById('userName').textContent = currentUser.nama || 'Supir';
   document.getElementById('userAvatar').textContent = (currentUser.nama || 'S').charAt(0).toUpperCase();
 
-  // ========== AMBIL ID DARI URL ==========
   const urlParams = new URLSearchParams(window.location.search);
   const trxId = urlParams.get('id');
 
@@ -31,7 +28,6 @@ document.addEventListener('DOMContentLoaded', () => {
     return;
   }
 
-  // ========== CARI TRANSAKSI ==========
   const semuaPengajuan = JSON.parse(localStorage.getItem('pengajuan') || '[]');
   const trxIndex = semuaPengajuan.findIndex(t => t.id === trxId);
 
@@ -43,7 +39,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const transaksi = semuaPengajuan[trxIndex];
   let selectedStatus = transaksi.status || 'Ditugaskan';
 
-  // ========== TAMPILKAN FORM ==========
   document.getElementById('formUpdate').style.display = 'block';
 
   // Info transaksi
@@ -58,7 +53,6 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('infoEstimasiBerat').textContent = estimasiBerat.toFixed(1) + ' kg';
   document.getElementById('infoStatusSaat').textContent = transaksi.status || '-';
 
-  // ========== MARK STATUS AKTIF ==========
   function markActive() {
     document.querySelectorAll('.status-step').forEach(step => {
       step.classList.remove('selected');
@@ -67,11 +61,9 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // Tampilkan input berat kalau pilih "Sedang Diperiksa" atau "Selesai"
     const beratBox = document.getElementById('beratBox');
     if (selectedStatus === 'Sedang Diperiksa' || selectedStatus === 'Selesai') {
       beratBox.classList.add('show');
-      // Prefill berat kalau sudah ada
       if (transaksi.beratAktual) {
         document.getElementById('beratAktual').value = transaksi.beratAktual;
       }
@@ -82,7 +74,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   markActive();
 
-  // ========== KLIK STATUS ==========
   document.querySelectorAll('.status-step').forEach(step => {
     step.addEventListener('click', () => {
       selectedStatus = step.dataset.status;
@@ -90,11 +81,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // ========== SIMPAN ==========
   document.getElementById('btnSimpan').addEventListener('click', () => {
+    let beratAktual = null;
+
     // Validasi berat kalau status "Sedang Diperiksa" atau "Selesai"
     if (selectedStatus === 'Sedang Diperiksa' || selectedStatus === 'Selesai') {
-      const beratAktual = parseFloat(document.getElementById('beratAktual').value);
+      beratAktual = parseFloat(document.getElementById('beratAktual').value);
       
       if (!beratAktual || beratAktual <= 0 || isNaN(beratAktual)) {
         document.getElementById('error-berat').textContent = 'Berat aktual wajib diisi (angka > 0)';
@@ -106,8 +98,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       
       document.getElementById('error-berat').textContent = '';
-      
-      // Simpan berat aktual
       semuaPengajuan[trxIndex].beratAktual = beratAktual;
     }
 
@@ -115,6 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
     semuaPengajuan[trxIndex].status = selectedStatus;
     semuaPengajuan[trxIndex].supirId = currentUser.id;
     semuaPengajuan[trxIndex].supirNama = currentUser.nama;
+    semuaPengajuan[trxIndex].supirTelepon = currentUser.telepon;
     semuaPengajuan[trxIndex].tanggalUpdate = new Date().toISOString();
 
     // Simpan catatan
@@ -123,17 +114,27 @@ document.addEventListener('DOMContentLoaded', () => {
       semuaPengajuan[trxIndex].catatanSupir = catatan;
     }
 
-    // Update waktu
+    // Update waktu tiap status
+    if (selectedStatus === 'Dijemput') {
+      semuaPengajuan[trxIndex].tanggalDijemput = new Date().toISOString();
+    } else if (selectedStatus === 'Sedang Diperiksa') {
+      semuaPengajuan[trxIndex].tanggalDiperiksa = new Date().toISOString();
+    } else if (selectedStatus === 'Selesai') {
+      semuaPengajuan[trxIndex].tanggalSelesai = new Date().toISOString();
+    }
+
+    // Riwayat status (log lengkap)
     if (!semuaPengajuan[trxIndex].riwayatStatus) {
       semuaPengajuan[trxIndex].riwayatStatus = [];
     }
     semuaPengajuan[trxIndex].riwayatStatus.push({
       status: selectedStatus,
       waktu: new Date().toISOString(),
-      oleh: currentUser.nama
+      oleh: currentUser.nama,
+      keterangan: beratAktual ? 'Berat: ' + beratAktual + ' kg' : ''
     });
 
-    // Simpan ke localStorage
+    // Simpan
     localStorage.setItem('pengajuan', JSON.stringify(semuaPengajuan));
 
     // Tampilkan sukses
