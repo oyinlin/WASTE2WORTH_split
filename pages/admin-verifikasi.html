@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verifikasi Transaksi - Waste2Worth</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/common.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body class="dashboard-body">
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <a href="../index.html" class="sidebar-logo">
+        <div class="nav-logo-icon"><i class="fas fa-recycle"></i></div>
+        <div class="nav-logo-text">Waste<strong>2</strong>Worth</div>
+      </a>
+      <button class="sidebar-close" id="sidebarClose"><i class="fas fa-times"></i></button>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a href="dashboard-admin.html" class="sidebar-link">
+        <i class="fas fa-home"></i><span>Dashboard</span>
+      </a>
+      <a href="admin-verifikasi.html" class="sidebar-link active">
+        <i class="fas fa-clipboard-check"></i><span>Verifikasi Transaksi</span>
+      </a>
+      <a href="admin-pembayaran.html" class="sidebar-link">
+        <i class="fas fa-money-bill-wave"></i><span>Konfirmasi Pembayaran</span>
+      </a>
+      <a href="admin-harga.html" class="sidebar-link">
+        <i class="fas fa-tags"></i><span>Kelola Harga</span>
+      </a>
+      <a href="admin-mitra.html" class="sidebar-link">
+        <i class="fas fa-handshake"></i><span>Kelola Mitra</span>
+      </a>
+      <a href="admin-konten.html" class="sidebar-link">
+        <i class="fas fa-file-alt"></i><span>Kelola Konten</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button class="sidebar-link logout-btn" onclick="logoutUser()">
+        <i class="fas fa-sign-out-alt"></i><span>Keluar</span>
+      </button>
+    </div>
+  </aside>
+
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <main class="main-content">
+    <header class="topbar">
+      <button class="topbar-toggle" id="topbarToggle"><i class="fas fa-bars"></i></button>
+      <div class="topbar-title">
+        <h1>Verifikasi Transaksi</h1>
+        <p>Verifikasi pengajuan & tugaskan supir</p>
+      </div>
+      <div class="topbar-user">
+        <div class="user-info">
+          <span class="user-name" id="userName">Admin</span>
+          <span class="user-role">Admin</span>
+        </div>
+        <div class="user-avatar" id="userAvatar">A</div>
+      </div>
+    </header>
+
+    <section class="stats-grid" style="margin-bottom:24px;">
+      <div class="stat-card">
+        <div class="stat-icon icon-orange"><i class="fas fa-clock"></i></div>
+        <div class="stat-info">
+          <span class="stat-label">Menunggu Verifikasi</span>
+          <h3 class="stat-value" id="statMenunggu">0</h3>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon icon-blue"><i class="fas fa-user-check"></i></div>
+        <div class="stat-info">
+          <span class="stat-label">Sudah Ditugaskan</span>
+          <h3 class="stat-value" id="statDitugaskan">0</h3>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon icon-purple"><i class="fas fa-list"></i></div>
+        <div class="stat-info">
+          <span class="stat-label">Total Pengajuan</span>
+          <h3 class="stat-value" id="statTotal">0</h3>
+        </div>
+      </div>
+    </section>
+
+    <div class="filter-bar">
+      <div class="filter-label">
+        <i class="fas fa-filter"></i><span>Filter:</span>
+      </div>
+      <div class="filter-buttons">
+        <button class="filter-btn active" data-filter="menunggu">Menunggu Verifikasi</button>
+        <button class="filter-btn" data-filter="ditugaskan">Sudah Ditugaskan</button>
+        <button class="filter-btn" data-filter="all">Semua</button>
+      </div>
+    </div>
+
+    <section>
+      <div id="emptyState" class="empty-state">
+        <i class="fas fa-inbox"></i>
+        <h3>Tidak Ada Data</h3>
+        <p>Tidak ada transaksi yang perlu diverifikasi saat ini.</p>
+      </div>
+      <div id="verifikasiList" class="admin-list"></div>
+    </section>
+  </main>
+
+  <div class="modal-overlay" id="modalTugaskan">
+    <div class="modal">
+      <div class="modal-header">
+        <h3><i class="fas fa-user-check"></i> Tugaskan Supir</h3>
+        <button class="modal-close" id="modalClose"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size:14px;color:#616161;margin-bottom:16px;">
+          Pilih supir yang akan menjemput sampah dari pelanggan:
+        </p>
+        <div class="form-group">
+          <label>Pilih Supir</label>
+          <select id="selectSupir">
+            <option value="">-- Pilih Supir --</option>
+          </select>
+          <span class="error-message" id="error-supir"></span>
+        </div>
+        <div class="form-group">
+          <label>Catatan untuk Supir (opsional)</label>
+          <textarea id="catatanAdmin" rows="2" placeholder="Contoh: Sampah ada di depan pagar"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" id="btnBatalModal">Batal</button>
+        <button class="btn btn-primary" id="btnTugaskan">
+          <i class="fas fa-check"></i> Tugaskan
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/common.js"></script>
+  <script src="../js/admin-verifikasi.js"></script>
+</body>
+</html>

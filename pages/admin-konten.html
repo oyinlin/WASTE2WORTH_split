@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kelola Konten - Waste2Worth</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/common.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body class="dashboard-body">
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <a href="../index.html" class="sidebar-logo">
+        <div class="nav-logo-icon"><i class="fas fa-recycle"></i></div>
+        <div class="nav-logo-text">Waste<strong>2</strong>Worth</div>
+      </a>
+      <button class="sidebar-close" id="sidebarClose"><i class="fas fa-times"></i></button>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a href="dashboard-admin.html" class="sidebar-link">
+        <i class="fas fa-home"></i><span>Dashboard</span>
+      </a>
+      <a href="admin-verifikasi.html" class="sidebar-link">
+        <i class="fas fa-clipboard-check"></i><span>Verifikasi Transaksi</span>
+      </a>
+      <a href="admin-pembayaran.html" class="sidebar-link">
+        <i class="fas fa-money-bill-wave"></i><span>Konfirmasi Pembayaran</span>
+      </a>
+      <a href="admin-harga.html" class="sidebar-link">
+        <i class="fas fa-tags"></i><span>Kelola Harga</span>
+      </a>
+      <a href="admin-mitra.html" class="sidebar-link">
+        <i class="fas fa-handshake"></i><span>Kelola Mitra</span>
+      </a>
+      <a href="admin-konten.html" class="sidebar-link active">
+        <i class="fas fa-file-alt"></i><span>Kelola Konten</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button class="sidebar-link logout-btn" onclick="logoutUser()">
+        <i class="fas fa-sign-out-alt"></i><span>Keluar</span>
+      </button>
+    </div>
+  </aside>
+
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <main class="main-content">
+    <header class="topbar">
+      <button class="topbar-toggle" id="topbarToggle"><i class="fas fa-bars"></i></button>
+      <div class="topbar-title">
+        <h1>Kelola Konten</h1>
+        <p>Kelola katalog produk, berita, dan artikel edukasi</p>
+      </div>
+      <div class="topbar-user">
+        <div class="user-info">
+          <span class="user-name" id="userName">Admin</span>
+          <span class="user-role">Admin</span>
+        </div>
+        <div class="user-avatar" id="userAvatar">A</div>
+      </div>
+    </header>
+
+    <div class="tab-nav-konten">
+      <button class="tab-btn-konten active" data-tab="katalog">
+        <i class="fas fa-shopping-bag"></i> Katalog
+      </button>
+      <button class="tab-btn-konten" data-tab="berita">
+        <i class="fas fa-newspaper"></i> Berita
+      </button>
+      <button class="tab-btn-konten" data-tab="edukasi">
+        <i class="fas fa-book-open"></i> Edukasi
+      </button>
+    </div>
+
+    <!-- TAB KATALOG -->
+    <div class="tab-konten active" id="tab-katalog">
+      <div class="action-bar">
+        <div class="search-box">
+          <i class="fas fa-search"></i>
+          <input type="text" id="searchKatalog" placeholder="Cari produk...">
+        </div>
+        <button class="btn btn-primary" data-tambah="katalog">
+          <i class="fas fa-plus"></i> Tambah Produk
+        </button>
+      </div>
+      <div class="card" style="padding:0;overflow:hidden;">
+        <div class="table-wrapper">
+          <table class="table-admin">
+            <thead>
+              <tr>
+                <th>Produk</th>
+                <th>Kategori</th>
+                <th>Harga</th>
+                <th>Toko</th>
+                <th>Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="bodyKatalog"></tbody>
+          </table>
+        </div>
+        <div id="emptyKatalog" class="empty-state" style="display:none;">
+          <i class="fas fa-shopping-bag"></i>
+          <h3>Belum Ada Produk</h3>
+          <p>Klik "Tambah Produk" untuk memulai</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB BERITA -->
+    <div class="tab-konten" id="tab-berita">
+      <div class="action-bar">
+        <div class="search-box">
+          <i class="fas fa-search"></i>
+          <input type="text" id="searchBerita" placeholder="Cari berita...">
+        </div>
+        <button class="btn btn-primary" data-tambah="berita">
+          <i class="fas fa-plus"></i> Tambah Berita
+        </button>
+      </div>
+      <div class="card" style="padding:0;overflow:hidden;">
+        <div class="table-wrapper">
+          <table class="table-admin">
+            <thead>
+              <tr>
+                <th>Judul</th>
+                <th>Kategori</th>
+                <th>Tanggal</th>
+                <th>Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="bodyBerita"></tbody>
+          </table>
+        </div>
+        <div id="emptyBerita" class="empty-state" style="display:none;">
+          <i class="fas fa-newspaper"></i>
+          <h3>Belum Ada Berita</h3>
+          <p>Klik "Tambah Berita" untuk memulai</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB EDUKASI -->
+    <div class="tab-konten" id="tab-edukasi">
+      <div class="action-bar">
+        <div class="search-box">
+          <i class="fas fa-search"></i>
+          <input type="text" id="searchEdukasi" placeholder="Cari artikel...">
+        </div>
+        <button class="btn btn-primary" data-tambah="edukasi">
+          <i class="fas fa-plus"></i> Tambah Artikel
+        </button>
+      </div>
+      <div class="card" style="padding:0;overflow:hidden;">
+        <div class="table-wrapper">
+          <table class="table-admin">
+            <thead>
+              <tr>
+                <th>Judul Artikel</th>
+                <th>Kategori</th>
+                <th>Tanggal</th>
+                <th>Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="bodyEdukasi"></tbody>
+          </table>
+        </div>
+        <div id="emptyEdukasi" class="empty-state" style="display:none;">
+          <i class="fas fa-book-open"></i>
+          <h3>Belum Ada Artikel</h3>
+          <p>Klik "Tambah Artikel" untuk memulai</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- MODAL KATALOG -->
+  <div class="modal-overlay" id="modalKatalog">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="modalTitleKatalog"><i class="fas fa-plus-circle"></i> Tambah Produk</h3>
+        <button class="modal-close" data-close="katalog"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Nama Produk *</label>
+          <input type="text" id="katalogNama" placeholder="Contoh: Tas dari Kain Perca">
+        </div>
+        <div class="form-group">
+          <label>Kategori *</label>
+          <select id="katalogKategori">
+            <option value="">-- Pilih Kategori --</option>
+            <option value="Tas">Tas</option>
+            <option value="Dekorasi">Dekorasi</option>
+            <option value="Aksesoris">Aksesoris</option>
+            <option value="Tanaman">Tanaman</option>
+            <option value="Alat Tulis">Alat Tulis</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Harga (Rp) *</label>
+            <input type="number" id="katalogHarga" placeholder="45000" min="1000" step="1000">
+          </div>
+          <div class="form-group">
+            <label>Nama Toko *</label>
+            <input type="text" id="katalogToko" placeholder="UMKM Medan Kreatif">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Deskripsi *</label>
+          <textarea id="katalogDeskripsi" rows="2" placeholder="Deskripsi singkat"></textarea>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Ikon</label>
+            <select id="katalogIcon">
+              <option value="fa-shopping-bag">Tas</option>
+              <option value="fa-wine-bottle">Vas</option>
+              <option value="fa-wallet">Dompet</option>
+              <option value="fa-lightbulb">Lampu</option>
+              <option value="fa-seedling">Tanaman</option>
+              <option value="fa-book">Buku</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Badge</label>
+            <select id="katalogBadge">
+              <option value="">-- Tidak Ada --</option>
+              <option value="Best Seller">Best Seller</option>
+              <option value="Baru">Baru</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" data-close="katalog">Batal</button>
+        <button class="btn btn-primary" id="btnSimpanKatalog"><i class="fas fa-save"></i> Simpan</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL BERITA -->
+  <div class="modal-overlay" id="modalBerita">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="modalTitleBerita"><i class="fas fa-plus-circle"></i> Tambah Berita</h3>
+        <button class="modal-close" data-close="berita"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Judul Berita *</label>
+          <input type="text" id="beritaJudul" placeholder="Judul berita">
+        </div>
+        <div class="form-group">
+          <label>Kategori *</label>
+          <select id="beritaKategori">
+            <option value="">-- Pilih --</option>
+            <option value="Pemerintahan">Pemerintahan</option>
+            <option value="Ekonomi">Ekonomi</option>
+            <option value="Prestasi">Prestasi</option>
+            <option value="Lingkungan">Lingkungan</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Ringkasan *</label>
+          <textarea id="beritaRingkasan" rows="3" placeholder="Ringkasan berita"></textarea>
+        </div>
+        <div class="form-group">
+          <label>Ikon</label>
+          <select id="beritaIcon">
+            <option value="fa-city">Kota</option>
+            <option value="fa-chart-line">Grafik</option>
+            <option value="fa-trophy">Trofi</option>
+            <option value="fa-leaf">Daun</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" data-close="berita">Batal</button>
+        <button class="btn btn-primary" id="btnSimpanBerita"><i class="fas fa-save"></i> Simpan</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL EDUKASI -->
+  <div class="modal-overlay" id="modalEdukasi">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="modalTitleEdukasi"><i class="fas fa-plus-circle"></i> Tambah Artikel</h3>
+        <button class="modal-close" data-close="edukasi"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Judul Artikel *</label>
+          <input type="text" id="edukasiJudul" placeholder="Judul artikel">
+        </div>
+        <div class="form-group">
+          <label>Kategori *</label>
+          <select id="edukasiKategori">
+            <option value="">-- Pilih --</option>
+            <option value="Lingkungan">Lingkungan</option>
+            <option value="Tips">Tips</option>
+            <option value="Panduan">Panduan</option>
+            <option value="Tutorial">Tutorial</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Ringkasan *</label>
+          <textarea id="edukasiRingkasan" rows="3" placeholder="Ringkasan artikel"></textarea>
+        </div>
+        <div class="form-group">
+          <label>Ikon</label>
+          <select id="edukasiIcon">
+            <option value="fa-globe">Globe</option>
+            <option value="fa-recycle">Recycle</option>
+            <option value="fa-home">Rumah</option>
+            <option value="fa-lightbulb">Ide</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" data-close="edukasi">Batal</button>
+        <button class="btn btn-primary" id="btnSimpanEdukasi"><i class="fas fa-save"></i> Simpan</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL HAPUS -->
+  <div class="modal-overlay" id="modalHapus">
+    <div class="modal" style="max-width:420px;">
+      <div class="modal-header">
+        <h3><i class="fas fa-exclamation-triangle" style="color:#f44336;"></i> Konfirmasi Hapus</h3>
+        <button class="modal-close" id="modalCloseHapus"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size:14px;color:#616161;line-height:1.6;">
+          Yakin ingin menghapus <strong id="namaHapus">-</strong>? Tindakan ini tidak dapat dibatalkan.
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" id="btnBatalHapus">Batal</button>
+        <button class="btn btn-primary" id="btnKonfirmasiHapus" style="background:#f44336;border-color:#f44336;">
+          <i class="fas fa-trash"></i> Hapus
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/common.js"></script>
+  <script src="../js/admin-konten.js"></script>
+</body>
+</html>

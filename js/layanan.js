@@ -1,11 +1,40 @@
 /* ============================================
    LAYANAN JS - Peta + Katalog + Tab
+   Dengan Integrasi Data dari Admin
    ============================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  // ========== DATA MITRA ==========
-  const mitraBankSampah = [
+  // ========== LOAD DATA MITRA DARI ADMIN ==========
+  function loadMitraDariAdmin() {
+    const mitraAdmin = JSON.parse(localStorage.getItem('mitraBankSampah') || '[]');
+    
+    if (mitraAdmin.length > 0) {
+      // Generate koordinat sekitar Medan biar tidak tumpuk
+      return mitraAdmin.map((m, i) => {
+        // Base koordinat Medan: 3.5952, 98.6722
+        // Sebar di sekitar Medan dengan offset kecil
+        const angle = (i / mitraAdmin.length) * Math.PI * 2;
+        const radius = 0.03 + (i * 0.005);
+        
+        return {
+          id: m.id,
+          nama: m.nama,
+          alamat: m.alamat,
+          kecamatan: m.kecamatan,
+          kontak: m.kontak,
+          jamLayanan: m.jamLayanan,
+          lat: 3.5952 + (Math.sin(angle) * radius),
+          lng: 98.6722 + (Math.cos(angle) * radius)
+        };
+      });
+    }
+    
+    return null;
+  }
+
+  // ========== DATA MITRA DEFAULT (FALLBACK) ==========
+  const mitraDefault = [
     { id: 1, nama: 'Bank Sampah Medan Barat', alamat: 'Jl. Gatot Subroto No. 123, Medan Barat', kecamatan: 'medan-barat', kontak: '0812-3456-7890', jamLayanan: 'Senin-Sabtu, 08.00-17.00' },
     { id: 2, nama: 'Bank Sampah Medan Timur', alamat: 'Jl. Williem Iskandar No. 45, Medan Timur', kecamatan: 'medan-timur', kontak: '0813-4567-8901', jamLayanan: 'Senin-Jumat, 09.00-16.00' },
     { id: 3, nama: 'Bank Sampah Medan Sunggal', alamat: 'Jl. Sunggal No. 88, Medan Sunggal', kecamatan: 'medan-sunggal', kontak: '0814-5678-9012', jamLayanan: 'Senin-Sabtu, 08.00-16.00' },
@@ -14,8 +43,30 @@ document.addEventListener('DOMContentLoaded', () => {
     { id: 6, nama: 'Bank Sampah Medan Denai', alamat: 'Jl. Denai No. 100, Medan Denai', kecamatan: 'medan-denai', kontak: '0817-8901-2345', jamLayanan: 'Senin-Sabtu, 08.00-17.00' }
   ];
 
-  // ========== DATA KATALOG ==========
-  const katalogProduk = [
+  // Pakai data admin kalau ada, kalau tidak pakai default
+  const mitraBankSampah = loadMitraDariAdmin() || mitraDefault;
+
+  // ========== LOAD DATA KATALOG DARI ADMIN ==========
+  function loadKatalogDariAdmin() {
+    const katalogAdmin = JSON.parse(localStorage.getItem('katalogProduk') || '[]');
+    
+    if (katalogAdmin.length > 0) {
+      return katalogAdmin.map(k => ({
+        id: k.id,
+        nama: k.nama,
+        deskripsi: k.deskripsi,
+        harga: k.harga,
+        toko: k.toko,
+        icon: k.icon || 'fa-shopping-bag',
+        badge: k.badge || ''
+      }));
+    }
+    
+    return null;
+  }
+
+  // ========== DATA KATALOG DEFAULT (FALLBACK) ==========
+  const katalogDefault = [
     { id: 1, nama: 'Tas dari Kain Perca', deskripsi: 'Tas cantik dari kain perca daur ulang', harga: 45000, toko: 'UMKM Medan Kreatif', icon: 'fa-shopping-bag', badge: 'Best Seller' },
     { id: 2, nama: 'Vas Bunga dari Botol Plastik', deskripsi: 'Vas unik dari botol plastik bekas', harga: 35000, toko: 'Bank Sampah Medan Barat', icon: 'fa-wine-bottle', badge: '' },
     { id: 3, nama: 'Dompet dari Kardus', deskripsi: 'Dompet ramah lingkungan dari kardus', harga: 25000, toko: 'UMKM Denai', icon: 'fa-wallet', badge: 'Baru' },
@@ -23,6 +74,8 @@ document.addEventListener('DOMContentLoaded', () => {
     { id: 5, nama: 'Pot Tanaman dari Plastik', deskripsi: 'Pot tanaman dari plastik daur ulang', harga: 20000, toko: 'Bank Sampah Medan Timur', icon: 'fa-seedling', badge: 'Best Seller' },
     { id: 6, nama: 'Buku Catatan dari Kertas Bekas', deskripsi: 'Buku catatan dari kertas daur ulang', harga: 30000, toko: 'UMKM Medan Pintar', icon: 'fa-book', badge: '' }
   ];
+
+  const katalogProduk = loadKatalogDariAdmin() || katalogDefault;
 
   // ========== TAB SWITCHER ==========
   const tabBtns = document.querySelectorAll('.tab-btn');

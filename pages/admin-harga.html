@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kelola Harga Sampah - Waste2Worth</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/common.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body class="dashboard-body">
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <a href="../index.html" class="sidebar-logo">
+        <div class="nav-logo-icon"><i class="fas fa-recycle"></i></div>
+        <div class="nav-logo-text">Waste<strong>2</strong>Worth</div>
+      </a>
+      <button class="sidebar-close" id="sidebarClose"><i class="fas fa-times"></i></button>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a href="dashboard-admin.html" class="sidebar-link">
+        <i class="fas fa-home"></i><span>Dashboard</span>
+      </a>
+      <a href="admin-verifikasi.html" class="sidebar-link">
+        <i class="fas fa-clipboard-check"></i><span>Verifikasi Transaksi</span>
+      </a>
+      <a href="admin-pembayaran.html" class="sidebar-link">
+        <i class="fas fa-money-bill-wave"></i><span>Konfirmasi Pembayaran</span>
+      </a>
+      <a href="admin-harga.html" class="sidebar-link active">
+        <i class="fas fa-tags"></i><span>Kelola Harga</span>
+      </a>
+      <a href="admin-mitra.html" class="sidebar-link">
+        <i class="fas fa-handshake"></i><span>Kelola Mitra</span>
+      </a>
+      <a href="admin-konten.html" class="sidebar-link">
+        <i class="fas fa-file-alt"></i><span>Kelola Konten</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button class="sidebar-link logout-btn" onclick="logoutUser()">
+        <i class="fas fa-sign-out-alt"></i><span>Keluar</span>
+      </button>
+    </div>
+  </aside>
+
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <main class="main-content">
+    <header class="topbar">
+      <button class="topbar-toggle" id="topbarToggle"><i class="fas fa-bars"></i></button>
+      <div class="topbar-title">
+        <h1>Kelola Harga Sampah</h1>
+        <p>Update harga sampah per jenis — dipakai untuk kalkulator pelanggan</p>
+      </div>
+      <div class="topbar-user">
+        <div class="user-info">
+          <span class="user-name" id="userName">Admin</span>
+          <span class="user-role">Admin</span>
+        </div>
+        <div class="user-avatar" id="userAvatar">A</div>
+      </div>
+    </header>
+
+    <!-- STATISTIK -->
+    <section class="stats-grid" style="margin-bottom:24px;">
+      <div class="stat-card">
+        <div class="stat-icon icon-green"><i class="fas fa-tags"></i></div>
+        <div class="stat-info">
+          <span class="stat-label">Total Jenis Sampah</span>
+          <h3 class="stat-value" id="statTotal">0</h3>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon icon-blue"><i class="fas fa-chart-line"></i></div>
+        <div class="stat-info">
+          <span class="stat-label">Harga Tertinggi</span>
+          <h3 class="stat-value" id="statTertinggi">Rp 0</h3>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon icon-orange"><i class="fas fa-chart-line"></i></div>
+        <div class="stat-info">
+          <span class="stat-label">Harga Terendah</span>
+          <h3 class="stat-value" id="statTerendah">Rp 0</h3>
+        </div>
+      </div>
+    </section>
+
+    <!-- ACTION BAR -->
+    <div class="action-bar">
+      <div class="search-box">
+        <i class="fas fa-search"></i>
+        <input type="text" id="searchHarga" placeholder="Cari jenis sampah...">
+      </div>
+      <button class="btn btn-primary" id="btnTambahHarga">
+        <i class="fas fa-plus"></i> Tambah Jenis Baru
+      </button>
+    </div>
+
+    <!-- TABEL HARGA -->
+    <div class="card" style="padding:0;overflow:hidden;">
+      <div class="table-wrapper">
+        <table class="table-admin">
+          <thead>
+            <tr>
+              <th>Jenis Sampah</th>
+              <th>Kategori</th>
+              <th>Harga / kg</th>
+              <th>Terakhir Update</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody id="bodyHarga"></tbody>
+        </table>
+      </div>
+
+      <div id="emptyHarga" class="empty-state" style="display:none;">
+        <i class="fas fa-tags"></i>
+        <h3>Belum Ada Data Harga</h3>
+        <p>Klik tombol "Tambah Jenis Baru" untuk memulai</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- MODAL TAMBAH/EDIT -->
+  <div class="modal-overlay" id="modalHarga">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="modalTitle"><i class="fas fa-plus-circle"></i> Tambah Harga Baru</h3>
+        <button class="modal-close" id="modalClose"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Nama Jenis Sampah <span style="color:#f44336;">*</span></label>
+          <input type="text" id="inputNama" placeholder="Contoh: Plastik PET">
+          <span class="error-message" id="error-nama"></span>
+        </div>
+
+        <div class="form-group">
+          <label>Kategori <span style="color:#f44336;">*</span></label>
+          <select id="inputKategori">
+            <option value="">-- Pilih Kategori --</option>
+            <option value="Plastik">Plastik</option>
+            <option value="Kertas">Kertas</option>
+            <option value="Logam">Logam</option>
+            <option value="Kaca">Kaca</option>
+            <option value="Organik">Organik</option>
+            <option value="Lainnya">Lainnya</option>
+          </select>
+          <span class="error-message" id="error-kategori"></span>
+        </div>
+
+        <div class="form-group">
+          <label>Harga per kg (Rp) <span style="color:#f44336;">*</span></label>
+          <input type="number" id="inputHarga" placeholder="Contoh: 5000" min="100" step="100">
+          <span class="error-message" id="error-harga"></span>
+        </div>
+
+        <div class="form-group">
+          <label>Keterangan (opsional)</label>
+          <textarea id="inputKeterangan" rows="2" placeholder="Contoh: Plastik bening, botol air mineral"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" id="btnBatal">Batal</button>
+        <button class="btn btn-primary" id="btnSimpan">
+          <i class="fas fa-save"></i> Simpan
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL HAPUS -->
+  <div class="modal-overlay" id="modalHapus">
+    <div class="modal" style="max-width:420px;">
+      <div class="modal-header">
+        <h3><i class="fas fa-exclamation-triangle" style="color:#f44336;"></i> Konfirmasi Hapus</h3>
+        <button class="modal-close" id="modalCloseHapus"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size:14px;color:#616161;line-height:1.6;">
+          Yakin ingin menghapus <strong id="namaHapus">-</strong> dari daftar harga?
+          Tindakan ini tidak dapat dibatalkan.
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" id="btnBatalHapus">Batal</button>
+        <button class="btn btn-primary" id="btnKonfirmasiHapus" style="background:#f44336;border-color:#f44336;">
+          <i class="fas fa-trash"></i> Hapus
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/common.js"></script>
+  <script src="../js/admin-harga.js"></script>
+</body>
+</html>

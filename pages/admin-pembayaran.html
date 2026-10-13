@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Konfirmasi Pembayaran - Waste2Worth</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/common.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body class="dashboard-body">
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <a href="../index.html" class="sidebar-logo">
+        <div class="nav-logo-icon"><i class="fas fa-recycle"></i></div>
+        <div class="nav-logo-text">Waste<strong>2</strong>Worth</div>
+      </a>
+      <button class="sidebar-close" id="sidebarClose"><i class="fas fa-times"></i></button>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a href="dashboard-admin.html" class="sidebar-link">
+        <i class="fas fa-home"></i><span>Dashboard</span>
+      </a>
+      <a href="admin-verifikasi.html" class="sidebar-link">
+        <i class="fas fa-clipboard-check"></i><span>Verifikasi Transaksi</span>
+      </a>
+      <a href="admin-pembayaran.html" class="sidebar-link active">
+        <i class="fas fa-money-bill-wave"></i><span>Konfirmasi Pembayaran</span>
+      </a>
+      <a href="admin-harga.html" class="sidebar-link">
+        <i class="fas fa-tags"></i><span>Kelola Harga</span>
+      </a>
+      <a href="admin-mitra.html" class="sidebar-link">
+        <i class="fas fa-handshake"></i><span>Kelola Mitra</span>
+      </a>
+      <a href="admin-konten.html" class="sidebar-link">
+        <i class="fas fa-file-alt"></i><span>Kelola Konten</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button class="sidebar-link logout-btn" onclick="logoutUser()">
+        <i class="fas fa-sign-out-alt"></i><span>Keluar</span>
+      </button>
+    </div>
+  </aside>
+
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <main class="main-content">
+    <header class="topbar">
+      <button class="topbar-toggle" id="topbarToggle"><i class="fas fa-bars"></i></button>
+      <div class="topbar-title">
+        <h1>Konfirmasi Pembayaran</h1>
+        <p>Konfirmasi berat aktual & proses pembayaran ke pelanggan</p>
+      </div>
+      <div class="topbar-user">
+        <div class="user-info">
+          <span class="user-name" id="userName">Admin</span>
+          <span class="user-role">Admin</span>
+        </div>
+        <div class="user-avatar" id="userAvatar">A</div>
+      </div>
+    </header>
+
+    <section class="stats-grid" style="margin-bottom:24px;">
+      <div class="stat-card">
+        <div class="stat-icon icon-purple"><i class="fas fa-weight-hanging"></i></div>
+        <div class="stat-info">
+          <span class="stat-label">Perlu Konfirmasi Berat</span>
+          <h3 class="stat-value" id="statPerluKonfirmasi">0</h3>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon icon-orange"><i class="fas fa-hand-holding-usd"></i></div>
+        <div class="stat-info">
+          <span class="stat-label">Perlu Dibayar</span>
+          <h3 class="stat-value" id="statPerluBayar">0</h3>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon icon-green"><i class="fas fa-check-circle"></i></div>
+        <div class="stat-info">
+          <span class="stat-label">Sudah Dibayar</span>
+          <h3 class="stat-value" id="statSudahBayar">0</h3>
+        </div>
+      </div>
+    </section>
+
+    <div class="filter-bar">
+      <div class="filter-label">
+        <i class="fas fa-filter"></i><span>Filter:</span>
+      </div>
+      <div class="filter-buttons">
+        <button class="filter-btn active" data-filter="perlu-konfirmasi">Perlu Konfirmasi Berat</button>
+        <button class="filter-btn" data-filter="perlu-bayar">Perlu Dibayar</button>
+        <button class="filter-btn" data-filter="sudah-bayar">Sudah Dibayar</button>
+        <button class="filter-btn" data-filter="all">Semua</button>
+      </div>
+    </div>
+
+    <section>
+      <div id="emptyState" class="empty-state">
+        <i class="fas fa-inbox"></i>
+        <h3>Tidak Ada Data</h3>
+        <p>Tidak ada transaksi yang perlu diproses saat ini.</p>
+      </div>
+      <div id="pembayaranList" class="admin-list"></div>
+    </section>
+  </main>
+
+  <!-- MODAL KONFIRMASI BERAT -->
+  <div class="modal-overlay" id="modalKonfirmasiBerat">
+    <div class="modal">
+      <div class="modal-header">
+        <h3><i class="fas fa-weight-hanging"></i> Konfirmasi Berat Aktual</h3>
+        <button class="modal-close" id="modalCloseBerat"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="transaksi-info-box" id="infoBoxBerat"></div>
+        <div class="form-group">
+          <label>Berat Aktual (kg) <span style="color:#f44336;">*</span></label>
+          <div class="berat-input-wrapper">
+            <input type="number" id="inputBeratAktual" placeholder="Contoh: 2.5" min="0.1" step="0.1">
+            <span class="unit">kg</span>
+          </div>
+          <span class="error-message" id="error-berat"></span>
+        </div>
+        <div class="form-group">
+          <label>Catatan (opsional)</label>
+          <textarea id="catatanBerat" rows="2" placeholder="Contoh: Berat sesuai timbangan aktual"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" id="btnBatalBerat">Batal</button>
+        <button class="btn btn-primary" id="btnSimpanBerat">
+          <i class="fas fa-check"></i> Konfirmasi Berat
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL PEMBAYARAN -->
+  <div class="modal-overlay" id="modalPembayaran">
+    <div class="modal">
+      <div class="modal-header">
+        <h3><i class="fas fa-money-bill-wave"></i> Proses Pembayaran</h3>
+        <button class="modal-close" id="modalCloseBayar"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="transaksi-info-box" id="infoBoxBayar"></div>
+        <div class="form-group">
+          <label>Metode Pembayaran</label>
+          <select id="metodePembayaran">
+            <option value="Transfer Bank">Transfer Bank</option>
+            <option value="E-Wallet">E-Wallet (OVO/Dana/GoPay)</option>
+            <option value="Tunai">Tunai</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Catatan (opsional)</label>
+          <textarea id="catatanBayar" rows="2" placeholder="Contoh: Dana dikirim ke rekening BCA"></textarea>
+        </div>
+        <div class="alert-info" style="display:flex;align-items:flex-start;gap:10px;padding:14px;background:#e3f2fd;border-radius:8px;color:#1976d2;font-size:13px;line-height:1.5;">
+          <i class="fas fa-info-circle" style="margin-top:2px;"></i>
+          <span>Setelah klik Konfirmasi, status transaksi berubah menjadi "Dibayar". Pelanggan akan diminta konfirmasi dana diterima.</span>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" id="btnBatalBayar">Batal</button>
+        <button class="btn btn-primary" id="btnProsesPembayaran">
+          <i class="fas fa-paper-plane"></i> Konfirmasi Pembayaran
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/common.js"></script>
+  <script src="../js/admin-pembayaran.js"></script>
+</body>
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Update Status - Waste2Worth</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/common.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="../css/supir.css">
+</head>
+<body class="dashboard-body">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <a href="../index.html" class="sidebar-logo">
+        <div class="nav-logo-icon"><i class="fas fa-recycle"></i></div>
+        <div class="nav-logo-text">Waste<strong>2</strong>Worth</div>
+      </a>
+      <button class="sidebar-close" id="sidebarClose"><i class="fas fa-times"></i></button>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a href="dashboard-supir.html" class="sidebar-link">
+        <i class="fas fa-home"></i><span>Dashboard</span>
+      </a>
+      <a href="supir-jadwal.html" class="sidebar-link">
+        <i class="fas fa-truck"></i><span>Jadwal Penjemputan</span>
+      </a>
+      <a href="supir-update-status.html" class="sidebar-link active">
+        <i class="fas fa-edit"></i><span>Update Status</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button class="sidebar-link logout-btn" onclick="logoutUser()">
+        <i class="fas fa-sign-out-alt"></i><span>Keluar</span>
+      </button>
+    </div>
+  </aside>
+
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- MAIN -->
+  <main class="main-content">
+    <header class="topbar">
+      <button class="topbar-toggle" id="topbarToggle"><i class="fas fa-bars"></i></button>
+      <div class="topbar-title">
+        <h1>Update Status Penjemputan</h1>
+        <p>Perbarui status dan input berat aktual sampah</p>
+      </div>
+      <div class="topbar-user">
+        <div class="user-info">
+          <span class="user-name" id="userName">Supir</span>
+          <span class="user-role">Supir</span>
+        </div>
+        <div class="user-avatar" id="userAvatar">S</div>
+      </div>
+    </header>
+
+    <div class="update-wrapper">
+
+      <!-- NOT FOUND -->
+      <div id="notFound" class="update-card" style="display:none;text-align:center;">
+        <i class="fas fa-search" style="font-size:60px;color:#e0e0e0;margin-bottom:16px;display:block;"></i>
+        <h2>Transaksi Tidak Ditemukan</h2>
+        <p style="color:#616161;margin-bottom:24px;">ID transaksi tidak valid atau tidak ada.</p>
+        <a href="supir-jadwal.html" class="btn btn-primary">
+          <i class="fas fa-arrow-left"></i> Kembali ke Jadwal
+        </a>
+      </div>
+
+      <!-- SUCCESS -->
+      <div id="successState" class="update-card" style="display:none;">
+        <div class="success-state">
+          <i class="fas fa-check-circle"></i>
+          <h3>Status Berhasil Diupdate!</h3>
+          <p>Perubahan status sudah tersimpan.</p>
+          <a href="supir-jadwal.html" class="btn btn-primary">
+            <i class="fas fa-list"></i> Lihat Jadwal Lain
+          </a>
+        </div>
+      </div>
+
+      <!-- FORM -->
+      <div id="formUpdate" class="update-card" style="display:none;">
+        <h2>Update Status</h2>
+        <p class="subtitle">Pilih status penjemputan saat ini</p>
+
+        <!-- Info Transaksi -->
+        <div class="transaksi-info-box">
+          <h4>Info Transaksi</h4>
+          <div class="transaksi-info-row">
+            <span class="label">ID Transaksi</span>
+            <span class="value" id="infoId">-</span>
+          </div>
+          <div class="transaksi-info-row">
+            <span class="label">Pelanggan</span>
+            <span class="value" id="infoPelanggan">-</span>
+          </div>
+          <div class="transaksi-info-row">
+            <span class="label">Alamat</span>
+            <span class="value" id="infoAlamat">-</span>
+          </div>
+          <div class="transaksi-info-row">
+            <span class="label">Estimasi Berat</span>
+            <span class="value" id="infoEstimasiBerat">-</span>
+          </div>
+          <div class="transaksi-info-row">
+            <span class="label">Status Saat Ini</span>
+            <span class="value" id="infoStatusSaat">-</span>
+          </div>
+        </div>
+
+        <!-- Pilih Status -->
+        <p style="font-size:14px;font-weight:600;color:#616161;margin-bottom:12px;">
+          Pilih status baru:
+        </p>
+
+        <div class="status-steps">
+
+          <div class="status-step" data-status="Ditugaskan">
+            <div class="status-step-icon"><i class="fas fa-user-check"></i></div>
+            <div class="status-step-content">
+              <h4>Ditugaskan</h4>
+              <p>Saya akan segera menuju lokasi pelanggan</p>
+            </div>
+          </div>
+
+          <div class="status-step" data-status="Dijemput">
+            <div class="status-step-icon"><i class="fas fa-truck"></i></div>
+            <div class="status-step-content">
+              <h4>Dijemput</h4>
+              <p>Sampah sudah saya ambil dari pelanggan</p>
+            </div>
+          </div>
+
+          <div class="status-step" data-status="Sedang Diperiksa">
+            <div class="status-step-icon"><i class="fas fa-weight-hanging"></i></div>
+            <div class="status-step-content">
+              <h4>Sedang Diperiksa</h4>
+              <p>Sampah sedang saya timbang</p>
+            </div>
+          </div>
+
+          <div class="status-step" data-status="Selesai">
+            <div class="status-step-icon"><i class="fas fa-check-circle"></i></div>
+            <div class="status-step-content">
+              <h4>Selesai</h4>
+              <p>Sampah sudah saya serahkan ke bank sampah</p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Input Berat Aktual (muncul kalau pilih "Sedang Diperiksa" atau "Selesai") -->
+        <div class="berat-input-box" id="beratBox">
+          <label><i class="fas fa-weight-hanging"></i> Berat Aktual (kg)</label>
+          <div class="berat-input-wrapper">
+            <input type="number" id="beratAktual" placeholder="Contoh: 2.5" min="0.1" step="0.1">
+            <span class="unit">kg</span>
+          </div>
+          <span class="berat-hint"><i class="fas fa-info-circle"></i> Masukkan berat hasil timbangan aktual</span>
+          <span class="error-message" id="error-berat" style="color:#f44336;font-size:13px;margin-top:6px;display:block;"></span>
+        </div>
+
+        <!-- Catatan -->
+        <div class="form-group" style="margin-top:20px;">
+          <label style="display:block;font-size:14px;font-weight:600;color:#212121;margin-bottom:8px;">
+            <i class="fas fa-sticky-note" style="color:#2e7d32;"></i> Catatan (opsional)
+          </label>
+          <textarea id="catatan" class="form-control" rows="2" 
+            style="width:100%;padding:12px 16px;border:2px solid #e0e0e0;border-radius:8px;font-family:'Poppins',sans-serif;font-size:14px;resize:vertical;"
+            placeholder="Contoh: Sampah sudah dipilah, ada tambahan 1 kantong kresek"></textarea>
+        </div>
+
+        <!-- Actions -->
+        <div class="update-actions">
+          <a href="supir-jadwal.html" class="btn btn-outline">
+            <i class="fas fa-arrow-left"></i> Kembali
+          </a>
+          <button type="button" class="btn btn-primary" id="btnSimpan">
+            <i class="fas fa-save"></i> Simpan Status
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <script src="../js/common.js"></script>
+  <script src="../js/supir-update-status.js"></script>
+</body>
+</html>

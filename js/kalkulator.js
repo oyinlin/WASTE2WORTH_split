@@ -1,5 +1,6 @@
 /* ============================================
    KALKULATOR JS - Multi Jenis Sampah
+   Dengan Integrasi Harga dari Admin
    ============================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -18,6 +19,38 @@ document.addEventListener('DOMContentLoaded', () => {
   const totalCard = document.getElementById('totalCard');
   const totalNilai = document.getElementById('totalNilai');
 
+  // ========== LOAD HARGA DARI ADMIN ==========
+  function loadHargaDariAdmin() {
+    const hargaAdmin = JSON.parse(localStorage.getItem('hargaSampah') || '[]');
+    
+    // Default harga kalau admin belum set
+    const defaultHarga = [
+      { nama: 'Plastik', harga: 5000 },
+      { nama: 'Kardus', harga: 4000 },
+      { nama: 'Kertas', harga: 3000 },
+      { nama: 'Logam', harga: 10000 },
+      { nama: 'Kaleng', harga: 7000 },
+      { nama: 'Botol Plastik', harga: 6000 }
+    ];
+
+    const hargaPakai = hargaAdmin.length > 0 ? hargaAdmin : defaultHarga;
+
+    // Kosongkan dropdown
+    jenisEl.innerHTML = '<option value="">-- Pilih Jenis --</option>';
+
+    // Isi dropdown dari data admin
+    hargaPakai.forEach(item => {
+      const opt = document.createElement('option');
+      const valueSlug = item.nama.toLowerCase().replace(/\s+/g, '-');
+      opt.value = valueSlug;
+      opt.dataset.harga = item.harga;
+      opt.dataset.nama = item.nama;
+      opt.textContent = item.nama + ' - Rp ' + Number(item.harga).toLocaleString('id-ID') + '/kg';
+      jenisEl.appendChild(opt);
+    });
+  }
+
+  // ========== HELPER ==========
   function setError(fieldId, message) {
     const el = document.getElementById('error-' + fieldId);
     if (el) el.textContent = message;
@@ -38,7 +71,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function getNamaJenis(jenis) {
     const option = jenisEl.querySelector('option[value="' + jenis + '"]');
-    return option ? option.textContent.split(' - ')[0] : jenis;
+    if (!option) return jenis;
+    return option.dataset.nama || option.textContent.split(' - ')[0];
   }
 
   // ========== TAMBAH ITEM ==========
@@ -146,7 +180,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const currentUser = Auth.getUser();
 
-    // Simpan ke localStorage
     localStorage.setItem('daftarSampah', JSON.stringify(daftarSampah));
     localStorage.setItem('kecamatanTerpilih', kecamatanTerpilih);
 
@@ -174,5 +207,8 @@ document.addEventListener('DOMContentLoaded', () => {
   beratEl?.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') btnTambah.click();
   });
+
+  // ========== INIT ==========
+  loadHargaDariAdmin();
 
 });

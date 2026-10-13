@@ -1,66 +1,22 @@
 /* ============================================
-   EDUKASI JS
+   EDUKASI JS - Dengan Integrasi Admin
    ============================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  // ========== DATA ARTIKEL ==========
-  const daftarArtikel = [
-    {
-      id: 1,
-      judul: 'Mengapa Daur Ulang Penting untuk Bumi?',
-      ringkasan: 'Daur ulang membantu mengurangi sampah di TPA dan menghemat sumber daya alam. Yuk pelajari manfaatnya!',
-      kategori: 'Lingkungan',
-      icon: 'fa-globe',
-      tanggal: '10 Maret 2026',
-      penulis: 'Admin Waste2Worth'
-    },
-    {
-      id: 2,
-      judul: 'Jenis Plastik yang Bisa Didaur Ulang',
-      ringkasan: 'Tidak semua plastik bisa didaur ulang. Kenali jenis-jenisnya agar kamu tidak salah pilih.',
-      kategori: 'Tips',
-      icon: 'fa-recycle',
-      tanggal: '8 Maret 2026',
-      penulis: 'Admin Waste2Worth'
-    },
-    {
-      id: 3,
-      judul: '5 Cara Mudah Memilah Sampah di Rumah',
-      ringkasan: 'Panduan praktis memilah sampah organik, anorganik, dan B3 dari rumahmu.',
-      kategori: 'Panduan',
-      icon: 'fa-home',
-      tanggal: '5 Maret 2026',
-      penulis: 'Admin Waste2Worth'
-    },
-    {
-      id: 4,
-      judul: 'Kisah Sukses: Dari Sampah Jadi Usaha',
-      ringkasan: 'Inspirasi dari pelaku UMKM yang sukses mengubah sampah menjadi produk bernilai jual.',
-      kategori: 'Inspirasi',
-      icon: 'fa-lightbulb',
-      tanggal: '2 Maret 2026',
-      penulis: 'Admin Waste2Worth'
-    },
-    {
-      id: 5,
-      judul: 'Bahaya Sampah Plastik bagi Lautan',
-      ringkasan: 'Setiap tahun, jutaan ton plastik berakhir di laut. Ini dampaknya bagi ekosistem.',
-      kategori: 'Lingkungan',
-      icon: 'fa-water',
-      tanggal: '28 Februari 2026',
-      penulis: 'Admin Waste2Worth'
-    },
-    {
-      id: 6,
-      judul: 'Cara Membuat Kompos dari Sampah Organik',
-      ringkasan: 'Tutorial lengkap mengubah sampah dapur menjadi kompos yang bermanfaat untuk tanaman.',
-      kategori: 'Tutorial',
-      icon: 'fa-seedling',
-      tanggal: '25 Februari 2026',
-      penulis: 'Admin Waste2Worth'
-    }
+  // ========== DEFAULT DATA ==========
+  const edukasiDefault = [
+    { id: 1, judul: 'Mengapa Daur Ulang Penting untuk Bumi?', ringkasan: 'Daur ulang membantu mengurangi sampah di TPA dan menghemat sumber daya alam. Yuk pelajari manfaatnya!', kategori: 'Lingkungan', icon: 'fa-globe', tanggal: '10 Maret 2026' },
+    { id: 2, judul: 'Jenis Plastik yang Bisa Didaur Ulang', ringkasan: 'Tidak semua plastik bisa didaur ulang. Kenali jenis-jenisnya agar kamu tidak salah pilih.', kategori: 'Tips', icon: 'fa-recycle', tanggal: '8 Maret 2026' },
+    { id: 3, judul: '5 Cara Mudah Memilah Sampah di Rumah', ringkasan: 'Panduan praktis memilah sampah organik, anorganik, dan B3 dari rumahmu.', kategori: 'Panduan', icon: 'fa-home', tanggal: '5 Maret 2026' },
+    { id: 4, judul: 'Kisah Sukses: Dari Sampah Jadi Usaha', ringkasan: 'Inspirasi dari pelaku UMKM yang sukses mengubah sampah menjadi produk bernilai jual.', kategori: 'Inspirasi', icon: 'fa-lightbulb', tanggal: '2 Maret 2026' },
+    { id: 5, judul: 'Bahaya Sampah Plastik bagi Lautan', ringkasan: 'Setiap tahun, jutaan ton plastik berakhir di laut. Ini dampaknya bagi ekosistem.', kategori: 'Lingkungan', icon: 'fa-water', tanggal: '28 Februari 2026' },
+    { id: 6, judul: 'Cara Membuat Kompos dari Sampah Organik', ringkasan: 'Tutorial lengkap mengubah sampah dapur menjadi kompos yang bermanfaat untuk tanaman.', kategori: 'Tutorial', icon: 'fa-seedling', tanggal: '25 Februari 2026' }
   ];
+
+  // ========== LOAD DARI ADMIN ==========
+  const edukasiAdmin = JSON.parse(localStorage.getItem('edukasiList') || 'null');
+  const daftarArtikel = edukasiAdmin && edukasiAdmin.length > 0 ? edukasiAdmin : edukasiDefault;
 
   // ========== TAB SWITCHER ==========
   const tabBtns = document.querySelectorAll('.tab-btn');
@@ -85,19 +41,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     grid.innerHTML = '';
 
-    daftarArtikel.forEach(artikel => {
+    const sorted = [...daftarArtikel].sort((a, b) => {
+      if (a.id && b.id) return b.id - a.id;
+      return 0;
+    });
+
+    sorted.forEach(artikel => {
       const card = document.createElement('div');
       card.className = 'artikel-card';
       card.innerHTML = 
         '<div class="artikel-image">' +
-          '<i class="fas ' + artikel.icon + '"></i>' +
-          '<span class="artikel-kategori">' + artikel.kategori + '</span>' +
+          '<i class="fas ' + (artikel.icon || 'fa-book') + '"></i>' +
+          '<span class="artikel-kategori">' + (artikel.kategori || 'Umum') + '</span>' +
         '</div>' +
         '<div class="artikel-content">' +
           '<h3>' + artikel.judul + '</h3>' +
           '<p>' + artikel.ringkasan + '</p>' +
           '<div class="artikel-meta">' +
-            '<span><i class="fas fa-calendar"></i> ' + artikel.tanggal + '</span>' +
+            '<span><i class="fas fa-calendar"></i> ' + (artikel.tanggal || '-') + '</span>' +
             '<span class="artikel-link">Baca <i class="fas fa-arrow-right"></i></span>' +
           '</div>' +
         '</div>';

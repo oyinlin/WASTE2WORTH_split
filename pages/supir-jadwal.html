@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jadwal Penjemputan - Waste2Worth</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/common.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="../css/supir.css">
+</head>
+<body class="dashboard-body">
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <a href="../index.html" class="sidebar-logo">
+        <div class="nav-logo-icon"><i class="fas fa-recycle"></i></div>
+        <div class="nav-logo-text">Waste<strong>2</strong>Worth</div>
+      </a>
+      <button class="sidebar-close" id="sidebarClose"><i class="fas fa-times"></i></button>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a href="dashboard-supir.html" class="sidebar-link">
+        <i class="fas fa-home"></i><span>Dashboard</span>
+      </a>
+      <a href="supir-jadwal.html" class="sidebar-link active">
+        <i class="fas fa-truck"></i><span>Jadwal Penjemputan</span>
+      </a>
+      <a href="supir-update-status.html" class="sidebar-link">
+        <i class="fas fa-edit"></i><span>Update Status</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button class="sidebar-link logout-btn" onclick="logoutUser()">
+        <i class="fas fa-sign-out-alt"></i><span>Keluar</span>
+      </button>
+    </div>
+  </aside>
+
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <main class="main-content">
+    <header class="topbar">
+      <button class="topbar-toggle" id="topbarToggle"><i class="fas fa-bars"></i></button>
+      <div class="topbar-title">
+        <h1>Jadwal Penjemputan</h1>
+        <p id="tanggalHariIni"></p>
+      </div>
+      <div class="topbar-user">
+        <div class="user-info">
+          <span class="user-name" id="userName">Supir</span>
+          <span class="user-role">Supir</span>
+        </div>
+        <div class="user-avatar" id="userAvatar">S</div>
+      </div>
+    </header>
+
+    <div class="filter-bar">
+      <div class="filter-label">
+        <i class="fas fa-filter"></i><span>Filter:</span>
+      </div>
+      <div class="filter-buttons">
+        <button class="filter-btn active" data-filter="all">Semua</button>
+        <button class="filter-btn" data-filter="ditugaskan">Ditugaskan</button>
+        <button class="filter-btn" data-filter="dijemput">Dijemput</button>
+        <button class="filter-btn" data-filter="diperiksa">Diperiksa</button>
+        <button class="filter-btn" data-filter="selesai">Selesai</button>
+      </div>
+    </div>
+
+    <section class="stats-grid" style="margin-bottom:24px;">
+      <div class="stat-card">
+        <div class="stat-icon icon-orange"><i class="fas fa-clipboard-list"></i></div>
+        <div class="stat-info">
+          <span class="stat-label">Total Tugas</span>
+          <h3 class="stat-value" id="statTotal">0</h3>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon icon-blue"><i class="fas fa-truck"></i></div>
+        <div class="stat-info">
+          <span class="stat-label">Sedang Dikerjakan</span>
+          <h3 class="stat-value" id="statProses">0</h3>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon icon-green"><i class="fas fa-check-circle"></i></div>
+        <div class="stat-info">
+          <span class="stat-label">Selesai</span>
+          <h3 class="stat-value" id="statSelesai">0</h3>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div id="emptyJadwal" class="empty-state">
+        <i class="fas fa-clipboard-check"></i>
+        <h3>Belum Ada Tugas</h3>
+        <p>Tugas penjemputan akan muncul setelah admin menugaskanmu.</p>
+      </div>
+      <div id="jadwalList" class="jadwal-list"></div>
+    </section>
+  </main>
+
+  <script src="../js/common.js"></script>
+  <script src="../js/supir-jadwal.js"></script>
+</body>
+</html>

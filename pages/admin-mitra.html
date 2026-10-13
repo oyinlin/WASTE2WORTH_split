@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kelola Mitra Bank Sampah - Waste2Worth</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/common.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body class="dashboard-body">
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <a href="../index.html" class="sidebar-logo">
+        <div class="nav-logo-icon"><i class="fas fa-recycle"></i></div>
+        <div class="nav-logo-text">Waste<strong>2</strong>Worth</div>
+      </a>
+      <button class="sidebar-close" id="sidebarClose"><i class="fas fa-times"></i></button>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a href="dashboard-admin.html" class="sidebar-link">
+        <i class="fas fa-home"></i><span>Dashboard</span>
+      </a>
+      <a href="admin-verifikasi.html" class="sidebar-link">
+        <i class="fas fa-clipboard-check"></i><span>Verifikasi Transaksi</span>
+      </a>
+      <a href="admin-pembayaran.html" class="sidebar-link">
+        <i class="fas fa-money-bill-wave"></i><span>Konfirmasi Pembayaran</span>
+      </a>
+      <a href="admin-harga.html" class="sidebar-link">
+        <i class="fas fa-tags"></i><span>Kelola Harga</span>
+      </a>
+      <a href="admin-mitra.html" class="sidebar-link active">
+        <i class="fas fa-handshake"></i><span>Kelola Mitra</span>
+      </a>
+      <a href="admin-konten.html" class="sidebar-link">
+        <i class="fas fa-file-alt"></i><span>Kelola Konten</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button class="sidebar-link logout-btn" onclick="logoutUser()">
+        <i class="fas fa-sign-out-alt"></i><span>Keluar</span>
+      </button>
+    </div>
+  </aside>
+
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <main class="main-content">
+    <header class="topbar">
+      <button class="topbar-toggle" id="topbarToggle"><i class="fas fa-bars"></i></button>
+      <div class="topbar-title">
+        <h1>Kelola Mitra Bank Sampah</h1>
+        <p>Data mitra dipakai untuk peta lokasi pelanggan</p>
+      </div>
+      <div class="topbar-user">
+        <div class="user-info">
+          <span class="user-name" id="userName">Admin</span>
+          <span class="user-role">Admin</span>
+        </div>
+        <div class="user-avatar" id="userAvatar">A</div>
+      </div>
+    </header>
+
+    <!-- STATISTIK -->
+    <section class="stats-grid" style="margin-bottom:24px;">
+      <div class="stat-card">
+        <div class="stat-icon icon-green"><i class="fas fa-handshake"></i></div>
+        <div class="stat-info">
+          <span class="stat-label">Total Mitra</span>
+          <h3 class="stat-value" id="statTotal">0</h3>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon icon-blue"><i class="fas fa-map-marker-alt"></i></div>
+        <div class="stat-info">
+          <span class="stat-label">Kecamatan</span>
+          <h3 class="stat-value" id="statKecamatan">0</h3>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon icon-orange"><i class="fas fa-clock"></i></div>
+        <div class="stat-info">
+          <span class="stat-label">Aktif Hari Ini</span>
+          <h3 class="stat-value" id="statAktif">0</h3>
+        </div>
+      </div>
+    </section>
+
+    <!-- ACTION BAR -->
+    <div class="action-bar">
+      <div class="search-box">
+        <i class="fas fa-search"></i>
+        <input type="text" id="searchMitra" placeholder="Cari mitra atau kecamatan...">
+      </div>
+      <button class="btn btn-primary" id="btnTambahMitra">
+        <i class="fas fa-plus"></i> Tambah Mitra Baru
+      </button>
+    </div>
+
+    <!-- TABEL -->
+    <div class="card" style="padding:0;overflow:hidden;">
+      <div class="table-wrapper">
+        <table class="table-admin">
+          <thead>
+            <tr>
+              <th>Nama Mitra</th>
+              <th>Alamat</th>
+              <th>Kontak</th>
+              <th>Jam Layanan</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody id="bodyMitra"></tbody>
+        </table>
+      </div>
+
+      <div id="emptyMitra" class="empty-state" style="display:none;">
+        <i class="fas fa-handshake"></i>
+        <h3>Belum Ada Mitra</h3>
+        <p>Klik tombol "Tambah Mitra Baru" untuk memulai</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- MODAL TAMBAH/EDIT -->
+  <div class="modal-overlay" id="modalMitra">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="modalTitle"><i class="fas fa-plus-circle"></i> Tambah Mitra Baru</h3>
+        <button class="modal-close" id="modalClose"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Nama Mitra <span style="color:#f44336;">*</span></label>
+          <input type="text" id="inputNama" placeholder="Contoh: Bank Sampah Medan Barat">
+          <span class="error-message" id="error-nama"></span>
+        </div>
+
+        <div class="form-group">
+          <label>Kecamatan <span style="color:#f44336;">*</span></label>
+          <select id="inputKecamatan">
+            <option value="">-- Pilih Kecamatan --</option>
+            <option value="medan-barat">Medan Barat</option>
+            <option value="medan-timur">Medan Timur</option>
+            <option value="medan-sunggal">Medan Sunggal</option>
+            <option value="medan-petisah">Medan Petisah</option>
+            <option value="medan-kota">Medan Kota</option>
+            <option value="medan-denai">Medan Denai</option>
+            <option value="medan-johor">Medan Johor</option>
+            <option value="medan-helvetia">Medan Helvetia</option>
+          </select>
+          <span class="error-message" id="error-kecamatan"></span>
+        </div>
+
+        <div class="form-group">
+          <label>Alamat Lengkap <span style="color:#f44336;">*</span></label>
+          <textarea id="inputAlamat" rows="2" placeholder="Jl. Contoh No. 123, Kelurahan"></textarea>
+          <span class="error-message" id="error-alamat"></span>
+        </div>
+
+        <div class="form-row" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+          <div class="form-group">
+            <label>Kontak <span style="color:#f44336;">*</span></label>
+            <input type="tel" id="inputKontak" placeholder="0812-3456-7890">
+            <span class="error-message" id="error-kontak"></span>
+          </div>
+          <div class="form-group">
+            <label>Jam Layanan <span style="color:#f44336;">*</span></label>
+            <input type="text" id="inputJam" placeholder="Senin-Sabtu, 08.00-17.00">
+            <span class="error-message" id="error-jam"></span>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" id="btnBatal">Batal</button>
+        <button class="btn btn-primary" id="btnSimpan">
+          <i class="fas fa-save"></i> Simpan
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL HAPUS -->
+  <div class="modal-overlay" id="modalHapus">
+    <div class="modal" style="max-width:420px;">
+      <div class="modal-header">
+        <h3><i class="fas fa-exclamation-triangle" style="color:#f44336;"></i> Konfirmasi Hapus</h3>
+        <button class="modal-close" id="modalCloseHapus"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size:14px;color:#616161;line-height:1.6;">
+          Yakin ingin menghapus mitra <strong id="namaHapus">-</strong>?
+          Tindakan ini tidak dapat dibatalkan.
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" id="btnBatalHapus">Batal</button>
+        <button class="btn btn-primary" id="btnKonfirmasiHapus" style="background:#f44336;border-color:#f44336;">
+          <i class="fas fa-trash"></i> Hapus
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/common.js"></script>
+  <script src="../js/admin-mitra.js"></script>
+</body>
+</html>
