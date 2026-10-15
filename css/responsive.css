@@ -1,0 +1,764 @@
+/* ============================================
+   RESPONSIVE CSS - Global untuk Semua Halaman
+   Breakpoints: 
+   - Mobile:  < 576px
+   - Tablet:  576px - 991px
+   - Desktop: > 991px
+   ============================================ */
+
+/* ============================================
+   BASE - Semua Device
+   ============================================ */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
+img, video, iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+table {
+  max-width: 100%;
+}
+
+/* Fix untuk 4K / ultrawide */
+@media (min-width: 1921px) {
+  :root {
+    --container: 1400px;
+  }
+}
+
+/* ============================================
+   TABLET & KECIL (<= 991px)
+   ============================================ */
+@media (max-width: 991px) {
+  
+  /* Container */
+  .container {
+    padding: 0 20px !important;
+  }
+  
+  /* Navbar */
+  .nav-menu {
+    position: fixed;
+    top: 70px;
+    left: 0;
+    right: 0;
+    background: #fff;
+    flex-direction: column;
+    padding: 20px;
+    gap: 8px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    transform: translateY(-150%);
+    transition: transform 0.3s ease;
+    z-index: 999;
+    max-height: calc(100vh - 70px);
+    overflow-y: auto;
+  }
+  
+  .nav-menu.active {
+    transform: translateY(0);
+  }
+  
+  .nav-link {
+    width: 100%;
+    padding: 12px 20px;
+    text-align: left;
+  }
+  
+  .nav-toggle {
+    display: block !important;
+  }
+  
+  /* Section Header */
+  .section-header {
+    margin-bottom: 40px;
+    padding: 0 10px;
+  }
+  
+  .section-header h2 {
+    font-size: clamp(22px, 5vw, 32px);
+  }
+  
+  /* Grid umum */
+  .features-grid,
+  .steps-grid,
+  .testimonials-grid,
+  .news-grid,
+  .actions-grid,
+  .stats-grid,
+  .katalog-grid,
+  .berita-grid,
+  .artikel-grid,
+  .video-grid,
+  .info-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)) !important;
+    gap: 20px !important;
+  }
+  
+  /* Hero */
+  .hero-container {
+    grid-template-columns: 1fr !important;
+    text-align: center;
+    gap: 40px !important;
+  }
+  
+  .hero-content {
+    order: 1;
+  }
+  
+  .hero-image {
+    order: 2;
+  }
+  
+  .hero-desc {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .hero-buttons,
+  .hero-stats {
+    justify-content: center;
+  }
+  
+  /* Dashboard layout */
+  .dashboard-body {
+    display: block !important;
+  }
+  
+  .sidebar {
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+  
+  .sidebar.active {
+    transform: translateX(0);
+  }
+  
+  .main-content {
+    margin-left: 0 !important;
+    padding: 20px !important;
+    width: 100% !important;
+  }
+  
+  /* Forms */
+  .form-row {
+    grid-template-columns: 1fr !important;
+    gap: 0 !important;
+  }
+  
+  /* 2 kolom jadi 1 */
+  .peta-wrapper,
+  .form-wrapper,
+  .detail-grid,
+  .kalkulator-wrapper,
+  .auth-container {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .auth-brand {
+    padding: 40px 30px !important;
+  }
+  
+  .auth-form-wrapper {
+    padding: 40px 30px !important;
+  }
+  
+  .auth-illustration {
+    display: none !important;
+  }
+  
+  /* CTA */
+  .cta-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 30px 20px !important;
+  }
+  
+  .cta-buttons {
+    width: 100%;
+    flex-direction: column;
+  }
+  
+  .cta-buttons .btn {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  /* Modal */
+  .modal {
+    max-width: 95vw !important;
+    margin: 20px !important;
+  }
+  
+  /* Table wrapper */
+  .table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .table-wrapper table {
+    min-width: 700px;
+  }
+}
+
+/* ============================================
+   MOBILE (<= 767px)
+   ============================================ */
+@media (max-width: 767px) {
+  
+  /* Typography */
+  body {
+    font-size: 14px;
+  }
+  
+  h1 { font-size: clamp(22px, 6vw, 32px) !important; }
+  h2 { font-size: clamp(20px, 5vw, 26px) !important; }
+  h3 { font-size: clamp(16px, 4vw, 20px) !important; }
+  h4 { font-size: clamp(14px, 3.5vw, 17px) !important; }
+  
+  /* Container */
+  .container {
+    padding: 0 16px !important;
+  }
+  
+  /* Navbar */
+  .nav-container {
+    padding: 0 16px !important;
+    gap: 12px !important;
+  }
+  
+  .nav-logo-text {
+    font-size: 17px !important;
+  }
+  
+  .nav-logo-icon {
+    width: 36px !important;
+    height: 36px !important;
+  }
+  
+  .nav-logo-icon i {
+    font-size: 17px !important;
+  }
+  
+  .nav-actions .btn {
+    padding: 8px 14px !important;
+    font-size: 13px !important;
+  }
+  
+  /* Buttons */
+  .btn {
+    padding: 11px 20px !important;
+    font-size: 14px !important;
+  }
+  
+  .btn-lg {
+    padding: 13px 24px !important;
+    font-size: 15px !important;
+  }
+  
+  /* Hero */
+  .hero {
+    padding: 110px 0 60px !important;
+  }
+  
+  .hero-title {
+    font-size: clamp(26px, 7vw, 38px) !important;
+  }
+  
+  .hero-stats {
+    gap: 20px !important;
+  }
+  
+  .stat-item h3 {
+    font-size: 22px !important;
+  }
+  
+  .stat-item p {
+    font-size: 12px !important;
+  }
+  
+  .hero-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .hero-buttons .btn {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  /* Hero recycle illustration */
+  .hero-recycle {
+    max-width: 260px !important;
+  }
+  
+  .hero-recycle-icon {
+    font-size: 80px !important;
+  }
+  
+  .recycle-badge {
+    padding: 8px 12px !important;
+    font-size: 11px !important;
+  }
+  
+  .badge-icon {
+    width: 30px !important;
+    height: 30px !important;
+    font-size: 13px !important;
+  }
+  
+  .badge-text strong { font-size: 11px !important; }
+  .badge-text span { font-size: 9px !important; }
+  
+  /* Grid jadi 1 kolom */
+  .features-grid,
+  .steps-grid,
+  .testimonials-grid,
+  .news-grid,
+  .actions-grid,
+  .katalog-grid,
+  .berita-grid,
+  .artikel-grid,
+  .video-grid,
+  .info-grid,
+  .stats-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+  
+  /* Stats grid mobile 2 kolom */
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  
+  /* Card padding */
+  .card,
+  .feature-card,
+  .step-card,
+  .testimonial-card,
+  .action-card {
+    padding: 20px !important;
+  }
+  
+  .section-header h2 {
+    font-size: 22px !important;
+  }
+  
+  /* Form */
+  .form-control {
+    font-size: 16px !important; /* biar ga zoom otomatis di iOS */
+    padding: 12px 14px !important;
+  }
+  
+  /* Dashboard sidebar */
+  .sidebar {
+    width: 280px !important;
+  }
+  
+  .topbar-title h1 {
+    font-size: 18px !important;
+  }
+  
+  .topbar-user .user-info {
+    display: none !important;
+  }
+  
+  .welcome-banner {
+    padding: 24px 20px !important;
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .welcome-content h2 {
+    font-size: 20px !important;
+  }
+  
+  .welcome-illustration {
+    display: none !important;
+  }
+  
+  .welcome-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .welcome-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  /* Stats card */
+  .stat-card {
+    padding: 16px !important;
+  }
+  
+  .stat-value {
+    font-size: 18px !important;
+  }
+  
+  .stat-icon {
+    width: 44px !important;
+    height: 44px !important;
+    font-size: 18px !important;
+  }
+  
+  /* Tab navigation */
+  .tab-nav,
+  .tab-nav-tarik,
+  .tab-nav-konten {
+    flex-direction: column !important;
+    padding: 6px !important;
+  }
+  
+  .tab-btn,
+  .tab-btn-tarik,
+  .tab-btn-konten {
+    padding: 12px 16px !important;
+    font-size: 13px !important;
+  }
+  
+  /* Filter */
+  .filter-bar {
+    flex-direction: column;
+    align-items: stretch !important;
+  }
+  
+  .filter-buttons {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .filter-btn {
+    font-size: 12px !important;
+    padding: 6px 14px !important;
+  }
+  
+  /* Table */
+  .table-admin,
+  .table-riwayat,
+  .tabel-detail {
+    font-size: 13px !important;
+  }
+  
+  .table-admin th,
+  .table-riwayat th,
+  .tabel-detail th {
+    padding: 10px 8px !important;
+    font-size: 11px !important;
+  }
+  
+  .table-admin td,
+  .table-riwayat td,
+  .tabel-detail td {
+    padding: 12px 8px !important;
+    font-size: 13px !important;
+  }
+  
+  /* Sembunyikan kolom tertentu di tabel */
+  .tabel-detail th:nth-child(3),
+  .tabel-detail td:nth-child(3),
+  .tabel-sampah th:nth-child(3),
+  .tabel-sampah td:nth-child(3) {
+    display: none !important;
+  }
+  
+  /* Bank/Wallet grid */
+  .bank-grid,
+  .wallet-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  
+  /* Saldo card */
+  .saldo-card {
+    padding: 24px 20px !important;
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .saldo-value {
+    font-size: 32px !important;
+  }
+  
+  .saldo-icon {
+    display: none !important;
+  }
+  
+  /* Action buttons */
+  .form-actions,
+  .update-actions,
+  .admin-actions,
+  .jadwal-actions,
+  .cta-buttons {
+    flex-direction: column !important;
+    gap: 10px !important;
+  }
+  
+  .form-actions .btn,
+  .update-actions .btn,
+  .admin-actions .btn,
+  .jadwal-actions .btn,
+  .cta-buttons .btn {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+  
+  /* Padding section */
+  .kalkulator-header,
+  .layanan-header,
+  .edukasi-header,
+  .riwayat-header,
+  .katalog-header,
+  .berita-header,
+  .form-header,
+  .detail-header,
+  .auth-body {
+    padding: 100px 16px 40px !important;
+  }
+  
+  /* Modal */
+  .modal {
+    border-radius: 12px 12px 0 0 !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    margin: 0 !important;
+    position: fixed !important;
+    bottom: 0 !important;
+    top: auto !important;
+    max-height: 90vh !important;
+    overflow-y: auto !important;
+  }
+  
+  .modal-overlay {
+    align-items: flex-end !important;
+    padding: 0 !important;
+  }
+  
+  .modal-footer {
+    flex-direction: column-reverse !important;
+  }
+  
+  .modal-footer .btn {
+    width: 100% !important;
+  }
+  
+  /* Toast */
+  .toast {
+    left: 16px !important;
+    right: 16px !important;
+    top: 16px !important;
+    max-width: 100% !important;
+  }
+  
+  /* Katalog produk */
+  .produk-image {
+    height: 160px !important;
+  }
+  
+  /* Video */
+  .video-thumb video {
+    height: 180px !important;
+  }
+  
+  /* Footer */
+  .footer-grid {
+    grid-template-columns: 1fr !important;
+    gap: 30px !important;
+  }
+  
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  /* Line chart / detail */
+  .info-row {
+    flex-direction: column !important;
+    gap: 4px !important;
+  }
+  
+  .info-value {
+    text-align: left !important;
+  }
+  
+  /* Timeline */
+  .timeline-item {
+    padding-bottom: 20px !important;
+  }
+  
+  /* Peta */
+  .peta-wrapper {
+    height: auto !important;
+    min-height: auto !important;
+  }
+  
+  .peta-sidebar {
+    max-height: 280px !important;
+  }
+  
+  .peta-map,
+  #map {
+    height: 300px !important;
+    min-height: 300px !important;
+  }
+}
+
+/* ============================================
+   MOBILE KECIL (<= 480px)
+   ============================================ */
+@media (max-width: 480px) {
+  
+  h1 { font-size: 22px !important; }
+  h2 { font-size: 18px !important; }
+  
+  .container {
+    padding: 0 12px !important;
+  }
+  
+  /* Hero stats vertikal */
+  .hero-stats {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px !important;
+  }
+  
+  /* Stats mobile 1 kolom kalau sangat kecil */
+  .stats-grid {
+    grid-template-columns: 1fr !important;
+  }
+  
+  /* Sidebar lebih kecil */
+  .sidebar {
+    width: 260px !important;
+  }
+  
+  /* Auth */
+  .auth-brand h1 { font-size: 20px !important; }
+  .auth-form-header h2 { font-size: 20px !important; }
+  
+  /* Badge */
+  .bank-grid,
+  .wallet-grid {
+    grid-template-columns: 1fr !important;
+  }
+  
+  /* CTA */
+  .cta-wrapper h2 {
+    font-size: 20px !important;
+  }
+  
+  /* Modal */
+  .modal-body {
+    padding: 16px !important;
+  }
+  
+  .modal-header {
+    padding: 16px !important;
+  }
+  
+  /* Card */
+  .card {
+    padding: 16px !important;
+  }
+  
+  .card h2 {
+    font-size: 15px !important;
+  }
+  
+  /* Recycle badge sembunyikan */
+  .recycle-badge {
+    display: none !important;
+  }
+  
+  .hero-recycle {
+    max-width: 200px !important;
+  }
+  
+  .hero-recycle-icon {
+    font-size: 60px !important;
+  }
+  
+  /* Toast */
+  .toast {
+    font-size: 13px !important;
+    padding: 12px 16px !important;
+  }
+}
+
+/* ============================================
+   LANDSCAPE MOBILE
+   ============================================ */
+@media (max-width: 900px) and (orientation: landscape) {
+  .hero {
+    padding: 90px 0 40px !important;
+  }
+  
+  .modal {
+    max-height: 95vh !important;
+  }
+}
+
+/* ============================================
+   PRINT
+   ============================================ */
+@media print {
+  .navbar,
+  .sidebar,
+  .sidebar-overlay,
+  .footer,
+  .scroll-top,
+  .toast,
+  .modal-overlay {
+    display: none !important;
+  }
+  
+  .main-content {
+    margin-left: 0 !important;
+  }
+  
+  body {
+    background: #fff !important;
+  }
+}
+
+/* ============================================
+   TOUCH DEVICE
+   ============================================ */
+@media (hover: none) {
+  /* Hover effect dimatikan di touch */
+  .feature-card:hover,
+  .news-card:hover,
+  .katalog-card:hover,
+  .stat-card:hover,
+  .admin-card:hover {
+    transform: none !important;
+  }
+  
+  /* Tombol touch target lebih besar */
+  .btn,
+  .btn-icon,
+  .filter-btn,
+  .tab-btn {
+    min-height: 44px;
+  }
+}
+
+/* ============================================
+   REDUCED MOTION
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
