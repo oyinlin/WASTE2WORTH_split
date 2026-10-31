@@ -143,3 +143,41 @@ function animateCounter(element, target, duration = 2000) {
 window.Auth = Auth;
 window.Format = Format;
 window.animateCounter = animateCounter;
+
+
+// ============================================
+// FUNGSI BUKA & TUTUP MODAL AUTH (TAMBAHAN BARU)
+// ============================================
+
+function openModal(type) {
+  const modal = document.getElementById('authModal');
+  
+  if (modal) {
+    modal.style.display = 'flex';
+    modal.classList.add('show');
+    document.body.classList.add('modal-open'); // Kunci scroll background
+    
+    // Jika ada fungsi pindah tab (opsional)
+    if (typeof switchAuthTab === 'function' && type) {
+      switchAuthTab(type);
+    }
+  }
+}
+
+function closeModal() {
+  const modal = document.getElementById('authModal');
+  
+  if (modal) {
+    modal.style.display = 'none';
+    modal.classList.remove('show');
+    document.body.classList.remove('modal-open'); // Buka kunci scroll
+  }
+}
+
+// Tutup modal jika klik area luar (overlay gelap)
+window.addEventListener('click', function(event) {
+  const modal = document.getElementById('authModal');
+  if (event.target === modal) {
+    closeModal();
+  }
+});

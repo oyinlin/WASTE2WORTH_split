@@ -591,3 +591,31 @@
     gap: 10px;
   }
 }
+/* Tempel di bagian paling bawah auth.css */
+@media (max-width: 768px) {
+    .modal {
+        padding: 10px;
+        align-items: flex-start;
+        padding-top: 80px;
+    }
+    .modal-content {
+        width: 100%;
+        max-width: 100%;
+        max-height: calc(100vh - 90px);
+        border-radius: 20px;
+        padding: 25px 20px;
+        margin: 0 auto;
+    }
+    .close-modal {
+        top: 15px;
+        right: 18px;
+        font-size: 1.3rem;
+        background: rgba(0,0,0,0.05);
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+    }
+}

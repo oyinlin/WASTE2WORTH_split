@@ -762,3 +762,9 @@ table {
     scroll-behavior: auto !important;
   }
 }
+/* Tempel di bagian paling bawah responsive.css */
+body.modal-open {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+}
