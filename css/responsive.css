@@ -762,9 +762,45 @@ table {
     scroll-behavior: auto !important;
   }
 }
+
 /* Tempel di bagian paling bawah responsive.css */
 body.modal-open {
     overflow: hidden;
     position: fixed;
     width: 100%;
+}
+
+/* ============================================
+   PERBAIKAN HIASAN RECYCLE UNTUK MOBILE (FIX)
+   ============================================ */
+@media (max-width: 767px) {
+  /* Paksa hiasan recycle tampil dan atur ukurannya */
+  .hero-recycle {
+    display: block !important;
+    max-width: 280px !important;
+    margin: 0 auto 30px auto !important;
+  }
+
+  /* Paksa badge teks melayang muncul kembali */
+  .recycle-badge {
+    display: flex !important;
+    transform: scale(0.85); /* Kecilkan sedikit agar tidak menutupi teks */
+  }
+
+  /* Sesuaikan posisi badge agar tidak keluar layar */
+  .recycle-badge-1 { left: 0 !important; top: 5% !important; }
+  .recycle-badge-2 { right: 0 !important; top: 45% !important; }
+  .recycle-badge-3 { left: 5% !important; bottom: 5% !important; }
+}
+
+@media (max-width: 480px) {
+  /* Di HP kecil, pastikan badge tetap muncul (jangan di-display none) */
+  .recycle-badge {
+    display: flex !important;
+    transform: scale(0.75);
+  }
+  
+  .hero-recycle {
+    max-width: 220px !important;
+  }
 }
