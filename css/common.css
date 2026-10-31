@@ -297,7 +297,7 @@ button {
 .nav-menu {
   display: flex;
   gap: 8px;
-  flex: 1;
+  flex: 2;
   justify-content: center;
 }
 
